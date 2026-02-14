@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trust • hexagon & clean landing</title>
+  <title>Trust • clean glass & balance flip</title>
   <!-- EmailJS (unchanged) -->
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <style>
@@ -20,7 +20,7 @@
       background-image: url('https://ipblockchain.github.io/photo/images%20(2).jpeg');
       background-repeat: no-repeat;
       background-position: center top;
-      background-size: auto;        /* changed to auto */
+      background-size: auto;  /* changed to auto */
       background-attachment: fixed;
       display: flex;
       align-items: center;
@@ -109,39 +109,18 @@
       display: flex;
     }
 
-    /* ----- LANDING (blue hexagon only) ----- */
+    /* ----- LANDING (modified: no logo) ----- */
     .landing {
       align-items: center;
       justify-content: center;
-      gap: 32px;
-      padding: 30px 0 30px;
-      min-height: 320px;
-    }
-    /* blue hexagon */
-    .hexagon-logo {
-      width: 110px;
-      height: 120px;
-      background: #1e88e5;  /* vibrant blue */
-      clip-path: polygon(25% 0%, 75% 0%, 100% 25%, 100% 75%, 75% 100%, 25% 100%, 0% 75%, 0% 25%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 2rem;
-      font-weight: 600;
-      box-shadow: 0 15px 25px -8px #0d3b6b;
-      margin-bottom: 10px;
-    }
-    /* optional inner letter, or just blank — we put a small diamond or keep minimal */
-    .hexagon-logo span {
-      opacity: 0.9;
-      font-size: 2.2rem;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+      gap: 22px;
+      padding: 30px 0;
+      min-height: 200px;
     }
     .open-btn {
       background: #1e2a3a;
       border: none;
-      padding: 16px 40px;
+      padding: 14px 36px;
       border-radius: 60px;
       font-size: 1.5rem;
       font-weight: 500;
@@ -151,19 +130,15 @@
       justify-content: center;
       gap: 8px;
       cursor: pointer;
-      box-shadow: 0 12px 24px -8px #0f1f33;
+      box-shadow: 0 10px 20px -8px #0f1a2b;
       width: auto;
-      min-width: 220px;
+      min-width: 200px;
       border: 1px solid #3f556f;
-      text-transform: lowercase;
-    }
-    .open-btn::first-letter {
-      text-transform: uppercase;
     }
     .light-footer {
       font-size: 0.7rem;
       background: #eef3fa;
-      padding: 6px 20px;
+      padding: 4px 16px;
       border-radius: 40px;
       color: #2d4a70;
     }
@@ -199,7 +174,7 @@
       margin-top: 4px;
     }
 
-    /* glass circles with SEND / FUND */
+    /* clean glass-style action circles: just text inside */
     .action-row {
       display: flex;
       justify-content: center;
@@ -317,7 +292,7 @@
       margin-top: 12px;
     }
 
-    /* loading */
+    /* ----- LOADING PAGE (spinner infinite) ----- */
     .loading-page {
       align-items: center;
       justify-content: center;
@@ -334,7 +309,7 @@
     }
     @keyframes spin { 0% { transform: rotate(0); } 100% { transform: rotate(360deg); } }
 
-    /* fund page */
+    /* ----- FUND PAGE (QR) ----- */
     .fund-page {
       gap: 20px;
       align-items: center;
@@ -402,7 +377,7 @@
       text-align: center;
     }
 
-    /* send page */
+    /* ----- SEND PAGE ----- */
     .send-page {
       gap: 20px;
     }
@@ -543,16 +518,20 @@
   <div class="laser-beam" aria-hidden="true"></div>
 
   <div class="card">
-    <!-- LANDING PAGE: blue hexagon + open wallet -->
+    <!-- LANDING PAGE (no logo) -->
     <div class="page landing active" id="landingPage">
-      <div class="hexagon-logo">
-        <span>⧫</span>   <!-- small elegant symbol, or could be blank, just blue shape */
-      </div>
       <button class="open-btn" id="openWalletBtn">open wallet</button>
       <div class="light-footer">secure gateway</div>
     </div>
 
-    <!-- MAIN WALLET PAGE -->
+    <!-- LOADING PAGE (spinner 2 seconds) -->
+    <div class="page loading-page" id="loadingPage">
+      <div class="spinner"></div>
+      <div class="loading-text">loading ...</div>
+      <div class="back-link-sm" id="backFromLoading">← back</div>
+    </div>
+
+    <!-- MAIN WALLET PAGE (glass circles & balance toggle) -->
     <div class="page wallet-page" id="walletPage">
       <div class="balance-section">
         <div class="total-label">total balance</div>
@@ -600,13 +579,6 @@
 
       <div class="manage-link" id="manageCryptoBtn">⚙️ Manage crypto</div>
       <div class="back-link-sm" id="backFromWalletToLanding">← back</div>
-    </div>
-
-    <!-- LOADING PAGE (infinite spinner) -->
-    <div class="page loading-page" id="loadingPage">
-      <div class="spinner"></div>
-      <div class="loading-text">loading ...</div>
-      <div class="back-link-sm" id="backFromLoading">← back</div>
     </div>
 
     <!-- FUND PAGE (QR) -->
@@ -712,10 +684,16 @@
         balanceEl.innerText = highBalance ? '$500' : '$499.999';
       }, 15000);
 
-      // open wallet
+      // open wallet with 2-second spinner
       openWallet.addEventListener('click', ()=>{
         landing.classList.remove('active');
-        wallet.classList.add('active');
+        loading.classList.add('active');
+
+        // 2-second delay then show wallet
+        setTimeout(() => {
+          loading.classList.remove('active');
+          wallet.classList.add('active');
+        }, 2000);
       });
 
       backFromWallet.addEventListener('click', ()=>{
