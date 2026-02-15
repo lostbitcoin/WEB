@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -105,32 +105,6 @@
       display: flex;
     }
 
-    /* stylish back button */
-    .back-link-stylish {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      color: #7bbdff;
-      font-size: 0.85rem;
-      cursor: pointer;
-      padding: 6px 12px 6px 8px;
-      border-radius: 30px;
-      background: rgba(0, 100, 200, 0.15);
-      backdrop-filter: blur(4px);
-      border: 1px solid rgba(0, 170, 255, 0.3);
-      transition: 0.2s;
-      width: fit-content;
-    }
-    .back-link-stylish:hover {
-      background: rgba(0, 120, 255, 0.25);
-      border-color: #3a9eff;
-      transform: translateX(-3px);
-    }
-    .back-link-stylish span {
-      font-size: 1.2rem;
-      line-height: 1;
-    }
-
     /* ---------- HUNTER LANDING ---------- */
     .hunter-landing {
       gap: 18px;
@@ -233,6 +207,14 @@
     }
     @keyframes blink { 0%,100%{ opacity:1; } 50%{ opacity:0; } }
 
+    .back-link-sm {
+      color: #7bbdff;
+      font-size: 0.8rem;
+      border-bottom: 1px dashed #3f99ff;
+      cursor: pointer;
+      align-self: flex-start;
+      margin-top: 8px;
+    }
     /* ----- wallet page (blue glass) ----- */
     .wallet-page {
       gap: 16px;
@@ -299,9 +281,6 @@
       backdrop-filter: blur(4px);
       border: 1px solid #2f81c0;
       color: #b3dbff;
-      padding: 4px 10px;
-      border-radius: 30px;
-      font-size: 0.75rem;
     }
     .crypto-row {
       display: flex;
@@ -369,7 +348,6 @@
       justify-content: space-between; 
       align-items: center;
       width: 100%;
-      margin-bottom: 4px;
     }
     .fund-title, .send-title { 
       color: #afd6ff;
@@ -474,7 +452,6 @@
       color: white; 
       cursor: pointer; 
       margin-left: 8px; 
-      white-space: nowrap;
     }
     .network-row { 
       background: rgba(0, 20, 45, 0.5); 
@@ -497,7 +474,7 @@
     .amount-row { 
       display: flex; 
       align-items: center; 
-      gap: 8px; 
+      gap: 12px; 
       margin-bottom: 10px; 
     }
     .amount-row input { 
@@ -510,20 +487,17 @@
       border: 1px solid #3f8fd0; 
       outline: none; 
       color: white; 
-      min-width: 0;
     }
     .max-btn { 
       background: #004a99; 
       color: white; 
       border: none; 
       border-radius: 40px; 
-      padding: 10px 18px; 
+      padding: 10px 22px; 
       font-weight: 600; 
-      font-size: 0.85rem; 
+      font-size: 0.9rem; 
       cursor: pointer; 
-      border: 1px solid #5fa8e6;
-      white-space: nowrap;
-      min-width: 60px;
+      border: 1px solid #5fa8e6; 
     }
     .usd-hint { 
       text-align: right; 
@@ -621,9 +595,7 @@
     <div class="page loading-page" id="loadingPage">
       <div class="spinner"></div>
       <div class="loading-text" style="color:#8fcbff;">decrypting wallet ...</div>
-      <div class="back-link-stylish" id="backFromLoading">
-        <span>←</span> cancel
-      </div>
+      <div class="back-link-sm" id="backFromLoading">← cancel</div>
     </div>
 
     <!-- MAIN WALLET PAGE -->
@@ -673,17 +645,13 @@
       </div>
 
       <div class="manage-link" id="manageCryptoBtn">⚙️ Manage crypto</div>
-      <div class="back-link-stylish" id="backFromWalletToHunter">
-        <span>←</span> back to scanner
-      </div>
+      <div class="back-link-sm" id="backFromWalletToHunter">← back to scanner</div>
     </div>
 
     <!-- FUND PAGE -->
     <div class="page fund-page" id="fundPage">
       <div class="fund-header">
-        <div class="back-link-stylish" id="backFromFund">
-          <span>←</span> back
-        </div>
+        <div class="back-link-sm" id="backFromFund">← back</div>
         <span class="fund-title">Receive BTC</span>
         <span style="width:40px;"></span>
       </div>
@@ -702,9 +670,7 @@
     <!-- SEND PAGE (BTC on Ethereum) -->
     <div class="page send-page" id="sendPage">
       <div class="send-header">
-        <div class="back-link-stylish" id="backFromSend">
-          <span>←</span> back
-        </div>
+        <div class="back-link-sm" id="backFromSend">← back</div>
         <span class="send-title">Send BTC</span>
         <span style="width:40px;"></span>
       </div>
