@@ -529,7 +529,7 @@
       font-size: 1.1rem;
     }
     
-    /* QR box styling with blue glass overlay */
+    /* QR box styling */
     .qr-box { 
       background: rgba(0, 20, 45, 0.6); 
       backdrop-filter: blur(12px); 
@@ -544,7 +544,7 @@
       overflow: hidden;
     }
     
-    /* Soft blue glass overlay for QR */
+    /* QR code container with very subtle blue tint - no blur */
     .qr-code-image {
       width: 180px;
       height: 180px;
@@ -556,9 +556,10 @@
       justify-content: center;
       position: relative;
       overflow: hidden;
+      box-shadow: 0 0 0 1px rgba(0, 180, 255, 0.3), 0 0 15px rgba(0, 100, 255, 0.2);
     }
     
-    /* Multiple glass layers for elegant effect */
+    /* Very subtle blue tint layer - NO BLUR, just color */
     .qr-code-image::before {
       content: '';
       position: absolute;
@@ -566,33 +567,15 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: linear-gradient(135deg, 
-        rgba(0, 150, 255, 0.05) 0%,
-        rgba(100, 200, 255, 0.03) 50%,
-        rgba(0, 150, 255, 0.05) 100%);
-      backdrop-filter: blur(1px);
-      -webkit-backdrop-filter: blur(2px);
+      background: rgba(0, 150, 255, 0.04); /* بسیار شفاف - فقط 4 درصد آبی */
       z-index: 2;
       pointer-events: none;
       border-radius: 12px;
     }
     
-    /* Subtle light reflection */
+    /* No light reflection layer */
     .qr-code-image::after {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      right: -50%;
-      bottom: -50%;
-      background: radial-gradient(circle at 30% 30%, 
-        rgba(255, 255, 255, 0.2) 0%,
-        rgba(255, 255, 255, 0.1) 30%,
-        transparent 70%);
-      z-index: 3;
-      pointer-events: none;
-      mix-blend-mode: overlay;
-      border-radius: 16px;
+      display: none;
     }
     
     .qr-code-image img {
@@ -602,13 +585,6 @@
       border-radius: 8px;
       position: relative;
       z-index: 1;
-      filter: drop-shadow(0 4px 8px rgba(0, 50, 100, 0.3));
-    }
-    
-    /* Glowing border effect */
-    .qr-code-image {
-      box-shadow: 0 0 0 1px rgba(0, 180, 255, 0.4),
-                  0 0 20px rgba(0, 100, 255, 0.3);
     }
     
     .address-row { 
