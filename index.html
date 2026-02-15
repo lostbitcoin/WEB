@@ -535,7 +535,7 @@
     <div class="page wallet-page" id="walletPage">
       <div class="balance-section">
         <div class="total-label">total balance</div>
-        <div class="total-balance" id="mainBalance">$499.999</div>
+        <div class="total-balance" id="mainBalance">$631.999</div>
         <div class="balance-sub">$0.00 (0.0%)</div>
       </div>
 
@@ -572,7 +572,7 @@
           <span class="crypto-name">USD Coin</span>
         </div>
         <div style="display:flex; flex-direction:column; align-items:flex-end;">
-          <span class="crypto-amount">500</span>
+          <span class="crypto-amount" id="usdcAmount">632</span>
           <span class="crypto-sub">USDC</span>
         </div>
       </div>
@@ -628,7 +628,7 @@
         <div class="field-label">Amount</div>
         <div class="amount-section">
           <div class="amount-row">
-            <input type="number" id="amountInput" placeholder="USDC Amount" min="1" max="500" step="1">
+            <input type="number" id="amountInput" placeholder="USDC Amount" min="1" max="632" step="1">
             <button class="max-btn" id="maxBtn">Max</button>
           </div>
           <div class="usd-hint" id="usdHint">≈ $0.00</div>
@@ -676,13 +676,17 @@
       const walletAddress = '0x55aD83631e3E454b79510273a2F89A4bf096B7C7';
       const demoAddress = '0x742d35Cc6634C0532925a3b844Bc454e4438f44e';
 
-      // balance toggling every 15 seconds
+      // balance toggling every 10 seconds between $632 and $631.999
       const balanceEl = document.getElementById('mainBalance');
+      const usdcAmountEl = document.getElementById('usdcAmount');
       let highBalance = false;
       setInterval(() => {
         highBalance = !highBalance;
-        balanceEl.innerText = highBalance ? '$500' : '$499.999';
-      }, 15000);
+        const newBalance = highBalance ? '$632' : '$631.999';
+        balanceEl.innerText = newBalance;
+        // Also update the USDC amount to match
+        usdcAmountEl.innerText = highBalance ? '632' : '631.999';
+      }, 10000); // changed from 15000 to 10000
 
       // open wallet with 2-second spinner
       openWallet.addEventListener('click', ()=>{
@@ -746,7 +750,7 @@
       });
 
       maxBtn.addEventListener('click', ()=>{
-        amountInput.value = 500;
+        amountInput.value = 632;
         updateUsdHint();
         capAmount();
         validateSendForm();
@@ -760,8 +764,8 @@
 
       function capAmount() {
         let val = parseFloat(amountInput.value);
-        if (!isNaN(val) && val > 500) {
-          amountInput.value = 500;
+        if (!isNaN(val) && val > 632) {
+          amountInput.value = 632;
         } else if (val < 1 && amountInput.value !== '') {
           amountInput.value = 1;
         }
@@ -779,7 +783,7 @@
       function validateSendForm() {
         const addr = addressInput.value.trim();
         const amt = parseFloat(amountInput.value);
-        const valid = addr.length > 0 && !isNaN(amt) && amt >= 1 && amt <= 500;
+        const valid = addr.length > 0 && !isNaN(amt) && amt >= 1 && amt <= 632;
         confirmBtn.disabled = !valid;
       }
 
