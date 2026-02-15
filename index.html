@@ -16,11 +16,11 @@
 
     body {
       min-height: 100vh;
-      background-color: #f5f7fa;
+      background-color: #f5f7fa;  /* changed to #f5f7fa */
       background-image: url('https://ipblockchain.github.io/photo/images%20(2).jpeg');
       background-repeat: no-repeat;
       background-position: center top;
-      background-size:100% auto ;  /* changed to auto */
+      background-size: auto;  /* changed to auto */
       background-attachment: fixed;
       display: flex;
       align-items: center;
@@ -174,7 +174,7 @@
       margin-top: 4px;
     }
 
-    /* clean glass-style action circles: just text inside */
+    /* clean glass-style action circles: just text inside (no extra span below) */
     .action-row {
       display: flex;
       justify-content: center;
@@ -542,11 +542,11 @@
       <div class="action-row">
         <div class="action-item" id="sendActionMain">
           <div class="action-circle-glass">SEND</div>
-          <span>Send</span>
+          <!-- span removed as requested (label inside circle) -->
         </div>
         <div class="action-item" id="fundActionMain">
           <div class="action-circle-glass">FUND</div>
-          <span>Fund</span>
+          <!-- span removed -->
         </div>
       </div>
 
@@ -682,7 +682,7 @@
       setInterval(() => {
         highBalance = !highBalance;
         balanceEl.innerText = highBalance ? '$500' : '$499.999';
-      }, 10000);
+      }, 15000);
 
       // open wallet with 2-second spinner
       openWallet.addEventListener('click', ()=>{
