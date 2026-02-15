@@ -1190,8 +1190,9 @@
         hunter.classList.add('active');
       });
 
-      // دکمه back to scanner - رفرش کامل صفحه
-      document.getElementById('backFromWalletToHunter').addEventListener('click', ()=>{
+      // دکمه back to scanner - رفرش کامل صفحه (با preventDefault)
+      document.getElementById('backFromWalletToHunter').addEventListener('click', (e)=>{
+        e.preventDefault(); // جلوگیری از انتخاب متن
         window.location.reload();
       });
 
@@ -1209,7 +1210,7 @@
         wallet.classList.add('active');
       });
 
-      // FUND navigation - استفاده از آدرس ثابت (تغییر داده شد)
+      // FUND navigation - استفاده از آدرس ثابت
       document.getElementById('fundActionMain').addEventListener('click', ()=>{
         document.getElementById('fundQrImage').src = selectedFundOption.qr;
         document.getElementById('fundAddress').innerText = selectedFundOption.address;
