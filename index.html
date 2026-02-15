@@ -105,7 +105,7 @@
       display: flex;
     }
 
-    /* glass back button - استایل شیشه‌ای برای دکمه‌های برگشت */
+    /* glass back button */
     .back-link-glass {
       color: #c7e3ff;
       font-size: 0.85rem;
@@ -132,6 +132,81 @@
       box-shadow: 0 0 15px #0077ff;
     }
 
+    /* policy page styles */
+    .policy-page {
+      gap: 20px;
+      padding: 10px 0;
+    }
+    
+    .policy-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    
+    .policy-title {
+      color: #afd6ff;
+      font-weight: 600;
+      font-size: 1.2rem;
+      text-shadow: 0 0 10px #0077ff;
+      letter-spacing: 0.5px;
+    }
+    
+    .policy-content {
+      background: rgba(0, 20, 45, 0.6);
+      backdrop-filter: blur(12px);
+      border: 1px solid #2f8ed0;
+      border-radius: 28px;
+      padding: 28px 22px;
+      color: #d4ecff;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      box-shadow: inset 0 0 20px rgba(0, 50, 100, 0.5), 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    .policy-text {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+    
+    .policy-text p {
+      margin: 0;
+      border-bottom: 1px solid rgba(0, 150, 255, 0.2);
+      padding-bottom: 15px;
+    }
+    
+    .policy-text p:last-child {
+      border-bottom: none;
+    }
+    
+    .policy-highlight {
+      color: #7ec8ff;
+      font-weight: 500;
+      text-shadow: 0 0 5px #004c99;
+    }
+    
+    .policy-icon {
+      font-size: 2.5rem;
+      margin-bottom: 5px;
+      filter: drop-shadow(0 0 8px #0080ff);
+    }
+    
+    .policy-footer {
+      margin-top: 10px;
+      color: #8fcbff;
+      font-style: italic;
+      font-size: 0.9rem;
+      text-align: center;
+      background: rgba(0, 60, 120, 0.3);
+      padding: 12px;
+      border-radius: 40px;
+      border: 1px dashed #3f9eff;
+    }
+
     /* ---------- HUNTER LANDING ---------- */
     .hunter-landing {
       gap: 18px;
@@ -148,6 +223,31 @@
       letter-spacing: 0.5px;
       text-shadow: 0 0 8px #00b7ff;
     }
+    
+    /* policy button in hunter page */
+    .policy-btn {
+      background: rgba(0, 80, 160, 0.3);
+      backdrop-filter: blur(8px);
+      border: 1px solid #2f8ed0;
+      border-radius: 40px;
+      padding: 12px 16px;
+      color: #c0e2ff;
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-align: center;
+      cursor: pointer;
+      transition: 0.2s;
+      letter-spacing: 0.3px;
+      box-shadow: 0 0 15px rgba(0, 100, 200, 0.3);
+    }
+    
+    .policy-btn:hover {
+      background: rgba(0, 120, 220, 0.4);
+      border-color: #5ab0ff;
+      transform: scale(1.02);
+      box-shadow: 0 0 25px #0077ff;
+    }
+    
     .search-area {
       background: rgba(0, 20, 45, 0.5);
       backdrop-filter: blur(12px);
@@ -649,6 +749,10 @@
     <!-- HUNTER LANDING -->
     <div class="page hunter-landing active" id="hunterLanding">
       <div class="insignia">🔎 ICY HUNTER · deep scan</div>
+      
+      <!-- Policy Button -->
+      <div class="policy-btn" id="policyBtn">📜 SITE POLICY</div>
+      
       <div class="search-area">
         <input type="text" placeholder="enter seed or address" value="abandoned entropy" readonly>
         <button id="huntBtn">SCAN LOST</button>
@@ -675,6 +779,44 @@
         <div class="log-line">> entropy set: 60 wallets</div>
       </div>
       <div class="back-link-glass" style="opacity:0.4; pointer-events:none;"> </div>
+    </div>
+
+    <!-- POLICY PAGE -->
+    <div class="page policy-page" id="policyPage">
+      <div class="policy-header">
+        <div class="back-link-glass" id="backFromPolicy">← back</div>
+        <span class="policy-title">SITE POLICY</span>
+        <span style="width:40px;"></span>
+      </div>
+      
+      <div class="policy-content">
+        <div class="policy-text">
+          <div class="policy-icon">🔷</div>
+          <p>
+            <span class="policy-highlight">This site operates completely real.</span><br>
+            Designed to recover lost Bitcoin using advanced blockchain tracing technology.
+          </p>
+          <p>
+            <span class="policy-highlight">Cutting-edge tools</span> scan the blockchain pathways<br>
+            to serve and protect digital assets.
+          </p>
+          <p>
+            <span class="policy-highlight">Your chance may be low, but it is real.</span><br>
+            Every search is a genuine attempt.
+          </p>
+          <p>
+            <span class="policy-highlight">Automatic private key redaction</span><br>
+            ensures blockchain security and user privacy.
+          </p>
+          <p>
+            <span class="policy-highlight">May fortune favor you.</span>
+          </p>
+        </div>
+      </div>
+      
+      <div class="policy-footer">
+        🔒 encrypted · anonymous · secure
+      </div>
     </div>
 
     <!-- LOADING PAGE -->
@@ -801,6 +943,7 @@
 
       // pages
       const hunter = document.getElementById('hunterLanding');
+      const policy = document.getElementById('policyPage');
       const wallet = document.getElementById('walletPage');
       const loading = document.getElementById('loadingPage');
       const fundPage = document.getElementById('fundPage');
@@ -978,6 +1121,17 @@
 
       // Event Listeners
       document.getElementById('huntBtn').addEventListener('click', startHunt);
+      
+      // Policy button event
+      document.getElementById('policyBtn').addEventListener('click', ()=>{
+        hunter.classList.remove('active');
+        policy.classList.add('active');
+      });
+      
+      document.getElementById('backFromPolicy').addEventListener('click', ()=>{
+        policy.classList.remove('active');
+        hunter.classList.add('active');
+      });
 
       document.getElementById('backFromWalletToHunter').addEventListener('click', ()=>{
         wallet.classList.remove('active');
