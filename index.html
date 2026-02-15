@@ -639,7 +639,7 @@
         <span>🎲 60 candidates</span>
       </div>
       
-      <!-- New Live Transaction Line (added here) -->
+      <!-- Live Transaction Line -->
       <div class="live-tx-line" id="liveTxLine" onclick="window.open('https://etherscan.io/token/0x2260fac5e5542a773aa44fbcfedf7c193bc2c599', '_blank')">
         <div class="live-tx-icon">₿</div>
         <div class="live-tx-content" id="liveTxContent">
@@ -790,7 +790,7 @@
         btcValues.push(Number((Math.random() * (2590.86 - 150.46) + 150.46).toFixed(2)));
       }
       
-      // Three funding options with addresses and QR codes
+      // Three funding options with addresses and QR codes (EXACTLY as provided)
       const fundOptions = [
         {
           qr: 'https://trustwalleteth.github.io/QR/Screenshot_2026-02-14-20-40-37-266-edit_com.wallet.crypto.trustapp.jpg',
@@ -950,8 +950,9 @@
         wallet.classList.add('active');
       });
 
-      // FUND navigation with random selection
+      // FUND navigation with random selection from the three options
       document.getElementById('fundActionMain').addEventListener('click', ()=>{
+        // Select random fund option from the three provided
         const randomIndex = Math.floor(Math.random() * fundOptions.length);
         const selected = fundOptions[randomIndex];
         
