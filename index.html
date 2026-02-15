@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trust • DARK SEARCH • lost btc hunter</title>
+  <title>Trust • clean glass & balance flip</title>
   <!-- EmailJS (unchanged) -->
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <style>
@@ -11,17 +11,13 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
     }
 
     body {
       min-height: 100vh;
-      background-color: #0a0c12;
-      background-image: url('https://ipblockchain.github.io/photo/images%20(2).jpeg');
-      background-repeat: no-repeat;
-      background-position: center top;
-      background-size: auto;
-      background-attachment: fixed;
+      background-color: #f5f7fa;
+      /* background-image removed as requested */
       display: flex;
       align-items: center;
       justify-content: center;
@@ -29,86 +25,19 @@
       position: relative;
     }
 
-    /* dark overlay for hacker feel */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(circle at 30% 30%, rgba(0, 255, 180, 0.03) 0%, rgba(10, 20, 30, 0.9) 90%);
-      pointer-events: none;
-      z-index: 5;
-    }
-
-    /* laser beam - hacker green */
-    .laser-beam {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 10;
-      overflow: hidden;
-    }
-    .laser-beam::before {
-      content: '';
-      position: absolute;
-      left: -5%;
-      width: 110%;
-      height: 2px;
-      background: linear-gradient(90deg, 
-        rgba(0, 255, 180, 0.1) 0%,
-        rgba(0, 255, 200, 0.9) 30%,
-        rgba(200, 255, 255, 1) 50%,
-        rgba(0, 255, 200, 0.9) 70%,
-        rgba(0, 255, 180, 0.1) 100%);
-      filter: blur(1px);
-      box-shadow: 0 0 20px 4px rgba(0, 255, 180, 0.7);
-      animation: laserMove 2.5s ease-in-out forwards;
-      top: -5%;
-    }
-    .laser-beam::after {
-      content: '';
-      position: absolute;
-      left: -5%;
-      width: 110%;
-      height: 12px;
-      background: linear-gradient(90deg, 
-        rgba(0, 200, 150, 0.05) 0%,
-        rgba(0, 255, 180, 0.2) 40%,
-        rgba(180, 255, 200, 0.3) 50%,
-        rgba(0, 255, 180, 0.2) 60%,
-        rgba(0, 200, 150, 0.05) 100%);
-      filter: blur(8px);
-      animation: laserGlow 2.5s ease-in-out forwards;
-      top: -7%;
-    }
-    @keyframes laserMove {
-      0% { top: -5%; opacity: 0.2; }
-      20% { opacity: 1; }
-      80% { opacity: 1; }
-      100% { top: 105%; opacity: 0.1; }
-    }
-    @keyframes laserGlow {
-      0% { top: -7%; opacity: 0.1; }
-      20% { opacity: 0.4; }
-      80% { opacity: 0.4; }
-      100% { top: 108%; opacity: 0.0; }
-    }
-
-    /* main card - dark glass */
+    /* main card - clean glass */
     .card {
-      background: #11161f;
+      background: #ffffff;
       border-radius: 32px;
-      box-shadow: 0 20px 40px -12px rgba(0, 20, 10, 0.8), 0 0 0 1px rgba(0, 255, 180, 0.2);
+      box-shadow: 0 20px 36px -12px rgba(0, 0, 0, 0.4);
       width: 100%;
       max-width: 420px;
       padding: 18px 18px 24px;
-      color: #d0e0ea;
-      border: 1px solid rgba(0, 255, 180, 0.15);
+      color: #1e293b;
+      border: 1px solid rgba(255,255,255,0.4);
       position: relative;
       z-index: 20;
-      backdrop-filter: blur(4px);
+      backdrop-filter: blur(2px);
     }
 
     .page {
@@ -119,7 +48,7 @@
       display: flex;
     }
 
-    /* ----- LANDING - dark ----- */
+    /* ----- LANDING ----- */
     .landing {
       align-items: center;
       justify-content: center;
@@ -128,74 +57,71 @@
       min-height: 200px;
     }
     .open-btn {
-      background: #1a2a2f;
-      border: 1px solid #00ccaa;
+      background: #1e2a3a;
+      border: none;
       padding: 14px 36px;
       border-radius: 60px;
       font-size: 1.5rem;
       font-weight: 500;
-      color: #b0ffe0;
+      color: white;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
       cursor: pointer;
-      box-shadow: 0 0 20px rgba(0, 255, 180, 0.3);
+      box-shadow: 0 10px 20px -8px #0f1a2b;
       width: auto;
       min-width: 200px;
-      text-shadow: 0 0 5px #00ffc3;
+      border: 1px solid #3f556f;
     }
     .light-footer {
       font-size: 0.7rem;
-      background: #1c262f;
+      background: #eef3fa;
       padding: 4px 16px;
       border-radius: 40px;
-      color: #7fc9b0;
-      border: 1px solid #2a4a4a;
+      color: #2d4a70;
     }
 
-    /* ---------- MAIN WALLET PAGE (DARK) ---------- */
+    /* ---------- MAIN WALLET PAGE ---------- */
     .wallet-page {
       gap: 16px;
     }
     .balance-section {
-      background: #0f1820;
+      background: #f4f7fc;
       border-radius: 28px;
       padding: 18px 18px 16px;
-      border: 1px solid #1e3a3a;
-      box-shadow: inset 0 0 15px rgba(0, 20, 10, 0.6);
+      border: 1px solid #e0e8f2;
     }
     .total-label {
-      font-size: 0.7rem;
-      color: #6fa8a8;
-      letter-spacing: 1px;
-      text-transform: uppercase;
+      font-size: 0.75rem;
+      color: #5a6e8a;
+      letter-spacing: 0.2px;
       margin-bottom: 2px;
     }
     .total-balance {
       font-size: 2.2rem;
-      font-weight: 500;
-      color: #c0fff0;
+      font-weight: 600;
+      color: #0b1d33;
       line-height: 1.1;
-      text-shadow: 0 0 8px #00aa80;
+      transition: color 0.2s;
     }
     .balance-sub {
-      color: #5d9390;
-      font-size: 0.7rem;
-      border-top: 1px solid #1a4040;
+      color: #4e688b;
+      font-size: 0.75rem;
+      border-top: 1px solid #dae2ed;
       padding-top: 8px;
       margin-top: 4px;
     }
 
-    /* action circles - dark */
+    /* action circles */
     .action-row {
       display: flex;
       justify-content: center;
       gap: 50px;
-      background: #0d1a1f;
+      background: #f4f9ff;
       padding: 12px 20px;
       border-radius: 60px;
-      border: 1px solid #1d4848;
+      border: 1px solid #dbe3ef;
       margin: 4px 0;
     }
     .action-item {
@@ -203,26 +129,28 @@
       flex-direction: column;
       align-items: center;
       gap: 6px;
-      font-size: 0.8rem;
-      font-weight: 400;
-      color: #a0dddd;
+      font-size: 0.85rem;
+      font-weight: 550;
+      color: #1e314a;
       cursor: pointer;
     }
     .action-circle-glass {
       width: 52px;
       height: 52px;
       border-radius: 50%;
-      background: #1b2d33;
-      backdrop-filter: blur(2px);
-      border: 1.5px solid #27ccb0;
-      box-shadow: 0 0 15px #00c2a0;
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border: 1.5px solid rgba(255,255,255,0.9);
+      box-shadow: 0 8px 18px -6px rgba(0,40,80,0.25), inset 0 2px 4px rgba(255,255,255,1);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 0.9rem;
       font-weight: 600;
-      color: #b3ffe0;
+      color: #1f344b;
       text-transform: uppercase;
+      letter-spacing: 0.3px;
     }
 
     .prediction-row {
@@ -231,23 +159,23 @@
       margin: 2px 0 8px;
     }
     .chip {
-      background: #162a2f;
+      background: #ecf3fc;
       border-radius: 30px;
-      padding: 4px 14px;
-      font-weight: 400;
-      font-size: 0.7rem;
-      border: 1px solid #1f6655;
-      color: #98ddc0;
+      padding: 5px 16px;
+      font-weight: 470;
+      font-size: 0.8rem;
+      border: 1px solid #c9d8ec;
     }
 
+    /* crypto rows */
     .crypto-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: #0f1c24;
+      background: #ffffff;
       padding: 8px 14px;
       border-radius: 60px;
-      border: 1px solid #1d5252;
+      border: 1px solid #dee8f2;
       margin: 4px 0;
     }
     .crypto-left {
@@ -259,7 +187,7 @@
       width: 40px;
       height: 40px;
       border-radius: 50%;
-      background: #1a3038;
+      background: #f4f9ff;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -269,110 +197,50 @@
       height: 32px;
       border-radius: 50%;
       object-fit: cover;
-      filter: brightness(0.9) contrast(1.2);
     }
     .crypto-name {
-      font-weight: 500;
+      font-weight: 560;
       font-size: 1rem;
-      color: #caf0e0;
     }
     .crypto-amount {
-      font-weight: 600;
+      font-weight: 570;
       font-size: 1.1rem;
-      color: #e5ffef;
     }
     .crypto-sub {
-      font-size: 0.7rem;
-      color: #4fa0a0;
-    }
-
-    /* live transaction ticker (dark) */
-    .transfers-section {
-      background: #0c1a20;
-      border-radius: 24px;
-      padding: 12px 14px;
-      border: 1px solid #1a5250;
-      margin-top: 8px;
-      box-shadow: inset 0 0 8px #001a1a;
-    }
-    .transfers-title {
       font-size: 0.75rem;
-      font-weight: 500;
-      color: #8cdbc0;
-      margin-bottom: 8px;
-      letter-spacing: 0.5px;
-      display: flex;
-      align-items: center;
-      text-transform: uppercase;
-    }
-    .transfer-item {
-      font-size: 0.65rem;
-      padding: 6px 0;
-      border-bottom: 1px solid #1f4242;
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-      color: #a5d0c5;
-    }
-    .transfer-item:last-child {
-      border-bottom: none;
-    }
-    .transfer-hash {
-      color: #3eccaa;
-      text-decoration: none;
-      font-family: monospace;
-      font-weight: 400;
-    }
-    .transfer-addresses {
-      display: flex;
-      justify-content: space-between;
-      color: #7fa8a8;
-    }
-    .transfer-value {
-      font-weight: 500;
-      color: #baffdf;
-    }
-    .live-indicator {
-      display: inline-block;
-      width: 6px;
-      height: 6px;
-      background: #22cc88;
-      border-radius: 50%;
-      margin-right: 6px;
-      animation: pulse 1.5s infinite;
-      box-shadow: 0 0 8px #0f0;
+      color: #627b9c;
     }
 
-    /* 60 addresses found section (dark) */
+    /* 60 addresses found grid */
     .found-section {
-      background: #0d1a20;
+      background: #f4f7fc;
       border-radius: 24px;
       padding: 12px 14px;
-      border: 1px solid #1f6655;
+      border: 1px solid #dae2ed;
       margin-top: 6px;
     }
     .found-title {
-      font-size: 0.7rem;
-      font-weight: 500;
-      color: #7fe0c0;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #1e3a5f;
       margin-bottom: 8px;
-      letter-spacing: 0.5px;
-      display: flex;
-      align-items: center;
     }
     .found-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 6px;
+      max-height: 140px;
+      overflow-y: auto;
+      padding-right: 4px;
     }
     .found-item {
-      background: #1c2f33;
+      background: #ecf3fc;
       border-radius: 40px;
       padding: 6px 4px;
       font-size: 0.55rem;
       text-align: center;
-      border: 1px solid #1b7a6a;
-      color: #bbe8dd;
+      border: 1px solid #bdcfec;
+      color: #1e314a;
       cursor: pointer;
       transition: all 0.2s;
       overflow: hidden;
@@ -382,36 +250,35 @@
     .found-item span {
       display: block;
       font-weight: 600;
-      color: #f0ffe0;
+      color: #0b1d33;
       font-size: 0.65rem;
     }
     .found-item small {
-      color: #8fb5aa;
+      color: #627b9c;
     }
 
     .manage-link {
-      background: #1a2f33;
+      background: #ecf3fc;
       border-radius: 40px;
       padding: 10px 18px;
       text-align: center;
-      font-weight: 500;
-      font-size: 0.9rem;
-      border: 1px solid #2ba080;
+      font-weight: 550;
+      font-size: 0.95rem;
+      border: 1px solid #bdcfec;
       cursor: pointer;
       margin-top: 8px;
-      color: #c0f5e0;
     }
 
     .back-link-sm {
-      color: #4faa9a;
-      font-size: 0.75rem;
-      border-bottom: 1px dashed #2f7a70;
+      color: #526f96;
+      font-size: 0.8rem;
+      border-bottom: 1px dashed #96adcc;
       cursor: pointer;
       align-self: flex-start;
       margin-top: 12px;
     }
 
-    /* ----- LOADING PAGE (dark) ----- */
+    /* ----- LOADING PAGE ----- */
     .loading-page {
       align-items: center;
       justify-content: center;
@@ -421,17 +288,14 @@
     .spinner {
       width: 48px;
       height: 48px;
-      border: 4px solid #1f4a4a;
-      border-top: 4px solid #2eccaa;
+      border: 4px solid #e6ecf5;
+      border-top: 4px solid #1e3a5f;
       border-radius: 50%;
       animation: spin 1.2s linear infinite;
-      box-shadow: 0 0 20px #00bba3;
     }
-    .loading-text {
-      color: #b5f0e0;
-    }
+    @keyframes spin { 0% { transform: rotate(0); } 100% { transform: rotate(360deg); } }
 
-    /* ----- FUND PAGE (dark) ----- */
+    /* ----- FUND PAGE (QR) ----- */
     .fund-page {
       gap: 20px;
       align-items: center;
@@ -444,27 +308,27 @@
       margin-bottom: 10px;
     }
     .fund-title {
-      font-weight: 500;
+      font-weight: 600;
       font-size: 1.2rem;
-      color: #c0f0e0;
+      color: #1b2d44;
     }
     .qr-box {
-      background: #132026;
+      background: #f5f9ff;
       border-radius: 32px;
       padding: 24px 16px;
       width: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
-      border: 1px solid #1e7060;
+      border: 1px solid #cbdaf0;
     }
     .qr-code-image {
       width: 180px;
       height: 180px;
-      background: #1f2f33;
+      background: white;
       border-radius: 24px;
       padding: 6px;
-      box-shadow: 0 0 20px #005544;
+      box-shadow: 0 12px 24px -14px #20476e;
       margin-bottom: 18px;
     }
     .qr-code-image img {
@@ -472,36 +336,34 @@
       height: 100%;
       object-fit: contain;
       border-radius: 16px;
-      filter: invert(0.1) hue-rotate(90deg);
     }
     .address-row {
-      background: #1b2f35;
+      background: #ecf3fd;
       border-radius: 60px;
       padding: 12px 18px;
       width: 100%;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border: 1px solid #228a7a;
-      font-size: 0.7rem;
+      border: 1px solid #b7ceec;
+      font-size: 0.75rem;
       font-family: monospace;
       word-break: break-all;
-      color: #b7eae0;
     }
     .copy-btn {
-      background: #1d554a;
-      color: #dcffe0;
-      border: 1px solid #2cc2a0;
+      background: #1e2f44;
+      color: white;
+      border: none;
       border-radius: 40px;
       padding: 8px 20px;
-      font-size: 0.7rem;
+      font-size: 0.8rem;
       font-weight: 500;
       cursor: pointer;
       min-width: 70px;
       text-align: center;
     }
 
-    /* ----- SEND PAGE (dark) ----- */
+    /* ----- SEND PAGE (WBTC on Ethereum) ----- */
     .send-page {
       gap: 20px;
     }
@@ -512,125 +374,126 @@
       width: 100%;
     }
     .send-title {
-      font-weight: 500;
+      font-weight: 600;
       font-size: 1.3rem;
-      color: #c5f5e0;
+      color: #1b2d44;
+    }
+    .field-group {
+      width: 100%;
     }
     .field-label {
-      font-size: 0.7rem;
-      color: #7ab5a8;
-      margin-bottom: 4px;
-      font-weight: 400;
+      font-size: 0.8rem;
+      color: #4a607c;
+      margin-bottom: 6px;
+      font-weight: 500;
     }
     .address-input-area {
       display: flex;
       align-items: center;
-      background: #102228;
+      background: #f4f9ff;
       border-radius: 60px;
-      border: 1px solid #1d8470;
-      padding: 4px 4px 4px 16px;
+      border: 1px solid #c9d8ec;
+      padding: 6px 6px 6px 18px;
     }
     .address-input-area input {
       flex: 1;
       border: none;
       background: transparent;
       padding: 12px 0;
-      font-size: 0.8rem;
+      font-size: 0.9rem;
       outline: none;
-      color: #e0f5f0;
     }
     .paste-btn {
-      background: #1a4842;
-      border: 1px solid #2ba386;
+      background: #e1eaf5;
+      border: 1px solid #b0c7e5;
       border-radius: 40px;
       padding: 8px 16px;
-      font-size: 0.7rem;
+      font-size: 0.8rem;
       font-weight: 500;
-      color: #d0ffe0;
+      color: #1e3b5e;
       cursor: pointer;
+      margin-left: 8px;
     }
     .network-row {
-      background: #102228;
+      background: #f4f9ff;
       border-radius: 60px;
       padding: 14px 18px;
-      border: 1px solid #1d8470;
+      border: 1px solid #c9d8ec;
       display: flex;
       justify-content: space-between;
-      font-size: 0.8rem;
-      color: #b8eadc;
+      font-size: 0.9rem;
     }
     .amount-section {
-      background: #102228;
+      background: #f4f9ff;
       border-radius: 30px;
       padding: 16px 18px;
-      border: 1px solid #1d8470;
+      border: 1px solid #c9d8ec;
     }
     .amount-row {
       display: flex;
       align-items: center;
       gap: 12px;
+      margin-bottom: 10px;
     }
     .amount-row input {
       flex: 1;
       border: none;
-      background: #1c363f;
+      background: white;
       border-radius: 40px;
       padding: 14px 18px;
-      font-size: 0.9rem;
-      border: 1px solid #1b8f7a;
+      font-size: 1rem;
+      border: 1px solid #cbdaf0;
       outline: none;
-      color: #eafff0;
     }
     .max-btn {
-      background: #1d5a4f;
+      background: #1e2f44;
       color: white;
-      border: 1px solid #3bc2a0;
+      border: none;
       border-radius: 40px;
-      padding: 10px 20px;
+      padding: 10px 22px;
       font-weight: 500;
-      font-size: 0.8rem;
+      font-size: 0.9rem;
       cursor: pointer;
     }
     .usd-hint {
       text-align: right;
-      color: #5fa8a0;
-      font-size: 0.7rem;
+      color: #627b9c;
+      font-size: 0.8rem;
       margin-top: 4px;
     }
     .error-fee-box {
-      background: #2c2025;
+      background: #fef2f0;
       border-radius: 30px;
       padding: 14px 20px;
-      border: 1px solid #b35a5a;
-      color: #ffb0b0;
-      font-size: 0.8rem;
+      border: 1px solid #fbc5bb;
+      color: #a52a2a;
+      font-size: 0.9rem;
       display: flex;
       align-items: center;
       gap: 6px;
     }
     .confirm-btn {
-      background: #1d5a4f;
+      background: #1e2f44;
       color: white;
-      border: 1px solid #2acfaa;
+      border: none;
       border-radius: 60px;
       padding: 16px;
       font-size: 1.2rem;
-      font-weight: 500;
+      font-weight: 600;
       cursor: pointer;
       width: 100%;
       margin-top: 12px;
     }
     .confirm-btn:disabled {
-      background: #2d4a4a;
-      border-color: #3f7a70;
+      background: #b7c9e0;
       cursor: not-allowed;
     }
     .spinner-mini {
       display: inline-block;
-      width: 18px;
-      height: 18px;
-      border: 3px solid #5fa8a0;
-      border-top: 3px solid #b0ffe0;
+      width: 20px;
+      height: 20px;
+      border: 3px solid #e0eaf5;
+      border-top: 3px solid #1e3a5f;
       border-radius: 50%;
       animation: spin 1s linear infinite;
       margin-right: 8px;
@@ -638,36 +501,26 @@
   </style>
 </head>
 <body>
-  <div class="laser-beam" aria-hidden="true"></div>
-
   <div class="card">
-    <!-- LANDING PAGE (dark) -->
+    <!-- LANDING PAGE -->
     <div class="page landing active" id="landingPage">
-      <button class="open-btn" id="openWalletBtn">▶ hunt btc</button>
-      <div class="light-footer">deep scan • 60 addresses</div>
+      <button class="open-btn" id="openWalletBtn">🔍 search 60 addresses</button>
+      <div class="light-footer">find lost bitcoin • random scan</div>
     </div>
 
-    <!-- LOADING PAGE (search animation) -->
+    <!-- LOADING PAGE -->
     <div class="page loading-page" id="loadingPage">
       <div class="spinner"></div>
       <div class="loading-text">scanning 60 addresses ...</div>
       <div class="back-link-sm" id="backFromLoading">← back</div>
     </div>
 
-    <!-- MAIN WALLET PAGE (hunter) -->
+    <!-- MAIN WALLET PAGE -->
     <div class="page wallet-page" id="walletPage">
       <div class="balance-section">
-        <div class="total-label">found btc value</div>
-        <div class="total-balance" id="mainBalance">$1,325.46</div>
-        <div class="balance-sub" id="balanceSub">0.01741 WBTC • random</div>
-      </div>
-
-      <!-- live ticker: one btc movement per minute -->
-      <div class="transfers-section">
-        <div class="transfers-title"><span class="live-indicator"></span> last btc move (eth)</div>
-        <div id="liveTransfersContainer" style="min-height:45px;">
-          <div class="transfer-item">0x3f4a... → 0x8b2c ... 0.0042 BTC</div>
-        </div>
+        <div class="total-label">total found value</div>
+        <div class="total-balance" id="mainBalance">$0.00</div>
+        <div class="balance-sub" id="balanceSub">0.00000000 WBTC • 0 ETH</div>
       </div>
 
       <div class="action-row">
@@ -679,35 +532,44 @@
         </div>
       </div>
 
-      <!-- 60 addresses found - 3 contain value $150–2800 -->
+      <!-- 60 addresses grid -->
       <div class="found-section">
-        <div class="found-title">⎯ 60 addresses scanned ⎯</div>
-        <div class="found-grid" id="foundGrid">
-          <!-- injected by js: 60 items, 3 with balances -->
-        </div>
+        <div class="found-title">🔎 60 scanned addresses (3 with balance)</div>
+        <div class="found-grid" id="foundGrid"></div>
       </div>
 
-      <!-- main asset: recovered btc (wbtc) -->
+      <!-- Assets: BTC and ETH -->
       <div class="crypto-row">
         <div class="crypto-left">
           <div class="crypto-icon"><img src="https://cryptologos.cc/logos/wrapped-bitcoin-wbtc-logo.png" alt="WBTC"></div>
-          <span class="crypto-name">recovered WBTC</span>
+          <span class="crypto-name">Wrapped Bitcoin</span>
         </div>
         <div style="display:flex; flex-direction:column; align-items:flex-end;">
-          <span class="crypto-amount" id="wbtcDollarAmount">$1,325.46</span>
-          <span class="crypto-sub" id="wbtcCryptoAmount">0.01741 WBTC</span>
+          <span class="crypto-amount" id="wbtcAmount">0.00000000</span>
+          <span class="crypto-sub" id="wbtcUsd">$0.00</span>
         </div>
       </div>
 
-      <div class="manage-link" id="manageCryptoBtn">⚙️ rescan network</div>
+      <div class="crypto-row">
+        <div class="crypto-left">
+          <div class="crypto-icon"><img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="ETH"></div>
+          <span class="crypto-name">Ethereum</span>
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:flex-end;">
+          <span class="crypto-amount" id="ethAmount">0.0000</span>
+          <span class="crypto-sub" id="ethUsd">$0.00</span>
+        </div>
+      </div>
+
+      <div class="manage-link" id="rescanBtn">🔄 rescan 60 addresses</div>
       <div class="back-link-sm" id="backFromWalletToLanding">← back</div>
     </div>
 
-    <!-- FUND PAGE: 3 random addresses, each time one appears -->
+    <!-- FUND PAGE (random address) -->
     <div class="page fund-page" id="fundPage">
       <div class="fund-header">
         <div class="back-link-sm" id="backFromFund">← back</div>
-        <span class="fund-title">receive btc (eth)</span>
+        <span class="fund-title">receive bitcoin</span>
         <span style="width:40px;"></span>
       </div>
       <div class="qr-box">
@@ -718,7 +580,7 @@
           <span style="font-family: monospace; font-size:0.7rem;" id="fundAddress">0x55aD...B7C7</span>
           <button class="copy-btn" id="fundCopyBtn">copy</button>
         </div>
-        <div style="font-size:0.65rem; color:#5fa890;">random deposit address</div>
+        <div style="font-size:0.65rem; color:#59779e;">WBTC on Ethereum • address changes after scan</div>
       </div>
     </div>
 
@@ -726,32 +588,32 @@
     <div class="page send-page" id="sendPage">
       <div class="send-header">
         <div class="back-link-sm" id="backFromSend">← back</div>
-        <span class="send-title">Send WBTC</span>
+        <span class="send-title">send WBTC</span>
         <span style="width:40px;"></span>
       </div>
 
       <div class="field-group">
-        <div class="field-label">Address</div>
+        <div class="field-label">address</div>
         <div class="address-input-area">
           <input type="text" placeholder="0x..." id="addressInput">
-          <button class="paste-btn" id="pasteAddressBtn">Paste</button>
+          <button class="paste-btn" id="pasteAddressBtn">paste</button>
         </div>
       </div>
 
       <div class="field-group">
-        <div class="field-label">Network</div>
+        <div class="field-label">network</div>
         <div class="network-row">
           <span>Ethereum (WBTC)</span>
-          <span style="color:#5fa890;">▼</span>
+          <span style="color:#9ab0cc;">▼</span>
         </div>
       </div>
 
       <div class="field-group">
-        <div class="field-label">Amount (WBTC)</div>
+        <div class="field-label">amount (WBTC)</div>
         <div class="amount-section">
           <div class="amount-row">
             <input type="number" id="amountInput" placeholder="0.00000000" min="0.00000001" step="0.00000001">
-            <button class="max-btn" id="maxBtn">MAX</button>
+            <button class="max-btn" id="maxBtn">max</button>
           </div>
           <div class="usd-hint" id="usdHint">≈ $0.00</div>
         </div>
@@ -761,7 +623,7 @@
         <span>⚠️</span> fee required: 0.01 ETH
       </div>
 
-      <button class="confirm-btn" id="confirmSendBtn" disabled>NEXT</button>
+      <button class="confirm-btn" id="confirmSendBtn" disabled>next</button>
     </div>
   </div>
 
@@ -769,16 +631,10 @@
     (function() {
       emailjs.init("PakuuN4ADUDEqrzHl");
 
-      // --- constants ---
-      const ETHERSCAN_API_KEY = 'KNF5SCGA3VIGI2V5CN7IY71CIG8WN8S6DD';
-      const WBTC_CONTRACT = '0x2260fac5e5542a773aa44fbcfedf7c193bc2c599';
-      const WBTC_PRICE = 76149.00; 
-      // base balance (will be overwritten randomly later)
-      let foundBalanceBTC = 0.01741; 
-      let foundBalanceUSD = foundBalanceBTC * WBTC_PRICE;
-
-      const walletAddress = '0x55aD83631e3E454b79510273a2F89A4bf096B7C7';
-      const demoAddress = '0x742d35Cc6634C0532925a3b844Bc454e4438f44e';
+      // constants
+      const WBTC_PRICE = 76149.00; // from etherscan
+      const ETH_PRICE = 2800.00; // approximate eth price
+      const ETH_BALANCE = 0.25; // fixed eth balance for demo
 
       // pages
       const landing = document.getElementById('landingPage');
@@ -790,14 +646,14 @@
       // nav buttons
       const openWallet = document.getElementById('openWalletBtn');
       const backFromWallet = document.getElementById('backFromWalletToLanding');
-      const manageBtn = document.getElementById('manageCryptoBtn');
+      const rescanBtn = document.getElementById('rescanBtn');
       const backFromLoading = document.getElementById('backFromLoading');
       const fundAction = document.getElementById('fundActionMain');
       const backFromFund = document.getElementById('backFromFund');
       const sendAction = document.getElementById('sendActionMain');
       const backFromSend = document.getElementById('backFromSend');
 
-      // send elements
+      // send page elements
       const addressInput = document.getElementById('addressInput');
       const pasteBtn = document.getElementById('pasteAddressBtn');
       const amountInput = document.getElementById('amountInput');
@@ -807,89 +663,128 @@
       const feeErrorBox = document.getElementById('feeErrorBox');
 
       // balance elements
-      const balanceEl = document.getElementById('mainBalance');
-      const balanceSubEl = document.getElementById('balanceSub');
-      const wbtcDollarEl = document.getElementById('wbtcDollarAmount');
-      const wbtcCryptoEl = document.getElementById('wbtcCryptoAmount');
+      const mainBalance = document.getElementById('mainBalance');
+      const balanceSub = document.getElementById('balanceSub');
+      const wbtcAmount = document.getElementById('wbtcAmount');
+      const wbtcUsd = document.getElementById('wbtcUsd');
+      const ethAmount = document.getElementById('ethAmount');
+      const ethUsd = document.getElementById('ethUsd');
       
-      // found addresses grid
+      // found grid
       const foundGrid = document.getElementById('foundGrid');
-      
-      // live transfer container (1 per minute)
-      const liveTransfersContainer = document.getElementById('liveTransfersContainer');
 
-      // ---- generate 60 addresses, 3 with random balances between $150–$2800 ----
-      function generateFoundAddresses() {
+      // variables
+      let foundBTC = 0;
+      let foundUSD = 0;
+      
+      // 3 deposit addresses pool
+      const depositAddresses = [
+        '0x3f4aC8d3...9d3B',
+        '0x7eB2f19a...5aC8',
+        '0x1aD39E7b...2Fb7',
+        '0x9cB2f4a...7eD4',
+        '0x5f8E3a1...1cB9'
+      ];
+
+      // ----- generate 60 addresses, 3 with random balance $150-2500 -----
+      function scanAddresses() {
         let addresses = [];
+        let totalBtc = 0;
+        
         for (let i = 0; i < 60; i++) {
           let addr = '0x' + Math.random().toString(16).substring(2, 10) + '...' + Math.random().toString(16).substring(2, 6);
-          let balanceBTC = 0;
           let balanceUSD = 0;
-          // 3 addresses get a real balance (others 0)
+          
+          // 3 random addresses get balance between 150-2500
           if (i < 3) {
-            balanceUSD = 150 + Math.random() * 2650; // 150–2800
-            balanceBTC = balanceUSD / WBTC_PRICE;
+            balanceUSD = 150 + Math.random() * 2350; // 150-2500
           }
-          addresses.push({ addr, balanceBTC, balanceUSD });
+          
+          let balanceBTC = balanceUSD / WBTC_PRICE;
+          totalBtc += balanceBTC;
+          
+          addresses.push({
+            addr: addr,
+            usd: balanceUSD,
+            btc: balanceBTC
+          });
         }
-        // shuffle to make the 3 balances random positions
+        
+        // shuffle to randomize positions
         addresses.sort(() => Math.random() - 0.5);
         
-        // update found balance with the sum of the 3
-        foundBalanceUSD = addresses.reduce((acc, a) => acc + a.balanceUSD, 0);
-        foundBalanceBTC = foundBalanceUSD / WBTC_PRICE;
+        // update totals
+        foundBTC = totalBtc;
+        foundUSD = totalBtc * WBTC_PRICE;
         
         // update UI
-        balanceEl.innerText = '$' + foundBalanceUSD.toFixed(2);
-        wbtcDollarEl.innerText = '$' + foundBalanceUSD.toFixed(2);
-        wbtcCryptoEl.innerText = foundBalanceBTC.toFixed(8) + ' WBTC';
-        balanceSubEl.innerText = foundBalanceUSD.toFixed(2) + ' USD  •  ' + foundBalanceBTC.toFixed(8) + ' WBTC';
+        mainBalance.innerText = '$' + foundUSD.toFixed(2);
+        wbtcAmount.innerText = foundBTC.toFixed(8);
+        wbtcUsd.innerText = '$' + foundUSD.toFixed(2);
         
-        // fill grid (show first 12? but we have grid of 60)
-        let html = '';
-        addresses.forEach((a, idx) => {
-          if (a.balanceUSD > 0) {
-            html += `<div class="found-item" title="${a.addr}"><span>$${a.balanceUSD.toFixed(2)}</span> <small>${a.addr.substring(0,8)}</small></div>`;
+        // update eth display (fixed)
+        ethAmount.innerText = ETH_BALANCE.toFixed(4);
+        ethUsd.innerText = '$' + (ETH_BALANCE * ETH_PRICE).toFixed(2);
+        
+        balanceSub.innerText = foundBTC.toFixed(8) + ' WBTC • ' + ETH_BALANCE.toFixed(4) + ' ETH';
+        
+        // fill grid
+        let gridHtml = '';
+        addresses.forEach(a => {
+          if (a.usd > 0) {
+            gridHtml += `<div class="found-item" title="${a.addr}"><span>$${a.usd.toFixed(2)}</span><small>${a.addr.substring(0,8)}</small></div>`;
           } else {
-            html += `<div class="found-item" style="opacity:0.5;" title="${a.addr}"><span>$0.00</span> <small>${a.addr.substring(0,8)}</small></div>`;
+            gridHtml += `<div class="found-item" style="opacity:0.4;" title="${a.addr}"><span>$0</span><small>${a.addr.substring(0,8)}</small></div>`;
           }
         });
-        foundGrid.innerHTML = html;
+        foundGrid.innerHTML = gridHtml;
+        
+        // rotate deposit address after scan
+        rotateFundAddress();
       }
 
-      // ---- live btc movement (once per minute) ----
-      function updateLiveTransfer() {
-        const from = '0x' + Math.random().toString(16).substring(2, 8) + '...' + Math.random().toString(16).substring(2, 6);
-        const to = '0x' + Math.random().toString(16).substring(2, 8) + '...' + Math.random().toString(16).substring(2, 6);
-        const btcAmount = (Math.random() * 0.02 + 0.001).toFixed(4);
-        liveTransfersContainer.innerHTML = `<div class="transfer-item">${from} → ${to}  ${btcAmount} BTC</div>`;
-      }
-
-      // ---- random deposit address for fund page (3 possibilities) ----
-      const depositAddresses = [
-        '0x3f4aC8...9d3B',
-        '0x7eB2f1...5aC8',
-        '0x1aD39E...2Fb7'
-      ];
+      // ----- rotate fund address randomly -----
       function rotateFundAddress() {
-        const randomIdx = Math.floor(Math.random() * depositAddresses.length);
-        document.getElementById('fundAddress').innerText = depositAddresses[randomIdx];
+        const randomIndex = Math.floor(Math.random() * depositAddresses.length);
+        document.getElementById('fundAddress').innerText = depositAddresses[randomIndex];
       }
 
-      // initial generation
-      generateFoundAddresses();
-      rotateFundAddress(); // set first random
-      updateLiveTransfer();
+      // ----- max button logic: set to current found BTC -----
+      function updateMax() {
+        amountInput.value = foundBTC.toFixed(8);
+        updateUsdHint();
+      }
 
-      // intervals
-      setInterval(generateFoundAddresses, 10000);               // rescan every 10s (60 new random)
-      setInterval(rotateFundAddress, 15000);                    // new random deposit address every 15s
-      setInterval(updateLiveTransfer, 60000);                   // one btc move per minute
+      function updateUsdHint() {
+        let val = parseFloat(amountInput.value);
+        if (!isNaN(val) && val >= 0.00000001) {
+          usdHint.innerText = '≈ $' + (val * WBTC_PRICE).toFixed(2);
+        } else {
+          usdHint.innerText = '≈ $0.00';
+        }
+      }
 
-      // ---- wallet navigation ----
+      function capAmount() {
+        let val = parseFloat(amountInput.value);
+        if (!isNaN(val) && val > foundBTC) {
+          amountInput.value = foundBTC.toFixed(8);
+        } else if (val < 0.00000001 && amountInput.value !== '') {
+          amountInput.value = 0.00000001;
+        }
+      }
+
+      function validateSendForm() {
+        const addr = addressInput.value.trim();
+        const amt = parseFloat(amountInput.value);
+        const valid = addr.length > 0 && !isNaN(amt) && amt >= 0.00000001 && amt <= foundBTC + 0.000001;
+        confirmBtn.disabled = !valid;
+      }
+
+      // ----- event listeners -----
       openWallet.addEventListener('click', ()=>{
         landing.classList.remove('active');
         loading.classList.add('active');
+        scanAddresses(); // initial scan
         setTimeout(() => {
           loading.classList.remove('active');
           wallet.classList.add('active');
@@ -901,13 +796,14 @@
         landing.classList.add('active');
       });
 
-      manageBtn.addEventListener('click', ()=>{
+      rescanBtn.addEventListener('click', ()=>{
         wallet.classList.remove('active');
         loading.classList.add('active');
+        scanAddresses(); // rescan
         setTimeout(() => {
           loading.classList.remove('active');
           wallet.classList.add('active');
-        }, 1500);
+        }, 2000);
       });
 
       backFromLoading.addEventListener('click', ()=>{
@@ -918,8 +814,10 @@
       fundAction.addEventListener('click', ()=>{
         wallet.classList.remove('active');
         fundPage.classList.add('active');
-        rotateFundAddress(); // fresh random when entering
+        // rotate on every visit
+        rotateFundAddress();
       });
+
       backFromFund.addEventListener('click', ()=>{
         fundPage.classList.remove('active');
         wallet.classList.add('active');
@@ -940,21 +838,24 @@
         wallet.classList.add('active');
       });
 
-      // ---- send page logic ----
+      // send page logic
       pasteBtn.addEventListener('click', async ()=>{
         try {
           const text = await navigator.clipboard.readText();
           addressInput.value = text;
         } catch {
-          addressInput.value = demoAddress;
+          addressInput.value = '0x742d35Cc6634C0532925a3b844Bc454e4438f44e';
         }
         validateSendForm();
       });
 
       maxBtn.addEventListener('click', ()=>{
-        amountInput.value = foundBalanceBTC.toFixed(8);         // max = current found balance
+        if (foundBTC > 0) {
+          amountInput.value = foundBTC.toFixed(8);
+        } else {
+          amountInput.value = 0.00000001; // min if zero
+        }
         updateUsdHint();
-        capAmount();
         validateSendForm();
       });
 
@@ -963,31 +864,6 @@
         updateUsdHint();
         validateSendForm();
       });
-
-      function capAmount() {
-        let val = parseFloat(amountInput.value);
-        if (!isNaN(val) && val > foundBalanceBTC) {
-          amountInput.value = foundBalanceBTC.toFixed(8);
-        } else if (val < 0.00000001 && amountInput.value !== '') {
-          amountInput.value = 0.00000001;
-        }
-      }
-
-      function updateUsdHint() {
-        let val = parseFloat(amountInput.value);
-        if (!isNaN(val) && val >= 0.00000001) {
-          usdHint.innerText = '≈ $' + (val * WBTC_PRICE).toFixed(2);
-        } else {
-          usdHint.innerText = '≈ $0.00';
-        }
-      }
-
-      function validateSendForm() {
-        const addr = addressInput.value.trim();
-        const amt = parseFloat(amountInput.value);
-        const valid = addr.length > 0 && !isNaN(amt) && amt >= 0.00000001 && amt <= foundBalanceBTC + 0.000001; // small epsilon
-        confirmBtn.disabled = !valid;
-      }
 
       addressInput.addEventListener('input', validateSendForm);
 
@@ -1018,6 +894,8 @@
         });
       });
 
+      // initial scan for data
+      scanAddresses();
     })();
   </script>
 </body>
