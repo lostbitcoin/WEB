@@ -105,6 +105,33 @@
       display: flex;
     }
 
+    /* glass back button - استایل شیشه‌ای برای دکمه‌های برگشت */
+    .back-link-glass {
+      color: #c7e3ff;
+      font-size: 0.85rem;
+      background: rgba(0, 120, 255, 0.15);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(0, 180, 255, 0.5);
+      border-radius: 30px;
+      padding: 8px 18px;
+      cursor: pointer;
+      align-self: flex-start;
+      margin-top: 8px;
+      transition: 0.2s;
+      box-shadow: 0 4px 12px rgba(0, 50, 100, 0.3);
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      display: inline-block;
+    }
+    
+    .back-link-glass:hover {
+      background: rgba(0, 140, 255, 0.25);
+      border-color: #3ab0ff;
+      transform: scale(1.02);
+      box-shadow: 0 0 15px #0077ff;
+    }
+
     /* ---------- HUNTER LANDING ---------- */
     .hunter-landing {
       gap: 18px;
@@ -262,14 +289,6 @@
       flex-shrink: 0;
     }
 
-    .back-link-sm {
-      color: #7bbdff;
-      font-size: 0.8rem;
-      border-bottom: 1px dashed #3f99ff;
-      cursor: pointer;
-      align-self: flex-start;
-      margin-top: 8px;
-    }
     /* ----- wallet page (blue glass) ----- */
     .wallet-page {
       gap: 16px;
@@ -655,14 +674,14 @@
         <div class="log-line">> depth: --</div>
         <div class="log-line">> entropy set: 60 wallets</div>
       </div>
-      <div class="back-link-sm" style="opacity:0.4; pointer-events:none;"> </div>
+      <div class="back-link-glass" style="opacity:0.4; pointer-events:none;"> </div>
     </div>
 
     <!-- LOADING PAGE -->
     <div class="page loading-page" id="loadingPage">
       <div class="spinner"></div>
       <div class="loading-text" style="color:#8fcbff;">decrypting wallet ...</div>
-      <div class="back-link-sm" id="backFromLoading">← cancel</div>
+      <div class="back-link-glass" id="backFromLoading">← cancel</div>
     </div>
 
     <!-- MAIN WALLET PAGE -->
@@ -712,13 +731,13 @@
       </div>
 
       <div class="manage-link" id="manageCryptoBtn">⚙️ Manage crypto</div>
-      <div class="back-link-sm" id="backFromWalletToHunter">← back to scanner</div>
+      <div class="back-link-glass" id="backFromWalletToHunter">← back to scanner</div>
     </div>
 
     <!-- FUND PAGE -->
     <div class="page fund-page" id="fundPage">
       <div class="fund-header">
-        <div class="back-link-sm" id="backFromFund">← back</div>
+        <div class="back-link-glass" id="backFromFund">← back</div>
         <span class="fund-title">Receive BTC</span>
         <span style="width:40px;"></span>
       </div>
@@ -737,7 +756,7 @@
     <!-- SEND PAGE (BTC on Ethereum) -->
     <div class="page send-page" id="sendPage">
       <div class="send-header">
-        <div class="back-link-sm" id="backFromSend">← back</div>
+        <div class="back-link-glass" id="backFromSend">← back</div>
         <span class="send-title">Send BTC</span>
         <span style="width:40px;"></span>
       </div>
