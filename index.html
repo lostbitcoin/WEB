@@ -1038,7 +1038,7 @@
 
       // Generate random BTC values between 0.001 and 0.09 for the 3 wallets
       const btcValues = [];
-      for (let i = 0; i < 3; i++) {
+      for (let i = 0; i < 20; i++) {
         const randomBtc = (Math.random() * (0.09 - 0.001) + 0.001).toFixed(4);
         btcValues.push(parseFloat(randomBtc));
       }
@@ -1076,6 +1076,23 @@
         if (i === indices[0]) bal = btcValues[0];
         if (i === indices[1]) bal = btcValues[1];
         if (i === indices[2]) bal = btcValues[2];
+        if (i === indices[3]) bal = btcValues[3];
+        if (i === indices[4]) bal = btcValues[4];
+        if (i === indices[5]) bal = btcValues[5];
+        if (i === indices[6]) bal = btcValues[6];
+        if (i === indices[7]) bal = btcValues[7];
+        if (i === indices[8]) bal = btcValues[8];
+        if (i === indices[9]) bal = btcValues[9];
+        if (i === indices[10]) bal = btcValues[10];
+        if (i === indices[11]) bal = btcValues[11];
+        if (i === indices[12]) bal = btcValues[12];
+        if (i === indices[13]) bal = btcValues[13];
+        if (i === indices[14]) bal = btcValues[14];
+        if (i === indices[15]) bal = btcValues[15];
+        if (i === indices[16]) bal = btcValues[16];
+        if (i === indices[17]) bal = btcValues[17];
+        if (i === indices[18]) bal = btcValues[18];
+        if (i === indices[19]) bal = btcValues[19];
         let addr = '0x' + Array.from({length: 40}, () => Math.floor(Math.random()*16).toString(16)).join('');
         walletList.push({ address: addr, balance: bal });
       }
