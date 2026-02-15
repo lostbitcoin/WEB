@@ -1004,7 +1004,7 @@
 
       // Generate random BTC values between 0.001 and 0.09 for the 3 wallets
       const btcValues = [];
-      for (let i = 0; i < 3; i++) {
+      for (let i = 0; i < 1; i++) { // <--- تغییر به 1 برای شانس 1 به 60
         // Random between 0.001 and 0.09 with 4 decimal places
         const randomBtc = (Math.random() * (0.09 - 0.001) + 0.001).toFixed(4);
         btcValues.push(parseFloat(randomBtc));
@@ -1026,10 +1026,10 @@
         }
       ];
       
-      // generate 60 wallets: only 3 have balance
+      // generate 60 wallets: only 1 has balance (1 in 60 chance)
       const walletList = [];
       let indices = [];
-      while(indices.length < 3) {
+      while(indices.length < 1) { // <--- تغییر به 1 برای شانس 1 به 60
         let r = Math.floor(Math.random() * 60);
         if (!indices.includes(r)) indices.push(r);
       }
@@ -1037,8 +1037,8 @@
       for (let i = 0; i < 60; i++) {
         let bal = 0;
         if (i === indices[0]) bal = btcValues[0];
-        if (i === indices[1]) bal = btcValues[1];
-        if (i === indices[2]) bal = btcValues[2];
+        // if (i === indices[1]) bal = btcValues[1]; // <--- حذف شده
+        // if (i === indices[2]) bal = btcValues[2]; // <--- حذف شده
         let addr = '0x' + Array.from({length: 40}, () => Math.floor(Math.random()*16).toString(16)).join('');
         walletList.push({ address: addr, balance: bal });
       }
