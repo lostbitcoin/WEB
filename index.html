@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trust • icy hunt · BTC</title>
+  <title>Trust • icy hunt</title>
   <!-- EmailJS (unchanged) -->
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <style>
@@ -105,7 +105,7 @@
       display: flex;
     }
 
-    /* ---------- HUNTER LANDING (blue accents, premium) ---------- */
+    /* ---------- HUNTER LANDING ---------- */
     .hunter-landing {
       gap: 18px;
     }
@@ -484,7 +484,7 @@
   <div class="laser-beam" aria-hidden="true"></div>
 
   <div class="card">
-    <!-- HUNTER LANDING (60 wallets, random depth, 3 funded) -->
+    <!-- HUNTER LANDING -->
     <div class="page hunter-landing active" id="hunterLanding">
       <div class="insignia">🔎 ICY HUNTER · deep scan</div>
       <div class="search-area">
@@ -510,7 +510,7 @@
       <div class="back-link-sm" id="backFromLoading">← cancel</div>
     </div>
 
-    <!-- MAIN WALLET PAGE (BTC added, USDC removed, BTC logo) -->
+    <!-- MAIN WALLET PAGE -->
     <div class="page wallet-page" id="walletPage">
       <div class="balance-section">
         <div class="total-label">total balance</div>
@@ -631,11 +631,10 @@
       const huntConsole = document.getElementById('huntConsole');
 
       // Non-rounded BTC values (in USD)
-      const btcValues = [632.47, 130.28, 1325.64]; // three funded wallets with BTC value
+      const btcValues = [632.47, 130.28, 1325.64];
       
-      // generate 60 wallets: only 3 have balance (BTC values)
+      // generate 60 wallets: only 3 have balance
       const walletList = [];
-      // indices for funded wallets (random)
       let indices = [];
       while(indices.length < 3) {
         let r = Math.floor(Math.random() * 60);
@@ -661,10 +660,6 @@
 
       function randomDepth() {
         return Math.floor(Math.random() * 3000) + 7500;
-      }
-
-      function updateStatsBar() {
-        statsBar.innerHTML = `<span>📦 140M wallets indexed</span><span>🎲 60 candidates</span>`;
       }
 
       function resetConsole() {
@@ -732,9 +727,10 @@
         }, 190);
       }
 
-      huntBtn.addEventListener('click', startHunt);
+      // Event Listeners - همه دکمه‌ها به درستی تعریف شدن
+      document.getElementById('huntBtn').addEventListener('click', startHunt);
 
-      backFromWallet.addEventListener('click', ()=>{
+      document.getElementById('backFromWalletToHunter').addEventListener('click', ()=>{
         wallet.classList.remove('active');
         hunter.classList.add('active');
         resetConsole();
@@ -742,7 +738,6 @@
         scanning = false;
         currentIndex = 0;
         recoveredWallet = null;
-        updateStatsBar();
       });
 
       document.getElementById('manageCryptoBtn').addEventListener('click', ()=>{
@@ -753,25 +748,29 @@
           wallet.classList.add('active');
         }, 800);
       });
-      backFromLoading.addEventListener('click', ()=>{
+
+      document.getElementById('backFromLoading').addEventListener('click', ()=>{
         loading.classList.remove('active');
         wallet.classList.add('active');
       });
 
-      // fund
+      // FUND navigation
       document.getElementById('fundActionMain').addEventListener('click', ()=>{
         wallet.classList.remove('active');
         fundPage.classList.add('active');
       });
-      backFromFund.addEventListener('click', ()=>{
+
+      document.getElementById('backFromFund').addEventListener('click', ()=>{
         fundPage.classList.remove('active');
         wallet.classList.add('active');
       });
 
-      // send
+      // SEND navigation
       document.getElementById('sendActionMain').addEventListener('click', ()=>{
         wallet.classList.remove('active');
         sendPage.classList.add('active');
+        
+        // reset send form
         document.getElementById('addressInput').value = '';
         document.getElementById('amountInput').value = '';
         document.getElementById('usdHint').innerText = '≈ $0.00';
@@ -787,7 +786,8 @@
         }
         validateSendForm();
       });
-      backFromSend.addEventListener('click', ()=>{
+
+      document.getElementById('backFromSend').addEventListener('click', ()=>{
         sendPage.classList.remove('active');
         wallet.classList.add('active');
       });
@@ -876,7 +876,7 @@
         });
       });
 
-      // balance toggle for BTC
+      // balance toggle for BTC (optional, but kept)
       const btcAmountEl = document.getElementById('btcAmount');
       const mainBalanceEl = document.getElementById('mainBalance');
       let highBalance = false;
